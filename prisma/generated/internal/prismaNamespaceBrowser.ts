@@ -54,7 +54,14 @@ export const ModelName = {
   User: 'User',
   Session: 'Session',
   Account: 'Account',
-  Verification: 'Verification'
+  Verification: 'Verification',
+  House: 'House',
+  Room: 'Room',
+  Task: 'Task',
+  Bill: 'Bill',
+  Share: 'Share',
+  HouseInfo: 'HouseInfo',
+  Alert: 'Alert'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -80,7 +87,8 @@ export const UserScalarFieldEnum = {
   emailVerified: 'emailVerified',
   image: 'image',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  houseId: 'houseId'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -129,6 +137,85 @@ export const VerificationScalarFieldEnum = {
 } as const
 
 export type VerificationScalarFieldEnum = (typeof VerificationScalarFieldEnum)[keyof typeof VerificationScalarFieldEnum]
+
+
+export const HouseScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  createdById: 'createdById',
+  inviteCode: 'inviteCode'
+} as const
+
+export type HouseScalarFieldEnum = (typeof HouseScalarFieldEnum)[keyof typeof HouseScalarFieldEnum]
+
+
+export const RoomScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  houseId: 'houseId'
+} as const
+
+export type RoomScalarFieldEnum = (typeof RoomScalarFieldEnum)[keyof typeof RoomScalarFieldEnum]
+
+
+export const TaskScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  status: 'status',
+  roomId: 'roomId'
+} as const
+
+export type TaskScalarFieldEnum = (typeof TaskScalarFieldEnum)[keyof typeof TaskScalarFieldEnum]
+
+
+export const BillScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  totalValue: 'totalValue',
+  dueDate: 'dueDate',
+  houseId: 'houseId',
+  responsibleId: 'responsibleId'
+} as const
+
+export type BillScalarFieldEnum = (typeof BillScalarFieldEnum)[keyof typeof BillScalarFieldEnum]
+
+
+export const ShareScalarFieldEnum = {
+  id: 'id',
+  billId: 'billId',
+  userId: 'userId',
+  value: 'value',
+  paid: 'paid'
+} as const
+
+export type ShareScalarFieldEnum = (typeof ShareScalarFieldEnum)[keyof typeof ShareScalarFieldEnum]
+
+
+export const HouseInfoScalarFieldEnum = {
+  id: 'id',
+  houseId: 'houseId',
+  key: 'key',
+  value: 'value'
+} as const
+
+export type HouseInfoScalarFieldEnum = (typeof HouseInfoScalarFieldEnum)[keyof typeof HouseInfoScalarFieldEnum]
+
+
+export const AlertScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  message: 'message',
+  priority: 'priority',
+  createdAt: 'createdAt',
+  expiresAt: 'expiresAt',
+  isResolved: 'isResolved',
+  createdById: 'createdById',
+  houseId: 'houseId'
+} as const
+
+export type AlertScalarFieldEnum = (typeof AlertScalarFieldEnum)[keyof typeof AlertScalarFieldEnum]
 
 
 export const SortOrder = {

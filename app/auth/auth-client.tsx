@@ -19,7 +19,6 @@ export default function AuthClientPage() {
   const handleSocialAuth = async (provider: "google" | "github") => {
     setIsLoading(true);
     setError("");
-
     try {
       await signInSocial(provider);
     } catch (err) {
@@ -45,13 +44,13 @@ export default function AuthClientPage() {
         if (!result.user) {
           setError("Invalid email or password");
         }
-        router.push("/");
+        // router.push("/");
       } else {
         const result = await signUp(email, password, name);
         if (!result.user) {
           setError("Failed to create account");
         }
-        router.push("/");
+        // router.push("/");
       }
     } catch (err) {
       setError(

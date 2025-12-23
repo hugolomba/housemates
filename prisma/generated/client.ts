@@ -59,3 +59,38 @@ export type Account = Prisma.AccountModel
  * 
  */
 export type Verification = Prisma.VerificationModel
+/**
+ * Model House
+ * 
+ */
+export type House = Prisma.HouseModel
+/**
+ * Model Room
+ * 
+ */
+export type Room = Prisma.RoomModel
+/**
+ * Model Task
+ * 
+ */
+export type Task = Prisma.TaskModel
+/**
+ * Model Bill
+ * 
+ */
+export type Bill = Prisma.BillModel
+/**
+ * Model Share
+ * 
+ */
+export type Share = Prisma.ShareModel
+/**
+ * Model HouseInfo
+ * 
+ */
+export type HouseInfo = Prisma.HouseInfoModel
+/**
+ * Model Alert
+ * 
+ */
+export type Alert = Prisma.AlertModel

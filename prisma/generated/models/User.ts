@@ -20,8 +20,18 @@ export type UserModel = runtime.Types.Result.DefaultSelection<Prisma.$UserPayloa
 
 export type AggregateUser = {
   _count: UserCountAggregateOutputType | null
+  _avg: UserAvgAggregateOutputType | null
+  _sum: UserSumAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
+}
+
+export type UserAvgAggregateOutputType = {
+  houseId: number | null
+}
+
+export type UserSumAggregateOutputType = {
+  houseId: number | null
 }
 
 export type UserMinAggregateOutputType = {
@@ -32,6 +42,7 @@ export type UserMinAggregateOutputType = {
   image: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  houseId: number | null
 }
 
 export type UserMaxAggregateOutputType = {
@@ -42,6 +53,7 @@ export type UserMaxAggregateOutputType = {
   image: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  houseId: number | null
 }
 
 export type UserCountAggregateOutputType = {
@@ -52,9 +64,18 @@ export type UserCountAggregateOutputType = {
   image: number
   createdAt: number
   updatedAt: number
+  houseId: number
   _all: number
 }
 
+
+export type UserAvgAggregateInputType = {
+  houseId?: true
+}
+
+export type UserSumAggregateInputType = {
+  houseId?: true
+}
 
 export type UserMinAggregateInputType = {
   id?: true
@@ -64,6 +85,7 @@ export type UserMinAggregateInputType = {
   image?: true
   createdAt?: true
   updatedAt?: true
+  houseId?: true
 }
 
 export type UserMaxAggregateInputType = {
@@ -74,6 +96,7 @@ export type UserMaxAggregateInputType = {
   image?: true
   createdAt?: true
   updatedAt?: true
+  houseId?: true
 }
 
 export type UserCountAggregateInputType = {
@@ -84,6 +107,7 @@ export type UserCountAggregateInputType = {
   image?: true
   createdAt?: true
   updatedAt?: true
+  houseId?: true
   _all?: true
 }
 
@@ -125,6 +149,18 @@ export type UserAggregateArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: UserAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: UserSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: UserMinAggregateInputType
@@ -155,6 +191,8 @@ export type UserGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
   take?: number
   skip?: number
   _count?: UserCountAggregateInputType | true
+  _avg?: UserAvgAggregateInputType
+  _sum?: UserSumAggregateInputType
   _min?: UserMinAggregateInputType
   _max?: UserMaxAggregateInputType
 }
@@ -167,7 +205,10 @@ export type UserGroupByOutputType = {
   image: string | null
   createdAt: Date
   updatedAt: Date
+  houseId: number | null
   _count: UserCountAggregateOutputType | null
+  _avg: UserAvgAggregateOutputType | null
+  _sum: UserSumAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
 }
@@ -198,8 +239,15 @@ export type UserWhereInput = {
   image?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  houseId?: Prisma.IntNullableFilter<"User"> | number | null
   sessions?: Prisma.SessionListRelationFilter
   accounts?: Prisma.AccountListRelationFilter
+  alertsCreated?: Prisma.AlertListRelationFilter
+  bills?: Prisma.BillListRelationFilter
+  housesCreated?: Prisma.HouseListRelationFilter
+  shares?: Prisma.ShareListRelationFilter
+  house?: Prisma.XOR<Prisma.HouseNullableScalarRelationFilter, Prisma.HouseWhereInput> | null
+  tasks?: Prisma.TaskListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -210,8 +258,15 @@ export type UserOrderByWithRelationInput = {
   image?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  houseId?: Prisma.SortOrderInput | Prisma.SortOrder
   sessions?: Prisma.SessionOrderByRelationAggregateInput
   accounts?: Prisma.AccountOrderByRelationAggregateInput
+  alertsCreated?: Prisma.AlertOrderByRelationAggregateInput
+  bills?: Prisma.BillOrderByRelationAggregateInput
+  housesCreated?: Prisma.HouseOrderByRelationAggregateInput
+  shares?: Prisma.ShareOrderByRelationAggregateInput
+  house?: Prisma.HouseOrderByWithRelationInput
+  tasks?: Prisma.TaskOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -225,8 +280,15 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   image?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  houseId?: Prisma.IntNullableFilter<"User"> | number | null
   sessions?: Prisma.SessionListRelationFilter
   accounts?: Prisma.AccountListRelationFilter
+  alertsCreated?: Prisma.AlertListRelationFilter
+  bills?: Prisma.BillListRelationFilter
+  housesCreated?: Prisma.HouseListRelationFilter
+  shares?: Prisma.ShareListRelationFilter
+  house?: Prisma.XOR<Prisma.HouseNullableScalarRelationFilter, Prisma.HouseWhereInput> | null
+  tasks?: Prisma.TaskListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -237,9 +299,12 @@ export type UserOrderByWithAggregationInput = {
   image?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  houseId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
+  _avg?: Prisma.UserAvgOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
   _min?: Prisma.UserMinOrderByAggregateInput
+  _sum?: Prisma.UserSumOrderByAggregateInput
 }
 
 export type UserScalarWhereWithAggregatesInput = {
@@ -253,6 +318,7 @@ export type UserScalarWhereWithAggregatesInput = {
   image?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
+  houseId?: Prisma.IntNullableWithAggregatesFilter<"User"> | number | null
 }
 
 export type UserCreateInput = {
@@ -265,6 +331,12 @@ export type UserCreateInput = {
   updatedAt?: Date | string
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  alertsCreated?: Prisma.AlertCreateNestedManyWithoutCreatedByInput
+  bills?: Prisma.BillCreateNestedManyWithoutResponsibleInput
+  housesCreated?: Prisma.HouseCreateNestedManyWithoutCreatedByInput
+  shares?: Prisma.ShareCreateNestedManyWithoutUserInput
+  house?: Prisma.HouseCreateNestedOneWithoutUsersInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutAssignedInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -275,8 +347,14 @@ export type UserUncheckedCreateInput = {
   image?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  houseId?: number | null
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  alertsCreated?: Prisma.AlertUncheckedCreateNestedManyWithoutCreatedByInput
+  bills?: Prisma.BillUncheckedCreateNestedManyWithoutResponsibleInput
+  housesCreated?: Prisma.HouseUncheckedCreateNestedManyWithoutCreatedByInput
+  shares?: Prisma.ShareUncheckedCreateNestedManyWithoutUserInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssignedInput
 }
 
 export type UserUpdateInput = {
@@ -289,6 +367,12 @@ export type UserUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  alertsCreated?: Prisma.AlertUpdateManyWithoutCreatedByNestedInput
+  bills?: Prisma.BillUpdateManyWithoutResponsibleNestedInput
+  housesCreated?: Prisma.HouseUpdateManyWithoutCreatedByNestedInput
+  shares?: Prisma.ShareUpdateManyWithoutUserNestedInput
+  house?: Prisma.HouseUpdateOneWithoutUsersNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutAssignedNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -299,8 +383,14 @@ export type UserUncheckedUpdateInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  houseId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  alertsCreated?: Prisma.AlertUncheckedUpdateManyWithoutCreatedByNestedInput
+  bills?: Prisma.BillUncheckedUpdateManyWithoutResponsibleNestedInput
+  housesCreated?: Prisma.HouseUncheckedUpdateManyWithoutCreatedByNestedInput
+  shares?: Prisma.ShareUncheckedUpdateManyWithoutUserNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutAssignedNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -311,6 +401,7 @@ export type UserCreateManyInput = {
   image?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  houseId?: number | null
 }
 
 export type UserUpdateManyMutationInput = {
@@ -331,6 +422,7 @@ export type UserUncheckedUpdateManyInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  houseId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type UserCountOrderByAggregateInput = {
@@ -341,6 +433,11 @@ export type UserCountOrderByAggregateInput = {
   image?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  houseId?: Prisma.SortOrder
+}
+
+export type UserAvgOrderByAggregateInput = {
+  houseId?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
@@ -351,6 +448,7 @@ export type UserMaxOrderByAggregateInput = {
   image?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  houseId?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
@@ -361,11 +459,26 @@ export type UserMinOrderByAggregateInput = {
   image?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  houseId?: Prisma.SortOrder
+}
+
+export type UserSumOrderByAggregateInput = {
+  houseId?: Prisma.SortOrder
 }
 
 export type UserScalarRelationFilter = {
   is?: Prisma.UserWhereInput
   isNot?: Prisma.UserWhereInput
+}
+
+export type UserListRelationFilter = {
+  every?: Prisma.UserWhereInput
+  some?: Prisma.UserWhereInput
+  none?: Prisma.UserWhereInput
+}
+
+export type UserOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type StringFieldUpdateOperationsInput = {
@@ -382,6 +495,14 @@ export type NullableStringFieldUpdateOperationsInput = {
 
 export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
+}
+
+export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
 }
 
 export type UserCreateNestedOneWithoutSessionsInput = {
@@ -412,6 +533,142 @@ export type UserUpdateOneRequiredWithoutAccountsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAccountsInput, Prisma.UserUpdateWithoutAccountsInput>, Prisma.UserUncheckedUpdateWithoutAccountsInput>
 }
 
+export type UserCreateNestedOneWithoutHousesCreatedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutHousesCreatedInput, Prisma.UserUncheckedCreateWithoutHousesCreatedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutHousesCreatedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedManyWithoutHouseInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutHouseInput, Prisma.UserUncheckedCreateWithoutHouseInput> | Prisma.UserCreateWithoutHouseInput[] | Prisma.UserUncheckedCreateWithoutHouseInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutHouseInput | Prisma.UserCreateOrConnectWithoutHouseInput[]
+  createMany?: Prisma.UserCreateManyHouseInputEnvelope
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserUncheckedCreateNestedManyWithoutHouseInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutHouseInput, Prisma.UserUncheckedCreateWithoutHouseInput> | Prisma.UserCreateWithoutHouseInput[] | Prisma.UserUncheckedCreateWithoutHouseInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutHouseInput | Prisma.UserCreateOrConnectWithoutHouseInput[]
+  createMany?: Prisma.UserCreateManyHouseInputEnvelope
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserUpdateOneRequiredWithoutHousesCreatedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutHousesCreatedInput, Prisma.UserUncheckedCreateWithoutHousesCreatedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutHousesCreatedInput
+  upsert?: Prisma.UserUpsertWithoutHousesCreatedInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutHousesCreatedInput, Prisma.UserUpdateWithoutHousesCreatedInput>, Prisma.UserUncheckedUpdateWithoutHousesCreatedInput>
+}
+
+export type UserUpdateManyWithoutHouseNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutHouseInput, Prisma.UserUncheckedCreateWithoutHouseInput> | Prisma.UserCreateWithoutHouseInput[] | Prisma.UserUncheckedCreateWithoutHouseInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutHouseInput | Prisma.UserCreateOrConnectWithoutHouseInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutHouseInput | Prisma.UserUpsertWithWhereUniqueWithoutHouseInput[]
+  createMany?: Prisma.UserCreateManyHouseInputEnvelope
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutHouseInput | Prisma.UserUpdateWithWhereUniqueWithoutHouseInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutHouseInput | Prisma.UserUpdateManyWithWhereWithoutHouseInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
+export type UserUncheckedUpdateManyWithoutHouseNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutHouseInput, Prisma.UserUncheckedCreateWithoutHouseInput> | Prisma.UserCreateWithoutHouseInput[] | Prisma.UserUncheckedCreateWithoutHouseInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutHouseInput | Prisma.UserCreateOrConnectWithoutHouseInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutHouseInput | Prisma.UserUpsertWithWhereUniqueWithoutHouseInput[]
+  createMany?: Prisma.UserCreateManyHouseInputEnvelope
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutHouseInput | Prisma.UserUpdateWithWhereUniqueWithoutHouseInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutHouseInput | Prisma.UserUpdateManyWithWhereWithoutHouseInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
+export type UserCreateNestedManyWithoutTasksInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTasksInput, Prisma.UserUncheckedCreateWithoutTasksInput> | Prisma.UserCreateWithoutTasksInput[] | Prisma.UserUncheckedCreateWithoutTasksInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTasksInput | Prisma.UserCreateOrConnectWithoutTasksInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserUncheckedCreateNestedManyWithoutTasksInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTasksInput, Prisma.UserUncheckedCreateWithoutTasksInput> | Prisma.UserCreateWithoutTasksInput[] | Prisma.UserUncheckedCreateWithoutTasksInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTasksInput | Prisma.UserCreateOrConnectWithoutTasksInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserUpdateManyWithoutTasksNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTasksInput, Prisma.UserUncheckedCreateWithoutTasksInput> | Prisma.UserCreateWithoutTasksInput[] | Prisma.UserUncheckedCreateWithoutTasksInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTasksInput | Prisma.UserCreateOrConnectWithoutTasksInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutTasksInput | Prisma.UserUpsertWithWhereUniqueWithoutTasksInput[]
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutTasksInput | Prisma.UserUpdateWithWhereUniqueWithoutTasksInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutTasksInput | Prisma.UserUpdateManyWithWhereWithoutTasksInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
+export type UserUncheckedUpdateManyWithoutTasksNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTasksInput, Prisma.UserUncheckedCreateWithoutTasksInput> | Prisma.UserCreateWithoutTasksInput[] | Prisma.UserUncheckedCreateWithoutTasksInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTasksInput | Prisma.UserCreateOrConnectWithoutTasksInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutTasksInput | Prisma.UserUpsertWithWhereUniqueWithoutTasksInput[]
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutTasksInput | Prisma.UserUpdateWithWhereUniqueWithoutTasksInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutTasksInput | Prisma.UserUpdateManyWithWhereWithoutTasksInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
+export type UserCreateNestedOneWithoutBillsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutBillsInput, Prisma.UserUncheckedCreateWithoutBillsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutBillsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutBillsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutBillsInput, Prisma.UserUncheckedCreateWithoutBillsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutBillsInput
+  upsert?: Prisma.UserUpsertWithoutBillsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutBillsInput, Prisma.UserUpdateWithoutBillsInput>, Prisma.UserUncheckedUpdateWithoutBillsInput>
+}
+
+export type UserCreateNestedOneWithoutSharesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSharesInput, Prisma.UserUncheckedCreateWithoutSharesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSharesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutSharesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSharesInput, Prisma.UserUncheckedCreateWithoutSharesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSharesInput
+  upsert?: Prisma.UserUpsertWithoutSharesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSharesInput, Prisma.UserUpdateWithoutSharesInput>, Prisma.UserUncheckedUpdateWithoutSharesInput>
+}
+
+export type UserCreateNestedOneWithoutAlertsCreatedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAlertsCreatedInput, Prisma.UserUncheckedCreateWithoutAlertsCreatedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAlertsCreatedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutAlertsCreatedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAlertsCreatedInput, Prisma.UserUncheckedCreateWithoutAlertsCreatedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAlertsCreatedInput
+  upsert?: Prisma.UserUpsertWithoutAlertsCreatedInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAlertsCreatedInput, Prisma.UserUpdateWithoutAlertsCreatedInput>, Prisma.UserUncheckedUpdateWithoutAlertsCreatedInput>
+}
+
 export type UserCreateWithoutSessionsInput = {
   id: string
   name: string
@@ -421,6 +678,12 @@ export type UserCreateWithoutSessionsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  alertsCreated?: Prisma.AlertCreateNestedManyWithoutCreatedByInput
+  bills?: Prisma.BillCreateNestedManyWithoutResponsibleInput
+  housesCreated?: Prisma.HouseCreateNestedManyWithoutCreatedByInput
+  shares?: Prisma.ShareCreateNestedManyWithoutUserInput
+  house?: Prisma.HouseCreateNestedOneWithoutUsersInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutAssignedInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -431,7 +694,13 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   image?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  houseId?: number | null
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  alertsCreated?: Prisma.AlertUncheckedCreateNestedManyWithoutCreatedByInput
+  bills?: Prisma.BillUncheckedCreateNestedManyWithoutResponsibleInput
+  housesCreated?: Prisma.HouseUncheckedCreateNestedManyWithoutCreatedByInput
+  shares?: Prisma.ShareUncheckedCreateNestedManyWithoutUserInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssignedInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -459,6 +728,12 @@ export type UserUpdateWithoutSessionsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  alertsCreated?: Prisma.AlertUpdateManyWithoutCreatedByNestedInput
+  bills?: Prisma.BillUpdateManyWithoutResponsibleNestedInput
+  housesCreated?: Prisma.HouseUpdateManyWithoutCreatedByNestedInput
+  shares?: Prisma.ShareUpdateManyWithoutUserNestedInput
+  house?: Prisma.HouseUpdateOneWithoutUsersNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutAssignedNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -469,7 +744,13 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  houseId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  alertsCreated?: Prisma.AlertUncheckedUpdateManyWithoutCreatedByNestedInput
+  bills?: Prisma.BillUncheckedUpdateManyWithoutResponsibleNestedInput
+  housesCreated?: Prisma.HouseUncheckedUpdateManyWithoutCreatedByNestedInput
+  shares?: Prisma.ShareUncheckedUpdateManyWithoutUserNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutAssignedNestedInput
 }
 
 export type UserCreateWithoutAccountsInput = {
@@ -481,6 +762,12 @@ export type UserCreateWithoutAccountsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  alertsCreated?: Prisma.AlertCreateNestedManyWithoutCreatedByInput
+  bills?: Prisma.BillCreateNestedManyWithoutResponsibleInput
+  housesCreated?: Prisma.HouseCreateNestedManyWithoutCreatedByInput
+  shares?: Prisma.ShareCreateNestedManyWithoutUserInput
+  house?: Prisma.HouseCreateNestedOneWithoutUsersInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutAssignedInput
 }
 
 export type UserUncheckedCreateWithoutAccountsInput = {
@@ -491,7 +778,13 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   image?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  houseId?: number | null
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  alertsCreated?: Prisma.AlertUncheckedCreateNestedManyWithoutCreatedByInput
+  bills?: Prisma.BillUncheckedCreateNestedManyWithoutResponsibleInput
+  housesCreated?: Prisma.HouseUncheckedCreateNestedManyWithoutCreatedByInput
+  shares?: Prisma.ShareUncheckedCreateNestedManyWithoutUserInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssignedInput
 }
 
 export type UserCreateOrConnectWithoutAccountsInput = {
@@ -519,6 +812,12 @@ export type UserUpdateWithoutAccountsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  alertsCreated?: Prisma.AlertUpdateManyWithoutCreatedByNestedInput
+  bills?: Prisma.BillUpdateManyWithoutResponsibleNestedInput
+  housesCreated?: Prisma.HouseUpdateManyWithoutCreatedByNestedInput
+  shares?: Prisma.ShareUpdateManyWithoutUserNestedInput
+  house?: Prisma.HouseUpdateOneWithoutUsersNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutAssignedNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -529,7 +828,577 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  houseId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  alertsCreated?: Prisma.AlertUncheckedUpdateManyWithoutCreatedByNestedInput
+  bills?: Prisma.BillUncheckedUpdateManyWithoutResponsibleNestedInput
+  housesCreated?: Prisma.HouseUncheckedUpdateManyWithoutCreatedByNestedInput
+  shares?: Prisma.ShareUncheckedUpdateManyWithoutUserNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutAssignedNestedInput
+}
+
+export type UserCreateWithoutHousesCreatedInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  alertsCreated?: Prisma.AlertCreateNestedManyWithoutCreatedByInput
+  bills?: Prisma.BillCreateNestedManyWithoutResponsibleInput
+  shares?: Prisma.ShareCreateNestedManyWithoutUserInput
+  house?: Prisma.HouseCreateNestedOneWithoutUsersInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutAssignedInput
+}
+
+export type UserUncheckedCreateWithoutHousesCreatedInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  houseId?: number | null
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  alertsCreated?: Prisma.AlertUncheckedCreateNestedManyWithoutCreatedByInput
+  bills?: Prisma.BillUncheckedCreateNestedManyWithoutResponsibleInput
+  shares?: Prisma.ShareUncheckedCreateNestedManyWithoutUserInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssignedInput
+}
+
+export type UserCreateOrConnectWithoutHousesCreatedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutHousesCreatedInput, Prisma.UserUncheckedCreateWithoutHousesCreatedInput>
+}
+
+export type UserCreateWithoutHouseInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  alertsCreated?: Prisma.AlertCreateNestedManyWithoutCreatedByInput
+  bills?: Prisma.BillCreateNestedManyWithoutResponsibleInput
+  housesCreated?: Prisma.HouseCreateNestedManyWithoutCreatedByInput
+  shares?: Prisma.ShareCreateNestedManyWithoutUserInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutAssignedInput
+}
+
+export type UserUncheckedCreateWithoutHouseInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  alertsCreated?: Prisma.AlertUncheckedCreateNestedManyWithoutCreatedByInput
+  bills?: Prisma.BillUncheckedCreateNestedManyWithoutResponsibleInput
+  housesCreated?: Prisma.HouseUncheckedCreateNestedManyWithoutCreatedByInput
+  shares?: Prisma.ShareUncheckedCreateNestedManyWithoutUserInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssignedInput
+}
+
+export type UserCreateOrConnectWithoutHouseInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutHouseInput, Prisma.UserUncheckedCreateWithoutHouseInput>
+}
+
+export type UserCreateManyHouseInputEnvelope = {
+  data: Prisma.UserCreateManyHouseInput | Prisma.UserCreateManyHouseInput[]
+  skipDuplicates?: boolean
+}
+
+export type UserUpsertWithoutHousesCreatedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutHousesCreatedInput, Prisma.UserUncheckedUpdateWithoutHousesCreatedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutHousesCreatedInput, Prisma.UserUncheckedCreateWithoutHousesCreatedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutHousesCreatedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutHousesCreatedInput, Prisma.UserUncheckedUpdateWithoutHousesCreatedInput>
+}
+
+export type UserUpdateWithoutHousesCreatedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  alertsCreated?: Prisma.AlertUpdateManyWithoutCreatedByNestedInput
+  bills?: Prisma.BillUpdateManyWithoutResponsibleNestedInput
+  shares?: Prisma.ShareUpdateManyWithoutUserNestedInput
+  house?: Prisma.HouseUpdateOneWithoutUsersNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutAssignedNestedInput
+}
+
+export type UserUncheckedUpdateWithoutHousesCreatedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  houseId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  alertsCreated?: Prisma.AlertUncheckedUpdateManyWithoutCreatedByNestedInput
+  bills?: Prisma.BillUncheckedUpdateManyWithoutResponsibleNestedInput
+  shares?: Prisma.ShareUncheckedUpdateManyWithoutUserNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutAssignedNestedInput
+}
+
+export type UserUpsertWithWhereUniqueWithoutHouseInput = {
+  where: Prisma.UserWhereUniqueInput
+  update: Prisma.XOR<Prisma.UserUpdateWithoutHouseInput, Prisma.UserUncheckedUpdateWithoutHouseInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutHouseInput, Prisma.UserUncheckedCreateWithoutHouseInput>
+}
+
+export type UserUpdateWithWhereUniqueWithoutHouseInput = {
+  where: Prisma.UserWhereUniqueInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutHouseInput, Prisma.UserUncheckedUpdateWithoutHouseInput>
+}
+
+export type UserUpdateManyWithWhereWithoutHouseInput = {
+  where: Prisma.UserScalarWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateManyMutationInput, Prisma.UserUncheckedUpdateManyWithoutHouseInput>
+}
+
+export type UserScalarWhereInput = {
+  AND?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+  OR?: Prisma.UserScalarWhereInput[]
+  NOT?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+  id?: Prisma.StringFilter<"User"> | string
+  name?: Prisma.StringFilter<"User"> | string
+  email?: Prisma.StringFilter<"User"> | string
+  emailVerified?: Prisma.BoolFilter<"User"> | boolean
+  image?: Prisma.StringNullableFilter<"User"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  houseId?: Prisma.IntNullableFilter<"User"> | number | null
+}
+
+export type UserCreateWithoutTasksInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  alertsCreated?: Prisma.AlertCreateNestedManyWithoutCreatedByInput
+  bills?: Prisma.BillCreateNestedManyWithoutResponsibleInput
+  housesCreated?: Prisma.HouseCreateNestedManyWithoutCreatedByInput
+  shares?: Prisma.ShareCreateNestedManyWithoutUserInput
+  house?: Prisma.HouseCreateNestedOneWithoutUsersInput
+}
+
+export type UserUncheckedCreateWithoutTasksInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  houseId?: number | null
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  alertsCreated?: Prisma.AlertUncheckedCreateNestedManyWithoutCreatedByInput
+  bills?: Prisma.BillUncheckedCreateNestedManyWithoutResponsibleInput
+  housesCreated?: Prisma.HouseUncheckedCreateNestedManyWithoutCreatedByInput
+  shares?: Prisma.ShareUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutTasksInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutTasksInput, Prisma.UserUncheckedCreateWithoutTasksInput>
+}
+
+export type UserUpsertWithWhereUniqueWithoutTasksInput = {
+  where: Prisma.UserWhereUniqueInput
+  update: Prisma.XOR<Prisma.UserUpdateWithoutTasksInput, Prisma.UserUncheckedUpdateWithoutTasksInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutTasksInput, Prisma.UserUncheckedCreateWithoutTasksInput>
+}
+
+export type UserUpdateWithWhereUniqueWithoutTasksInput = {
+  where: Prisma.UserWhereUniqueInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutTasksInput, Prisma.UserUncheckedUpdateWithoutTasksInput>
+}
+
+export type UserUpdateManyWithWhereWithoutTasksInput = {
+  where: Prisma.UserScalarWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateManyMutationInput, Prisma.UserUncheckedUpdateManyWithoutTasksInput>
+}
+
+export type UserCreateWithoutBillsInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  alertsCreated?: Prisma.AlertCreateNestedManyWithoutCreatedByInput
+  housesCreated?: Prisma.HouseCreateNestedManyWithoutCreatedByInput
+  shares?: Prisma.ShareCreateNestedManyWithoutUserInput
+  house?: Prisma.HouseCreateNestedOneWithoutUsersInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutAssignedInput
+}
+
+export type UserUncheckedCreateWithoutBillsInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  houseId?: number | null
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  alertsCreated?: Prisma.AlertUncheckedCreateNestedManyWithoutCreatedByInput
+  housesCreated?: Prisma.HouseUncheckedCreateNestedManyWithoutCreatedByInput
+  shares?: Prisma.ShareUncheckedCreateNestedManyWithoutUserInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssignedInput
+}
+
+export type UserCreateOrConnectWithoutBillsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutBillsInput, Prisma.UserUncheckedCreateWithoutBillsInput>
+}
+
+export type UserUpsertWithoutBillsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutBillsInput, Prisma.UserUncheckedUpdateWithoutBillsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutBillsInput, Prisma.UserUncheckedCreateWithoutBillsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutBillsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutBillsInput, Prisma.UserUncheckedUpdateWithoutBillsInput>
+}
+
+export type UserUpdateWithoutBillsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  alertsCreated?: Prisma.AlertUpdateManyWithoutCreatedByNestedInput
+  housesCreated?: Prisma.HouseUpdateManyWithoutCreatedByNestedInput
+  shares?: Prisma.ShareUpdateManyWithoutUserNestedInput
+  house?: Prisma.HouseUpdateOneWithoutUsersNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutAssignedNestedInput
+}
+
+export type UserUncheckedUpdateWithoutBillsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  houseId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  alertsCreated?: Prisma.AlertUncheckedUpdateManyWithoutCreatedByNestedInput
+  housesCreated?: Prisma.HouseUncheckedUpdateManyWithoutCreatedByNestedInput
+  shares?: Prisma.ShareUncheckedUpdateManyWithoutUserNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutAssignedNestedInput
+}
+
+export type UserCreateWithoutSharesInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  alertsCreated?: Prisma.AlertCreateNestedManyWithoutCreatedByInput
+  bills?: Prisma.BillCreateNestedManyWithoutResponsibleInput
+  housesCreated?: Prisma.HouseCreateNestedManyWithoutCreatedByInput
+  house?: Prisma.HouseCreateNestedOneWithoutUsersInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutAssignedInput
+}
+
+export type UserUncheckedCreateWithoutSharesInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  houseId?: number | null
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  alertsCreated?: Prisma.AlertUncheckedCreateNestedManyWithoutCreatedByInput
+  bills?: Prisma.BillUncheckedCreateNestedManyWithoutResponsibleInput
+  housesCreated?: Prisma.HouseUncheckedCreateNestedManyWithoutCreatedByInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssignedInput
+}
+
+export type UserCreateOrConnectWithoutSharesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutSharesInput, Prisma.UserUncheckedCreateWithoutSharesInput>
+}
+
+export type UserUpsertWithoutSharesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutSharesInput, Prisma.UserUncheckedUpdateWithoutSharesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutSharesInput, Prisma.UserUncheckedCreateWithoutSharesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutSharesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutSharesInput, Prisma.UserUncheckedUpdateWithoutSharesInput>
+}
+
+export type UserUpdateWithoutSharesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  alertsCreated?: Prisma.AlertUpdateManyWithoutCreatedByNestedInput
+  bills?: Prisma.BillUpdateManyWithoutResponsibleNestedInput
+  housesCreated?: Prisma.HouseUpdateManyWithoutCreatedByNestedInput
+  house?: Prisma.HouseUpdateOneWithoutUsersNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutAssignedNestedInput
+}
+
+export type UserUncheckedUpdateWithoutSharesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  houseId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  alertsCreated?: Prisma.AlertUncheckedUpdateManyWithoutCreatedByNestedInput
+  bills?: Prisma.BillUncheckedUpdateManyWithoutResponsibleNestedInput
+  housesCreated?: Prisma.HouseUncheckedUpdateManyWithoutCreatedByNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutAssignedNestedInput
+}
+
+export type UserCreateWithoutAlertsCreatedInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  bills?: Prisma.BillCreateNestedManyWithoutResponsibleInput
+  housesCreated?: Prisma.HouseCreateNestedManyWithoutCreatedByInput
+  shares?: Prisma.ShareCreateNestedManyWithoutUserInput
+  house?: Prisma.HouseCreateNestedOneWithoutUsersInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutAssignedInput
+}
+
+export type UserUncheckedCreateWithoutAlertsCreatedInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  houseId?: number | null
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  bills?: Prisma.BillUncheckedCreateNestedManyWithoutResponsibleInput
+  housesCreated?: Prisma.HouseUncheckedCreateNestedManyWithoutCreatedByInput
+  shares?: Prisma.ShareUncheckedCreateNestedManyWithoutUserInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssignedInput
+}
+
+export type UserCreateOrConnectWithoutAlertsCreatedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutAlertsCreatedInput, Prisma.UserUncheckedCreateWithoutAlertsCreatedInput>
+}
+
+export type UserUpsertWithoutAlertsCreatedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutAlertsCreatedInput, Prisma.UserUncheckedUpdateWithoutAlertsCreatedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutAlertsCreatedInput, Prisma.UserUncheckedCreateWithoutAlertsCreatedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutAlertsCreatedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutAlertsCreatedInput, Prisma.UserUncheckedUpdateWithoutAlertsCreatedInput>
+}
+
+export type UserUpdateWithoutAlertsCreatedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  bills?: Prisma.BillUpdateManyWithoutResponsibleNestedInput
+  housesCreated?: Prisma.HouseUpdateManyWithoutCreatedByNestedInput
+  shares?: Prisma.ShareUpdateManyWithoutUserNestedInput
+  house?: Prisma.HouseUpdateOneWithoutUsersNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutAssignedNestedInput
+}
+
+export type UserUncheckedUpdateWithoutAlertsCreatedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  houseId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  bills?: Prisma.BillUncheckedUpdateManyWithoutResponsibleNestedInput
+  housesCreated?: Prisma.HouseUncheckedUpdateManyWithoutCreatedByNestedInput
+  shares?: Prisma.ShareUncheckedUpdateManyWithoutUserNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutAssignedNestedInput
+}
+
+export type UserCreateManyHouseInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type UserUpdateWithoutHouseInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  alertsCreated?: Prisma.AlertUpdateManyWithoutCreatedByNestedInput
+  bills?: Prisma.BillUpdateManyWithoutResponsibleNestedInput
+  housesCreated?: Prisma.HouseUpdateManyWithoutCreatedByNestedInput
+  shares?: Prisma.ShareUpdateManyWithoutUserNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutAssignedNestedInput
+}
+
+export type UserUncheckedUpdateWithoutHouseInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  alertsCreated?: Prisma.AlertUncheckedUpdateManyWithoutCreatedByNestedInput
+  bills?: Prisma.BillUncheckedUpdateManyWithoutResponsibleNestedInput
+  housesCreated?: Prisma.HouseUncheckedUpdateManyWithoutCreatedByNestedInput
+  shares?: Prisma.ShareUncheckedUpdateManyWithoutUserNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutAssignedNestedInput
+}
+
+export type UserUncheckedUpdateManyWithoutHouseInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type UserUpdateWithoutTasksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  alertsCreated?: Prisma.AlertUpdateManyWithoutCreatedByNestedInput
+  bills?: Prisma.BillUpdateManyWithoutResponsibleNestedInput
+  housesCreated?: Prisma.HouseUpdateManyWithoutCreatedByNestedInput
+  shares?: Prisma.ShareUpdateManyWithoutUserNestedInput
+  house?: Prisma.HouseUpdateOneWithoutUsersNestedInput
+}
+
+export type UserUncheckedUpdateWithoutTasksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  houseId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  alertsCreated?: Prisma.AlertUncheckedUpdateManyWithoutCreatedByNestedInput
+  bills?: Prisma.BillUncheckedUpdateManyWithoutResponsibleNestedInput
+  housesCreated?: Prisma.HouseUncheckedUpdateManyWithoutCreatedByNestedInput
+  shares?: Prisma.ShareUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateManyWithoutTasksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  houseId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 
@@ -540,11 +1409,21 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
 export type UserCountOutputType = {
   sessions: number
   accounts: number
+  alertsCreated: number
+  bills: number
+  housesCreated: number
+  shares: number
+  tasks: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   sessions?: boolean | UserCountOutputTypeCountSessionsArgs
   accounts?: boolean | UserCountOutputTypeCountAccountsArgs
+  alertsCreated?: boolean | UserCountOutputTypeCountAlertsCreatedArgs
+  bills?: boolean | UserCountOutputTypeCountBillsArgs
+  housesCreated?: boolean | UserCountOutputTypeCountHousesCreatedArgs
+  shares?: boolean | UserCountOutputTypeCountSharesArgs
+  tasks?: boolean | UserCountOutputTypeCountTasksArgs
 }
 
 /**
@@ -571,6 +1450,41 @@ export type UserCountOutputTypeCountAccountsArgs<ExtArgs extends runtime.Types.E
   where?: Prisma.AccountWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountAlertsCreatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AlertWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountBillsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BillWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountHousesCreatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.HouseWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountSharesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ShareWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountTasksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TaskWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -580,8 +1494,15 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   image?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  houseId?: boolean
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
+  alertsCreated?: boolean | Prisma.User$alertsCreatedArgs<ExtArgs>
+  bills?: boolean | Prisma.User$billsArgs<ExtArgs>
+  housesCreated?: boolean | Prisma.User$housesCreatedArgs<ExtArgs>
+  shares?: boolean | Prisma.User$sharesArgs<ExtArgs>
+  house?: boolean | Prisma.User$houseArgs<ExtArgs>
+  tasks?: boolean | Prisma.User$tasksArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -593,6 +1514,8 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   image?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  houseId?: boolean
+  house?: boolean | Prisma.User$houseArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -603,6 +1526,8 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   image?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  houseId?: boolean
+  house?: boolean | Prisma.User$houseArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
@@ -613,22 +1538,39 @@ export type UserSelectScalar = {
   image?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  houseId?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "createdAt" | "updatedAt" | "houseId", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
+  alertsCreated?: boolean | Prisma.User$alertsCreatedArgs<ExtArgs>
+  bills?: boolean | Prisma.User$billsArgs<ExtArgs>
+  housesCreated?: boolean | Prisma.User$housesCreatedArgs<ExtArgs>
+  shares?: boolean | Prisma.User$sharesArgs<ExtArgs>
+  house?: boolean | Prisma.User$houseArgs<ExtArgs>
+  tasks?: boolean | Prisma.User$tasksArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
-export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
-export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  house?: boolean | Prisma.User$houseArgs<ExtArgs>
+}
+export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  house?: boolean | Prisma.User$houseArgs<ExtArgs>
+}
 
 export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "User"
   objects: {
     sessions: Prisma.$SessionPayload<ExtArgs>[]
     accounts: Prisma.$AccountPayload<ExtArgs>[]
+    alertsCreated: Prisma.$AlertPayload<ExtArgs>[]
+    bills: Prisma.$BillPayload<ExtArgs>[]
+    housesCreated: Prisma.$HousePayload<ExtArgs>[]
+    shares: Prisma.$SharePayload<ExtArgs>[]
+    house: Prisma.$HousePayload<ExtArgs> | null
+    tasks: Prisma.$TaskPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -638,6 +1580,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     image: string | null
     createdAt: Date
     updatedAt: Date
+    houseId: number | null
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -1034,6 +1977,12 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   readonly [Symbol.toStringTag]: "PrismaPromise"
   sessions<T extends Prisma.User$sessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   accounts<T extends Prisma.User$accountsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  alertsCreated<T extends Prisma.User$alertsCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$alertsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AlertPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  bills<T extends Prisma.User$billsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$billsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BillPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  housesCreated<T extends Prisma.User$housesCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$housesCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HousePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  shares<T extends Prisma.User$sharesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sharesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SharePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  house<T extends Prisma.User$houseArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$houseArgs<ExtArgs>>): Prisma.Prisma__HouseClient<runtime.Types.Result.GetResult<Prisma.$HousePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  tasks<T extends Prisma.User$tasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$tasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1070,6 +2019,7 @@ export interface UserFieldRefs {
   readonly image: Prisma.FieldRef<"User", 'String'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
+  readonly houseId: Prisma.FieldRef<"User", 'Int'>
 }
     
 
@@ -1319,6 +2269,10 @@ export type UserCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions
    */
   data: Prisma.UserCreateManyInput | Prisma.UserCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1389,6 +2343,10 @@ export type UserUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions
    * Limit how many Users to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1503,6 +2461,145 @@ export type User$accountsArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.AccountScalarFieldEnum | Prisma.AccountScalarFieldEnum[]
+}
+
+/**
+ * User.alertsCreated
+ */
+export type User$alertsCreatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Alert
+   */
+  select?: Prisma.AlertSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Alert
+   */
+  omit?: Prisma.AlertOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AlertInclude<ExtArgs> | null
+  where?: Prisma.AlertWhereInput
+  orderBy?: Prisma.AlertOrderByWithRelationInput | Prisma.AlertOrderByWithRelationInput[]
+  cursor?: Prisma.AlertWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AlertScalarFieldEnum | Prisma.AlertScalarFieldEnum[]
+}
+
+/**
+ * User.bills
+ */
+export type User$billsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Bill
+   */
+  select?: Prisma.BillSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Bill
+   */
+  omit?: Prisma.BillOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BillInclude<ExtArgs> | null
+  where?: Prisma.BillWhereInput
+  orderBy?: Prisma.BillOrderByWithRelationInput | Prisma.BillOrderByWithRelationInput[]
+  cursor?: Prisma.BillWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BillScalarFieldEnum | Prisma.BillScalarFieldEnum[]
+}
+
+/**
+ * User.housesCreated
+ */
+export type User$housesCreatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the House
+   */
+  select?: Prisma.HouseSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the House
+   */
+  omit?: Prisma.HouseOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.HouseInclude<ExtArgs> | null
+  where?: Prisma.HouseWhereInput
+  orderBy?: Prisma.HouseOrderByWithRelationInput | Prisma.HouseOrderByWithRelationInput[]
+  cursor?: Prisma.HouseWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.HouseScalarFieldEnum | Prisma.HouseScalarFieldEnum[]
+}
+
+/**
+ * User.shares
+ */
+export type User$sharesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Share
+   */
+  select?: Prisma.ShareSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Share
+   */
+  omit?: Prisma.ShareOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ShareInclude<ExtArgs> | null
+  where?: Prisma.ShareWhereInput
+  orderBy?: Prisma.ShareOrderByWithRelationInput | Prisma.ShareOrderByWithRelationInput[]
+  cursor?: Prisma.ShareWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ShareScalarFieldEnum | Prisma.ShareScalarFieldEnum[]
+}
+
+/**
+ * User.house
+ */
+export type User$houseArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the House
+   */
+  select?: Prisma.HouseSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the House
+   */
+  omit?: Prisma.HouseOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.HouseInclude<ExtArgs> | null
+  where?: Prisma.HouseWhereInput
+}
+
+/**
+ * User.tasks
+ */
+export type User$tasksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Task
+   */
+  select?: Prisma.TaskSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Task
+   */
+  omit?: Prisma.TaskOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TaskInclude<ExtArgs> | null
+  where?: Prisma.TaskWhereInput
+  orderBy?: Prisma.TaskOrderByWithRelationInput | Prisma.TaskOrderByWithRelationInput[]
+  cursor?: Prisma.TaskWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TaskScalarFieldEnum | Prisma.TaskScalarFieldEnum[]
 }
 
 /**

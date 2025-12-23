@@ -40,9 +40,11 @@ export const signInSocial = async (provider: "google" | "github") => {
   const { url } = await auth.api.signInSocial({
     body: {
       provider,
-      callbackURL: "/",
+      callbackURL: "/jahjkshajkshajkh",
     },
   });
+
+  console.log("Social sign-in URL:", url);
 
   if (url) {
     redirect(url);
