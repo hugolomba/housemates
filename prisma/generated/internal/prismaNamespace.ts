@@ -394,6 +394,7 @@ export const ModelName = {
   Bill: 'Bill',
   Share: 'Share',
   HouseInfo: 'HouseInfo',
+  HouseCredential: 'HouseCredential',
   Alert: 'Alert'
 } as const
 
@@ -410,7 +411,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "session" | "account" | "verification" | "house" | "room" | "task" | "bill" | "share" | "houseInfo" | "alert"
+    modelProps: "user" | "session" | "account" | "verification" | "house" | "room" | "task" | "bill" | "share" | "houseInfo" | "houseCredential" | "alert"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1154,6 +1155,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    HouseCredential: {
+      payload: Prisma.$HouseCredentialPayload<ExtArgs>
+      fields: Prisma.HouseCredentialFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.HouseCredentialFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HouseCredentialPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.HouseCredentialFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HouseCredentialPayload>
+        }
+        findFirst: {
+          args: Prisma.HouseCredentialFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HouseCredentialPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.HouseCredentialFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HouseCredentialPayload>
+        }
+        findMany: {
+          args: Prisma.HouseCredentialFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HouseCredentialPayload>[]
+        }
+        create: {
+          args: Prisma.HouseCredentialCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HouseCredentialPayload>
+        }
+        createMany: {
+          args: Prisma.HouseCredentialCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.HouseCredentialCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HouseCredentialPayload>[]
+        }
+        delete: {
+          args: Prisma.HouseCredentialDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HouseCredentialPayload>
+        }
+        update: {
+          args: Prisma.HouseCredentialUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HouseCredentialPayload>
+        }
+        deleteMany: {
+          args: Prisma.HouseCredentialDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.HouseCredentialUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.HouseCredentialUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HouseCredentialPayload>[]
+        }
+        upsert: {
+          args: Prisma.HouseCredentialUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HouseCredentialPayload>
+        }
+        aggregate: {
+          args: Prisma.HouseCredentialAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateHouseCredential>
+        }
+        groupBy: {
+          args: Prisma.HouseCredentialGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.HouseCredentialGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.HouseCredentialCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.HouseCredentialCountAggregateOutputType> | number
+        }
+      }
+    }
     Alert: {
       payload: Prisma.$AlertPayload<ExtArgs>
       fields: Prisma.AlertFieldRefs
@@ -1392,6 +1467,22 @@ export const HouseInfoScalarFieldEnum = {
 export type HouseInfoScalarFieldEnum = (typeof HouseInfoScalarFieldEnum)[keyof typeof HouseInfoScalarFieldEnum]
 
 
+export const HouseCredentialScalarFieldEnum = {
+  id: 'id',
+  houseId: 'houseId',
+  type: 'type',
+  label: 'label',
+  email: 'email',
+  username: 'username',
+  password: 'password',
+  url: 'url',
+  notes: 'notes',
+  createdAt: 'createdAt'
+} as const
+
+export type HouseCredentialScalarFieldEnum = (typeof HouseCredentialScalarFieldEnum)[keyof typeof HouseCredentialScalarFieldEnum]
+
+
 export const AlertScalarFieldEnum = {
   id: 'id',
   title: 'title',
@@ -1497,6 +1588,20 @@ export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, '
  * Reference to a field of type 'Float[]'
  */
 export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+    
+
+
+/**
+ * Reference to a field of type 'CredentialType'
+ */
+export type EnumCredentialTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CredentialType'>
+    
+
+
+/**
+ * Reference to a field of type 'CredentialType[]'
+ */
+export type ListEnumCredentialTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CredentialType[]'>
     
 
 
@@ -1618,6 +1723,7 @@ export type GlobalOmitConfig = {
   bill?: Prisma.BillOmit
   share?: Prisma.ShareOmit
   houseInfo?: Prisma.HouseInfoOmit
+  houseCredential?: Prisma.HouseCredentialOmit
   alert?: Prisma.AlertOmit
 }
 

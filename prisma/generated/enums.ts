@@ -17,3 +17,13 @@ export const Priority = {
 } as const
 
 export type Priority = (typeof Priority)[keyof typeof Priority]
+
+
+export const CredentialType = {
+  WIFI: 'WIFI',
+  APPLIANCE: 'APPLIANCE',
+  SERVICE: 'SERVICE',
+  OTHER: 'OTHER'
+} as const
+
+export type CredentialType = (typeof CredentialType)[keyof typeof CredentialType]

@@ -230,6 +230,7 @@ export type HouseWhereInput = {
   infos?: Prisma.HouseInfoListRelationFilter
   rooms?: Prisma.RoomListRelationFilter
   users?: Prisma.UserListRelationFilter
+  credentials?: Prisma.HouseCredentialListRelationFilter
 }
 
 export type HouseOrderByWithRelationInput = {
@@ -245,6 +246,7 @@ export type HouseOrderByWithRelationInput = {
   infos?: Prisma.HouseInfoOrderByRelationAggregateInput
   rooms?: Prisma.RoomOrderByRelationAggregateInput
   users?: Prisma.UserOrderByRelationAggregateInput
+  credentials?: Prisma.HouseCredentialOrderByRelationAggregateInput
 }
 
 export type HouseWhereUniqueInput = Prisma.AtLeast<{
@@ -263,6 +265,7 @@ export type HouseWhereUniqueInput = Prisma.AtLeast<{
   infos?: Prisma.HouseInfoListRelationFilter
   rooms?: Prisma.RoomListRelationFilter
   users?: Prisma.UserListRelationFilter
+  credentials?: Prisma.HouseCredentialListRelationFilter
 }, "id" | "inviteCode">
 
 export type HouseOrderByWithAggregationInput = {
@@ -302,6 +305,7 @@ export type HouseCreateInput = {
   infos?: Prisma.HouseInfoCreateNestedManyWithoutHouseInput
   rooms?: Prisma.RoomCreateNestedManyWithoutHouseInput
   users?: Prisma.UserCreateNestedManyWithoutHouseInput
+  credentials?: Prisma.HouseCredentialCreateNestedManyWithoutHouseInput
 }
 
 export type HouseUncheckedCreateInput = {
@@ -316,6 +320,7 @@ export type HouseUncheckedCreateInput = {
   infos?: Prisma.HouseInfoUncheckedCreateNestedManyWithoutHouseInput
   rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutHouseInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutHouseInput
+  credentials?: Prisma.HouseCredentialUncheckedCreateNestedManyWithoutHouseInput
 }
 
 export type HouseUpdateInput = {
@@ -329,6 +334,7 @@ export type HouseUpdateInput = {
   infos?: Prisma.HouseInfoUpdateManyWithoutHouseNestedInput
   rooms?: Prisma.RoomUpdateManyWithoutHouseNestedInput
   users?: Prisma.UserUpdateManyWithoutHouseNestedInput
+  credentials?: Prisma.HouseCredentialUpdateManyWithoutHouseNestedInput
 }
 
 export type HouseUncheckedUpdateInput = {
@@ -343,6 +349,7 @@ export type HouseUncheckedUpdateInput = {
   infos?: Prisma.HouseInfoUncheckedUpdateManyWithoutHouseNestedInput
   rooms?: Prisma.RoomUncheckedUpdateManyWithoutHouseNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutHouseNestedInput
+  credentials?: Prisma.HouseCredentialUncheckedUpdateManyWithoutHouseNestedInput
 }
 
 export type HouseCreateManyInput = {
@@ -533,6 +540,20 @@ export type HouseUpdateOneRequiredWithoutInfosNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.HouseUpdateToOneWithWhereWithoutInfosInput, Prisma.HouseUpdateWithoutInfosInput>, Prisma.HouseUncheckedUpdateWithoutInfosInput>
 }
 
+export type HouseCreateNestedOneWithoutCredentialsInput = {
+  create?: Prisma.XOR<Prisma.HouseCreateWithoutCredentialsInput, Prisma.HouseUncheckedCreateWithoutCredentialsInput>
+  connectOrCreate?: Prisma.HouseCreateOrConnectWithoutCredentialsInput
+  connect?: Prisma.HouseWhereUniqueInput
+}
+
+export type HouseUpdateOneRequiredWithoutCredentialsNestedInput = {
+  create?: Prisma.XOR<Prisma.HouseCreateWithoutCredentialsInput, Prisma.HouseUncheckedCreateWithoutCredentialsInput>
+  connectOrCreate?: Prisma.HouseCreateOrConnectWithoutCredentialsInput
+  upsert?: Prisma.HouseUpsertWithoutCredentialsInput
+  connect?: Prisma.HouseWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.HouseUpdateToOneWithWhereWithoutCredentialsInput, Prisma.HouseUpdateWithoutCredentialsInput>, Prisma.HouseUncheckedUpdateWithoutCredentialsInput>
+}
+
 export type HouseCreateNestedOneWithoutAlertsInput = {
   create?: Prisma.XOR<Prisma.HouseCreateWithoutAlertsInput, Prisma.HouseUncheckedCreateWithoutAlertsInput>
   connectOrCreate?: Prisma.HouseCreateOrConnectWithoutAlertsInput
@@ -557,6 +578,7 @@ export type HouseCreateWithoutCreatedByInput = {
   infos?: Prisma.HouseInfoCreateNestedManyWithoutHouseInput
   rooms?: Prisma.RoomCreateNestedManyWithoutHouseInput
   users?: Prisma.UserCreateNestedManyWithoutHouseInput
+  credentials?: Prisma.HouseCredentialCreateNestedManyWithoutHouseInput
 }
 
 export type HouseUncheckedCreateWithoutCreatedByInput = {
@@ -570,6 +592,7 @@ export type HouseUncheckedCreateWithoutCreatedByInput = {
   infos?: Prisma.HouseInfoUncheckedCreateNestedManyWithoutHouseInput
   rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutHouseInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutHouseInput
+  credentials?: Prisma.HouseCredentialUncheckedCreateNestedManyWithoutHouseInput
 }
 
 export type HouseCreateOrConnectWithoutCreatedByInput = {
@@ -592,6 +615,7 @@ export type HouseCreateWithoutUsersInput = {
   createdBy: Prisma.UserCreateNestedOneWithoutHousesCreatedInput
   infos?: Prisma.HouseInfoCreateNestedManyWithoutHouseInput
   rooms?: Prisma.RoomCreateNestedManyWithoutHouseInput
+  credentials?: Prisma.HouseCredentialCreateNestedManyWithoutHouseInput
 }
 
 export type HouseUncheckedCreateWithoutUsersInput = {
@@ -605,6 +629,7 @@ export type HouseUncheckedCreateWithoutUsersInput = {
   bills?: Prisma.BillUncheckedCreateNestedManyWithoutHouseInput
   infos?: Prisma.HouseInfoUncheckedCreateNestedManyWithoutHouseInput
   rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutHouseInput
+  credentials?: Prisma.HouseCredentialUncheckedCreateNestedManyWithoutHouseInput
 }
 
 export type HouseCreateOrConnectWithoutUsersInput = {
@@ -661,6 +686,7 @@ export type HouseUpdateWithoutUsersInput = {
   createdBy?: Prisma.UserUpdateOneRequiredWithoutHousesCreatedNestedInput
   infos?: Prisma.HouseInfoUpdateManyWithoutHouseNestedInput
   rooms?: Prisma.RoomUpdateManyWithoutHouseNestedInput
+  credentials?: Prisma.HouseCredentialUpdateManyWithoutHouseNestedInput
 }
 
 export type HouseUncheckedUpdateWithoutUsersInput = {
@@ -674,6 +700,7 @@ export type HouseUncheckedUpdateWithoutUsersInput = {
   bills?: Prisma.BillUncheckedUpdateManyWithoutHouseNestedInput
   infos?: Prisma.HouseInfoUncheckedUpdateManyWithoutHouseNestedInput
   rooms?: Prisma.RoomUncheckedUpdateManyWithoutHouseNestedInput
+  credentials?: Prisma.HouseCredentialUncheckedUpdateManyWithoutHouseNestedInput
 }
 
 export type HouseCreateWithoutRoomsInput = {
@@ -686,6 +713,7 @@ export type HouseCreateWithoutRoomsInput = {
   createdBy: Prisma.UserCreateNestedOneWithoutHousesCreatedInput
   infos?: Prisma.HouseInfoCreateNestedManyWithoutHouseInput
   users?: Prisma.UserCreateNestedManyWithoutHouseInput
+  credentials?: Prisma.HouseCredentialCreateNestedManyWithoutHouseInput
 }
 
 export type HouseUncheckedCreateWithoutRoomsInput = {
@@ -699,6 +727,7 @@ export type HouseUncheckedCreateWithoutRoomsInput = {
   bills?: Prisma.BillUncheckedCreateNestedManyWithoutHouseInput
   infos?: Prisma.HouseInfoUncheckedCreateNestedManyWithoutHouseInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutHouseInput
+  credentials?: Prisma.HouseCredentialUncheckedCreateNestedManyWithoutHouseInput
 }
 
 export type HouseCreateOrConnectWithoutRoomsInput = {
@@ -727,6 +756,7 @@ export type HouseUpdateWithoutRoomsInput = {
   createdBy?: Prisma.UserUpdateOneRequiredWithoutHousesCreatedNestedInput
   infos?: Prisma.HouseInfoUpdateManyWithoutHouseNestedInput
   users?: Prisma.UserUpdateManyWithoutHouseNestedInput
+  credentials?: Prisma.HouseCredentialUpdateManyWithoutHouseNestedInput
 }
 
 export type HouseUncheckedUpdateWithoutRoomsInput = {
@@ -740,6 +770,7 @@ export type HouseUncheckedUpdateWithoutRoomsInput = {
   bills?: Prisma.BillUncheckedUpdateManyWithoutHouseNestedInput
   infos?: Prisma.HouseInfoUncheckedUpdateManyWithoutHouseNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutHouseNestedInput
+  credentials?: Prisma.HouseCredentialUncheckedUpdateManyWithoutHouseNestedInput
 }
 
 export type HouseCreateWithoutBillsInput = {
@@ -752,6 +783,7 @@ export type HouseCreateWithoutBillsInput = {
   infos?: Prisma.HouseInfoCreateNestedManyWithoutHouseInput
   rooms?: Prisma.RoomCreateNestedManyWithoutHouseInput
   users?: Prisma.UserCreateNestedManyWithoutHouseInput
+  credentials?: Prisma.HouseCredentialCreateNestedManyWithoutHouseInput
 }
 
 export type HouseUncheckedCreateWithoutBillsInput = {
@@ -765,6 +797,7 @@ export type HouseUncheckedCreateWithoutBillsInput = {
   infos?: Prisma.HouseInfoUncheckedCreateNestedManyWithoutHouseInput
   rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutHouseInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutHouseInput
+  credentials?: Prisma.HouseCredentialUncheckedCreateNestedManyWithoutHouseInput
 }
 
 export type HouseCreateOrConnectWithoutBillsInput = {
@@ -793,6 +826,7 @@ export type HouseUpdateWithoutBillsInput = {
   infos?: Prisma.HouseInfoUpdateManyWithoutHouseNestedInput
   rooms?: Prisma.RoomUpdateManyWithoutHouseNestedInput
   users?: Prisma.UserUpdateManyWithoutHouseNestedInput
+  credentials?: Prisma.HouseCredentialUpdateManyWithoutHouseNestedInput
 }
 
 export type HouseUncheckedUpdateWithoutBillsInput = {
@@ -806,6 +840,7 @@ export type HouseUncheckedUpdateWithoutBillsInput = {
   infos?: Prisma.HouseInfoUncheckedUpdateManyWithoutHouseNestedInput
   rooms?: Prisma.RoomUncheckedUpdateManyWithoutHouseNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutHouseNestedInput
+  credentials?: Prisma.HouseCredentialUncheckedUpdateManyWithoutHouseNestedInput
 }
 
 export type HouseCreateWithoutInfosInput = {
@@ -818,6 +853,7 @@ export type HouseCreateWithoutInfosInput = {
   createdBy: Prisma.UserCreateNestedOneWithoutHousesCreatedInput
   rooms?: Prisma.RoomCreateNestedManyWithoutHouseInput
   users?: Prisma.UserCreateNestedManyWithoutHouseInput
+  credentials?: Prisma.HouseCredentialCreateNestedManyWithoutHouseInput
 }
 
 export type HouseUncheckedCreateWithoutInfosInput = {
@@ -831,6 +867,7 @@ export type HouseUncheckedCreateWithoutInfosInput = {
   bills?: Prisma.BillUncheckedCreateNestedManyWithoutHouseInput
   rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutHouseInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutHouseInput
+  credentials?: Prisma.HouseCredentialUncheckedCreateNestedManyWithoutHouseInput
 }
 
 export type HouseCreateOrConnectWithoutInfosInput = {
@@ -859,6 +896,7 @@ export type HouseUpdateWithoutInfosInput = {
   createdBy?: Prisma.UserUpdateOneRequiredWithoutHousesCreatedNestedInput
   rooms?: Prisma.RoomUpdateManyWithoutHouseNestedInput
   users?: Prisma.UserUpdateManyWithoutHouseNestedInput
+  credentials?: Prisma.HouseCredentialUpdateManyWithoutHouseNestedInput
 }
 
 export type HouseUncheckedUpdateWithoutInfosInput = {
@@ -870,6 +908,77 @@ export type HouseUncheckedUpdateWithoutInfosInput = {
   inviteCode?: Prisma.StringFieldUpdateOperationsInput | string
   alerts?: Prisma.AlertUncheckedUpdateManyWithoutHouseNestedInput
   bills?: Prisma.BillUncheckedUpdateManyWithoutHouseNestedInput
+  rooms?: Prisma.RoomUncheckedUpdateManyWithoutHouseNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutHouseNestedInput
+  credentials?: Prisma.HouseCredentialUncheckedUpdateManyWithoutHouseNestedInput
+}
+
+export type HouseCreateWithoutCredentialsInput = {
+  name: string
+  address?: string | null
+  imageUrl?: string | null
+  inviteCode?: string
+  alerts?: Prisma.AlertCreateNestedManyWithoutHouseInput
+  bills?: Prisma.BillCreateNestedManyWithoutHouseInput
+  createdBy: Prisma.UserCreateNestedOneWithoutHousesCreatedInput
+  infos?: Prisma.HouseInfoCreateNestedManyWithoutHouseInput
+  rooms?: Prisma.RoomCreateNestedManyWithoutHouseInput
+  users?: Prisma.UserCreateNestedManyWithoutHouseInput
+}
+
+export type HouseUncheckedCreateWithoutCredentialsInput = {
+  id?: number
+  name: string
+  address?: string | null
+  imageUrl?: string | null
+  createdById: string
+  inviteCode?: string
+  alerts?: Prisma.AlertUncheckedCreateNestedManyWithoutHouseInput
+  bills?: Prisma.BillUncheckedCreateNestedManyWithoutHouseInput
+  infos?: Prisma.HouseInfoUncheckedCreateNestedManyWithoutHouseInput
+  rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutHouseInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutHouseInput
+}
+
+export type HouseCreateOrConnectWithoutCredentialsInput = {
+  where: Prisma.HouseWhereUniqueInput
+  create: Prisma.XOR<Prisma.HouseCreateWithoutCredentialsInput, Prisma.HouseUncheckedCreateWithoutCredentialsInput>
+}
+
+export type HouseUpsertWithoutCredentialsInput = {
+  update: Prisma.XOR<Prisma.HouseUpdateWithoutCredentialsInput, Prisma.HouseUncheckedUpdateWithoutCredentialsInput>
+  create: Prisma.XOR<Prisma.HouseCreateWithoutCredentialsInput, Prisma.HouseUncheckedCreateWithoutCredentialsInput>
+  where?: Prisma.HouseWhereInput
+}
+
+export type HouseUpdateToOneWithWhereWithoutCredentialsInput = {
+  where?: Prisma.HouseWhereInput
+  data: Prisma.XOR<Prisma.HouseUpdateWithoutCredentialsInput, Prisma.HouseUncheckedUpdateWithoutCredentialsInput>
+}
+
+export type HouseUpdateWithoutCredentialsInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  inviteCode?: Prisma.StringFieldUpdateOperationsInput | string
+  alerts?: Prisma.AlertUpdateManyWithoutHouseNestedInput
+  bills?: Prisma.BillUpdateManyWithoutHouseNestedInput
+  createdBy?: Prisma.UserUpdateOneRequiredWithoutHousesCreatedNestedInput
+  infos?: Prisma.HouseInfoUpdateManyWithoutHouseNestedInput
+  rooms?: Prisma.RoomUpdateManyWithoutHouseNestedInput
+  users?: Prisma.UserUpdateManyWithoutHouseNestedInput
+}
+
+export type HouseUncheckedUpdateWithoutCredentialsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  inviteCode?: Prisma.StringFieldUpdateOperationsInput | string
+  alerts?: Prisma.AlertUncheckedUpdateManyWithoutHouseNestedInput
+  bills?: Prisma.BillUncheckedUpdateManyWithoutHouseNestedInput
+  infos?: Prisma.HouseInfoUncheckedUpdateManyWithoutHouseNestedInput
   rooms?: Prisma.RoomUncheckedUpdateManyWithoutHouseNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutHouseNestedInput
 }
@@ -884,6 +993,7 @@ export type HouseCreateWithoutAlertsInput = {
   infos?: Prisma.HouseInfoCreateNestedManyWithoutHouseInput
   rooms?: Prisma.RoomCreateNestedManyWithoutHouseInput
   users?: Prisma.UserCreateNestedManyWithoutHouseInput
+  credentials?: Prisma.HouseCredentialCreateNestedManyWithoutHouseInput
 }
 
 export type HouseUncheckedCreateWithoutAlertsInput = {
@@ -897,6 +1007,7 @@ export type HouseUncheckedCreateWithoutAlertsInput = {
   infos?: Prisma.HouseInfoUncheckedCreateNestedManyWithoutHouseInput
   rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutHouseInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutHouseInput
+  credentials?: Prisma.HouseCredentialUncheckedCreateNestedManyWithoutHouseInput
 }
 
 export type HouseCreateOrConnectWithoutAlertsInput = {
@@ -925,6 +1036,7 @@ export type HouseUpdateWithoutAlertsInput = {
   infos?: Prisma.HouseInfoUpdateManyWithoutHouseNestedInput
   rooms?: Prisma.RoomUpdateManyWithoutHouseNestedInput
   users?: Prisma.UserUpdateManyWithoutHouseNestedInput
+  credentials?: Prisma.HouseCredentialUpdateManyWithoutHouseNestedInput
 }
 
 export type HouseUncheckedUpdateWithoutAlertsInput = {
@@ -938,6 +1050,7 @@ export type HouseUncheckedUpdateWithoutAlertsInput = {
   infos?: Prisma.HouseInfoUncheckedUpdateManyWithoutHouseNestedInput
   rooms?: Prisma.RoomUncheckedUpdateManyWithoutHouseNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutHouseNestedInput
+  credentials?: Prisma.HouseCredentialUncheckedUpdateManyWithoutHouseNestedInput
 }
 
 export type HouseCreateManyCreatedByInput = {
@@ -958,6 +1071,7 @@ export type HouseUpdateWithoutCreatedByInput = {
   infos?: Prisma.HouseInfoUpdateManyWithoutHouseNestedInput
   rooms?: Prisma.RoomUpdateManyWithoutHouseNestedInput
   users?: Prisma.UserUpdateManyWithoutHouseNestedInput
+  credentials?: Prisma.HouseCredentialUpdateManyWithoutHouseNestedInput
 }
 
 export type HouseUncheckedUpdateWithoutCreatedByInput = {
@@ -971,6 +1085,7 @@ export type HouseUncheckedUpdateWithoutCreatedByInput = {
   infos?: Prisma.HouseInfoUncheckedUpdateManyWithoutHouseNestedInput
   rooms?: Prisma.RoomUncheckedUpdateManyWithoutHouseNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutHouseNestedInput
+  credentials?: Prisma.HouseCredentialUncheckedUpdateManyWithoutHouseNestedInput
 }
 
 export type HouseUncheckedUpdateManyWithoutCreatedByInput = {
@@ -992,6 +1107,7 @@ export type HouseCountOutputType = {
   infos: number
   rooms: number
   users: number
+  credentials: number
 }
 
 export type HouseCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1000,6 +1116,7 @@ export type HouseCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.
   infos?: boolean | HouseCountOutputTypeCountInfosArgs
   rooms?: boolean | HouseCountOutputTypeCountRoomsArgs
   users?: boolean | HouseCountOutputTypeCountUsersArgs
+  credentials?: boolean | HouseCountOutputTypeCountCredentialsArgs
 }
 
 /**
@@ -1047,6 +1164,13 @@ export type HouseCountOutputTypeCountUsersArgs<ExtArgs extends runtime.Types.Ext
   where?: Prisma.UserWhereInput
 }
 
+/**
+ * HouseCountOutputType without action
+ */
+export type HouseCountOutputTypeCountCredentialsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.HouseCredentialWhereInput
+}
+
 
 export type HouseSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1061,6 +1185,7 @@ export type HouseSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   infos?: boolean | Prisma.House$infosArgs<ExtArgs>
   rooms?: boolean | Prisma.House$roomsArgs<ExtArgs>
   users?: boolean | Prisma.House$usersArgs<ExtArgs>
+  credentials?: boolean | Prisma.House$credentialsArgs<ExtArgs>
   _count?: boolean | Prisma.HouseCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["house"]>
 
@@ -1101,6 +1226,7 @@ export type HouseInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   infos?: boolean | Prisma.House$infosArgs<ExtArgs>
   rooms?: boolean | Prisma.House$roomsArgs<ExtArgs>
   users?: boolean | Prisma.House$usersArgs<ExtArgs>
+  credentials?: boolean | Prisma.House$credentialsArgs<ExtArgs>
   _count?: boolean | Prisma.HouseCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type HouseIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1119,6 +1245,7 @@ export type $HousePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     infos: Prisma.$HouseInfoPayload<ExtArgs>[]
     rooms: Prisma.$RoomPayload<ExtArgs>[]
     users: Prisma.$UserPayload<ExtArgs>[]
+    credentials: Prisma.$HouseCredentialPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1527,6 +1654,7 @@ export interface Prisma__HouseClient<T, Null = never, ExtArgs extends runtime.Ty
   infos<T extends Prisma.House$infosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.House$infosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HouseInfoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   rooms<T extends Prisma.House$roomsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.House$roomsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RoomPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   users<T extends Prisma.House$usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.House$usersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  credentials<T extends Prisma.House$credentialsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.House$credentialsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HouseCredentialPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2075,6 +2203,30 @@ export type House$usersArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
   take?: number
   skip?: number
   distinct?: Prisma.UserScalarFieldEnum | Prisma.UserScalarFieldEnum[]
+}
+
+/**
+ * House.credentials
+ */
+export type House$credentialsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the HouseCredential
+   */
+  select?: Prisma.HouseCredentialSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the HouseCredential
+   */
+  omit?: Prisma.HouseCredentialOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.HouseCredentialInclude<ExtArgs> | null
+  where?: Prisma.HouseCredentialWhereInput
+  orderBy?: Prisma.HouseCredentialOrderByWithRelationInput | Prisma.HouseCredentialOrderByWithRelationInput[]
+  cursor?: Prisma.HouseCredentialWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.HouseCredentialScalarFieldEnum | Prisma.HouseCredentialScalarFieldEnum[]
 }
 
 /**

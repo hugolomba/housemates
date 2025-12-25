@@ -91,6 +91,7 @@ model House {
   infos       HouseInfo[]
   rooms       Room[]
   users       User[]      @relation("HouseMembers")
+  credentials HouseCredential[]
 }
 
 model Room {
@@ -142,6 +143,21 @@ model HouseInfo {
   house   House  @relation(fields: [houseId], references: [id])
 }
 
+model HouseCredential {
+  id        Int            @id @default(autoincrement())
+  houseId   Int
+  type      CredentialType
+  label     String
+  email     String?
+  username  String?
+  password  String?
+  url       String?
+  notes     String?
+  createdAt DateTime       @default(now())
+
+  house     House          @relation(fields: [houseId], references: [id])
+}
+
 model Alert {
   id          String    @id @default(uuid())
   title       String
@@ -161,4 +177,11 @@ enum Priority {
   MEDIUM
   HIGH
   URGENT
+}
+
+enum CredentialType {
+  WIFI
+  APPLIANCE
+  SERVICE
+  OTHER
 }

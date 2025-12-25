@@ -61,6 +61,7 @@ export const ModelName = {
   Bill: 'Bill',
   Share: 'Share',
   HouseInfo: 'HouseInfo',
+  HouseCredential: 'HouseCredential',
   Alert: 'Alert'
 } as const
 
@@ -203,6 +204,22 @@ export const HouseInfoScalarFieldEnum = {
 } as const
 
 export type HouseInfoScalarFieldEnum = (typeof HouseInfoScalarFieldEnum)[keyof typeof HouseInfoScalarFieldEnum]
+
+
+export const HouseCredentialScalarFieldEnum = {
+  id: 'id',
+  houseId: 'houseId',
+  type: 'type',
+  label: 'label',
+  email: 'email',
+  username: 'username',
+  password: 'password',
+  url: 'url',
+  notes: 'notes',
+  createdAt: 'createdAt'
+} as const
+
+export type HouseCredentialScalarFieldEnum = (typeof HouseCredentialScalarFieldEnum)[keyof typeof HouseCredentialScalarFieldEnum]
 
 
 export const AlertScalarFieldEnum = {

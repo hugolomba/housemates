@@ -121,3 +121,40 @@ export async function getHouseByUserId(userId: string) {
 
   return user?.house || null;
 }
+
+// get user by user id
+export async function getUserById(userId: string) {
+  const user = await prisma.user.findUnique({
+    where: { id: userId },
+  });
+
+  return user || null;
+}
+
+// get house by house id
+export async function getHouseById(houseId: number) {
+  const house = await prisma.house.findUnique({
+    where: { id: houseId },
+    include: {
+      users: true,
+      bills: true,
+      infos: true,
+      alerts: true,
+      rooms: {
+        include: {
+          tasks: {
+            include: {
+              assigned: true,
+            },
+          },
+        },
+      },
+    },
+  });
+
+  if (!house) {
+    throw new Error("House not found");
+  }
+
+  return house;
+}

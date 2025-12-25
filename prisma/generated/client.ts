@@ -90,6 +90,11 @@ export type Share = Prisma.ShareModel
  */
 export type HouseInfo = Prisma.HouseInfoModel
 /**
+ * Model HouseCredential
+ * 
+ */
+export type HouseCredential = Prisma.HouseCredentialModel
+/**
  * Model Alert
  * 
  */
