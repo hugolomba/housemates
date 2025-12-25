@@ -21,10 +21,49 @@ import {
 import { Payload } from "@prisma/client/runtime/client";
 import HouseInfoTable from "./house-info-table";
 
-import { House as HouseIcon } from "lucide-react";
+import {
+  ClipboardList,
+  House as HouseIcon,
+  MoonIcon,
+  ReceiptEuro,
+  TriangleAlert,
+} from "lucide-react";
 
 export default function HouseMain({ house }: Payload<House>) {
   console.log(house.alerts);
+
+  const defineAlertColor = (alertPriority: string) => {
+    switch (alertPriority) {
+      case "URGENT":
+      case "HIGH":
+        return "danger";
+
+      case "MEDIUM":
+      case "LOW":
+        return "warning";
+
+      default:
+        return "primary";
+    }
+  };
+
+  const defineAlertVariant = (alertPriority: string) => {
+    switch (alertPriority) {
+      case "URGENT":
+        return "solid";
+
+      case "MEDIUM":
+      case "HIGH":
+        return "faded";
+
+      case "LOW":
+        return "flat";
+
+      default:
+        return undefined;
+    }
+  };
+
   return (
     <Card fullWidth>
       <CardBody className="flex flex-col items-center justify-center">
@@ -54,16 +93,45 @@ export default function HouseMain({ house }: Payload<House>) {
           </Button>
         </div>
       </CardBody>
-      <CardFooter>
-        <Accordion isCompact>
-          <AccordionItem key="1" aria-label="House Details" title="Alerts">
-            {house.alerts.map((alert) => (
-              <Alert
-                description={alert.description}
-                title={alert.title}
-                key={alert.id}
-              />
-            ))}
+      <CardFooter className="px-2">
+        <Accordion
+          variant="splitted"
+          className="flex flex-col gap-2"
+          disableIndicatorAnimation
+        >
+          <AccordionItem
+            key="1"
+            aria-label="Alerts"
+            title={
+              <p className="text-foreground/90 font-bold">
+                Alerts ({house.alerts.length})
+              </p>
+            }
+            indicator={<TriangleAlert color="#ff0000" />}
+            // className="bg-red-600/20"
+          >
+            <div className="flex flex-col gap-2">
+              {house.alerts.map((alert) => (
+                <Alert
+                  description={alert.description}
+                  title={alert.title}
+                  key={alert.id}
+                  color={defineAlertColor(alert.priority)}
+                  variant={defineAlertVariant(alert.priority)}
+                  endContent={
+                    <Button
+                      size="sm"
+                      //   variant={defineAlertVariant(alert.priority)}
+                      variant="flat"
+                      color="default"
+                      //   color={defineAlertColor(alert.priority)}
+                    >
+                      Mark as Solved
+                    </Button>
+                  }
+                />
+              ))}
+            </div>
 
             {/* <HouseInfoTable infos={house.infos} /> */}
             {/* <div className="flex flex-col gap-4">
@@ -77,6 +145,19 @@ export default function HouseMain({ house }: Payload<House>) {
               ))}
             </div> */}
           </AccordionItem>
+          <AccordionItem
+            key="2"
+            aria-label="Upcoming bills"
+            title="Upcoming bills"
+            indicator={<ReceiptEuro />}
+          ></AccordionItem>
+
+          <AccordionItem
+            key="3"
+            aria-label="Upcoming Tasks"
+            title="Upcoming Tasks"
+            indicator={<ClipboardList />}
+          ></AccordionItem>
         </Accordion>
 
         {/* <Button size="sm" variant="outline" fullWidth>

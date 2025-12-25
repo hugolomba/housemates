@@ -155,6 +155,11 @@ export async function getHouseById(houseId: number) {
   if (!house) {
     throw new Error("House not found");
   }
-
+  // Sort alerts by priority: URGENT, HIGH, MEDIUM, LOW
+  const priorityOrder = ["URGENT", "HIGH", "MEDIUM", "LOW"];
+  house.alerts.sort(
+    (a, b) =>
+      priorityOrder.indexOf(a.priority) - priorityOrder.indexOf(b.priority)
+  );
   return house;
 }
