@@ -37,13 +37,9 @@ export default function CreateHouseForm() {
       if (house) {
         setCreatedHouse(house);
       }
-
-      console.log("House created successfully:", house);
     } catch (error) {
       setErrorMessage(String(error));
       setIsVisible(true);
-      console.error("Error creating house:", error);
-      console.log("Error message set to:", errorMessage);
     } finally {
       setIsSubmitting(false);
     }

@@ -14,7 +14,6 @@ export default function SetupHouse() {
       {mode && (
         <Button
           className="absolute top-4 left-4"
-          // variant="ghost"
           href="/"
           startContent={<ArrowBigLeft />}
           onPress={() => setMode(null)}

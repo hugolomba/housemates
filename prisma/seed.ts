@@ -1,9 +1,9 @@
 import { prisma } from "../lib/prisma";
 
 async function main() {
-  // Limpar dados existentes
+  // Clear existing data
   await prisma.alert.deleteMany();
-  await prisma.share.deleteMany(); // ⬅️ ESTAVA FALTANDO
+  await prisma.share.deleteMany(); // ⬅️ THIS WAS MISSING
   await prisma.task.deleteMany();
   await prisma.bill.deleteMany();
   await prisma.room.deleteMany();
@@ -11,7 +11,7 @@ async function main() {
   await prisma.house.deleteMany();
   await prisma.user.deleteMany();
 
-  // Criar usuários
+  // Create users
   const user1 = await prisma.user.create({
     data: {
       id: "user1",
@@ -40,7 +40,7 @@ async function main() {
     },
   });
 
-  // Criar casa (OBRIGATÓRIO: createdBy)
+  // Create house (REQUIRED: createdBy)
   const house = await prisma.house.create({
     data: {
       name: "Medusa's House",
@@ -63,7 +63,7 @@ async function main() {
     },
   });
 
-  // Criar quartos
+  // Create rooms
   const room1 = await prisma.room.create({
     data: {
       name: "Living Room",
@@ -82,7 +82,7 @@ async function main() {
     },
   });
 
-  // Criar tarefas
+  // Create tasks
   await prisma.task.create({
     data: {
       title: "Clean the living room",
@@ -98,7 +98,7 @@ async function main() {
 
   await prisma.task.create({
     data: {
-      title: "wash the dishes",
+      title: "Wash the dishes",
       description: "Wash plates, glasses, and cutlery",
       room: {
         connect: { id: room2.id },
@@ -109,7 +109,7 @@ async function main() {
     },
   });
 
-  // Criar conta (bill)
+  // Create bill
   const bill = await prisma.bill.create({
     data: {
       title: "Electricity Bill",
@@ -142,10 +142,10 @@ async function main() {
     },
   });
 
-  // Criar alerta
+  // Create alert
   await prisma.alert.create({
     data: {
-      title: "test warning",
+      title: "Test warning",
       message: "Test alert message",
       priority: "HIGH",
 
@@ -161,7 +161,7 @@ async function main() {
     },
   });
 
-  console.log("Seed finalizado com sucesso!");
+  console.log("Seed completed successfully!");
 }
 
 main()

@@ -48,7 +48,6 @@ export default async function Home({
     }
   }
 
-  console.log(house);
   return (
     <div className="flex flex-col items-center mt-6">
       <HouseCard house={house!} />

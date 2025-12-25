@@ -44,8 +44,6 @@ export const signInSocial = async (provider: "google" | "github") => {
     },
   });
 
-  console.log("Social sign-in URL:", url);
-
   if (url) {
     redirect(url);
   }

@@ -6,55 +6,97 @@ import {
 } from "@/lib/actions/house-actions";
 import { Prisma } from "@/prisma/generated/client";
 import {
+  Alert,
   Avatar,
   AvatarGroup,
   Button,
   Card,
   CardBody,
   CardFooter,
-  CardHeader,
   Form,
   Input,
   Spinner,
 } from "@heroui/react";
-import { set } from "better-auth";
 import { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function SetupHouse() {
+  const router = useRouter();
+
   const [inviteCode, setInviteCode] = useState("");
   const [codeIsValid, setCodeIsValid] = useState<boolean | null>(null);
   const [houseToJoin, setHouseToJoin] = useState<Prisma.HouseGetPayload<{
     include: { users: true };
   }> | null>(null);
-  const [error, setError] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [isValidating, setIsValidating] = useState(false);
+  const [isJoining, setIsJoining] = useState(false);
+  const [hasJoined, setHasJoined] = useState(false);
 
   const validateCode = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
-    const house = await getHouseByInviteCode(inviteCode);
-    setHouseToJoin(house);
-    setCodeIsValid(house !== null);
-    setIsLoading(false);
+    setIsValidating(true);
+    setErrorMessage(null);
+
+    try {
+      const house = await getHouseByInviteCode(inviteCode);
+      setHouseToJoin(house);
+      setCodeIsValid(house !== null);
+    } catch (err) {
+      setErrorMessage("Invalid invite code");
+      setCodeIsValid(false);
+    } finally {
+      setIsValidating(false);
+    }
   };
 
   const joinHouse = async () => {
-    // implement join house logic here
-    await joinHouseByInviteCode(inviteCode);
+    setIsJoining(true);
+    setErrorMessage(null);
+
+    try {
+      await joinHouseByInviteCode(inviteCode);
+      setHasJoined(true);
+
+      setTimeout(() => {
+        router.push("/house");
+      }, 3000);
+    } catch (err) {
+      setErrorMessage("Failed to join house" + err);
+    } finally {
+      setIsJoining(false);
+    }
   };
 
   return (
     <div className="flex flex-col items-center gap-8 w-full max-w-md p-8">
+      {errorMessage && (
+        <Alert
+          variant="flat"
+          color="danger"
+          title="Error"
+          description={errorMessage}
+        />
+      )}
       <h1 className="text-2xl font-bold">Join in an existing house</h1>
-      <h2 className="text-center">
-        To join in an existing house, please ask the house admin for the invite
-        code.
-      </h2>
+      {!houseToJoin && (
+        <h2 className="text-center">
+          To join in an existing house, please ask the house admin for the
+          invite code.
+        </h2>
+      )}
 
-      <div className="w-full min-h-[300px] flex items-center justify-center">
-        {isLoading && <Spinner size="lg" variant="wave" />}
+      <div className="w-full min-h-75 flex items-center justify-center">
+        {isValidating && (
+          <Spinner
+            size="lg"
+            variant="wave"
+            label="Validating Invitation Code"
+          />
+        )}
 
-        {!codeIsValid && !isLoading && (
+        {!codeIsValid && !isValidating && (
           <Form
             className="w-full flex flex-col items-center"
             onSubmit={validateCode}
@@ -73,19 +115,8 @@ export default function SetupHouse() {
           </Form>
         )}
 
-        {!isLoading && codeIsValid && (
-          // <C className="w-full flex flex-col items-center">
-          //   <h3 className="text-xl font-semibold mb-4">House Found!</h3>
-          //   <p className="mb-2">House Name: {houseToJoin.name}</p>
-          //   <p className="mb-4">Address: {houseToJoin.address || "N/A"}</p>
-          //   <Button size="lg" variant="solid">
-          //     Join House
-          //   </Button>
-          // </div>
+        {!isValidating && codeIsValid && (
           <Card className="w-full p-4">
-            {/* <CardHeader>
-            {houseToJoin.name} - Invite Code: {houseToJoin.inviteCode}
-          </CardHeader> */}
             <CardBody className="flex items-center">
               <p className="text-2xl font-bold mb-2">{houseToJoin?.name}</p>
               <p className="mb-4"> {houseToJoin?.address || "N/A"}</p>
@@ -107,7 +138,34 @@ export default function SetupHouse() {
               </AvatarGroup>
             </CardBody>
             <CardFooter className="flex flex-col items-center">
-              <Button onPress={joinHouse}>Join House</Button>
+              {isJoining && !hasJoined && (
+                <Button
+                  isLoading
+                  type="button"
+                  className=""
+                  size="lg"
+                  variant="solid"
+                >
+                  Joining House
+                </Button>
+              )}
+
+              {!isJoining && !hasJoined && (
+                <Button onPress={joinHouse}>Join House</Button>
+              )}
+              {hasJoined && (
+                <>
+                  <Alert
+                    variant="flat"
+                    color="success"
+                    title="You have joined the house!"
+                    description="redirecting to your house..."
+                  />
+                  <Link href="/" className="mt-2 text-xs underline">
+                    click here if not redirected
+                  </Link>
+                </>
+              )}
             </CardFooter>
           </Card>
         )}

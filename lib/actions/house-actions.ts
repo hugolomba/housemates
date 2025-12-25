@@ -59,6 +59,10 @@ export async function getHouseByInviteCode(inviteCode: string) {
     },
   });
 
+  if (!house) {
+    throw new Error("Invalid invite code");
+  }
+
   return house;
 }
 
@@ -90,4 +94,30 @@ export async function joinHouseByInviteCode(inviteCode: string) {
   });
 
   return updatedUser;
+}
+
+// Just check if user has an house
+
+export async function checkIfUserHasHouse(userId: string) {
+  const user = await prisma.user.findUnique({
+    where: { id: userId },
+  });
+
+  if (user?.houseId !== null) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+// Get house by user ID
+export async function getHouseByUserId(userId: string) {
+  const user = await prisma.user.findUnique({
+    where: { id: userId },
+    include: {
+      house: true,
+    },
+  });
+
+  return user?.house || null;
 }

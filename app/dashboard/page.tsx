@@ -1,7 +1,6 @@
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { auth } from "@/lib/auth";
-import Items from "../house/[houseId]/items";
 
 export default async function Dashboard() {
   // protected routes
@@ -9,7 +8,6 @@ export default async function Dashboard() {
     headers: await headers(),
   });
 
-  console.log("Dashboard session:", session);
   if (!session) {
     redirect("/auth");
   }
