@@ -1,4 +1,5 @@
 "use client";
+
 import { House } from "@/prisma/generated/client";
 import {
   Accordion,
@@ -9,126 +10,22 @@ import {
   Card,
   CardBody,
   CardFooter,
-  getKeyValue,
-  Table,
-  TableBody,
-  TableCell,
-  TableColumn,
-  TableHeader,
-  TableRow,
-  Alert,
-  addToast,
-  closeToast,
 } from "@heroui/react";
-import { Payload } from "@prisma/client/runtime/client";
-import HouseInfoTable from "./house-info-table";
 
 import {
   ClipboardList,
   House as HouseIcon,
-  MoonIcon,
   ReceiptEuro,
   TriangleAlert,
-  Undo2,
 } from "lucide-react";
-import {
-  markAlertAsResolved,
-  undoResolvedAlert,
-} from "@/lib/actions/alerts-actions";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { set } from "better-auth";
+import Alerts from "./(main-info-components)/alerts";
+import { getHouseById } from "@/lib/actions/house-actions";
 
-export default function HouseMain({ house }: Payload<House>) {
-  const router = useRouter();
+type HouseProps = {
+  house: NonNullable<Awaited<ReturnType<typeof getHouseById>>>;
+};
 
-  const [isResolving, setIsResolving] = useState<boolean>(false);
-  const [isResolved, setIsResolved] = useState<boolean>(false);
-  const [resolvingAlertId, setResolvingAlertId] = useState<string | null>(null);
-  const [resolvedAlertIds, setResolvedAlertIds] = useState<Set<string>>(
-    new Set()
-  );
-
-  const activeAlerts = house.alerts.filter(
-    (alert) => !alert.isResolved && !resolvedAlertIds.has(alert.id)
-  );
-
-  const defineAlertColor = (alertId: string, priority: string) => {
-    if (resolvedAlertIds.has(alertId)) return "success";
-
-    switch (priority) {
-      case "URGENT":
-      case "HIGH":
-        return "danger";
-      case "MEDIUM":
-      case "LOW":
-        return "warning";
-      default:
-        return "primary";
-    }
-  };
-
-  const defineAlertVariant = (alertPriority: string) => {
-    switch (alertPriority) {
-      case "URGENT":
-        return "solid";
-
-      case "MEDIUM":
-      case "HIGH":
-        return "faded";
-
-      case "LOW":
-        return "flat";
-
-      default:
-        return undefined;
-    }
-  };
-
-  const handleResolveAlert = async (alertId: string, alertTitle: string) => {
-    setResolvingAlertId(alertId);
-
-    try {
-      await markAlertAsResolved(alertId);
-
-      setResolvedAlertIds((prev) => {
-        const next = new Set(prev);
-        next.add(alertId);
-        return next;
-      });
-    } catch (error) {
-      console.error("Failed to resolve alert:", error);
-    } finally {
-      setResolvingAlertId(null);
-      //   setTimeout(() => {
-      router.refresh();
-      //   }, 200);
-      const key = addToast({
-        title: "Alert resolved",
-        description: `${alertTitle} has been marked as resolved.`,
-        color: "success",
-        shouldShowTimeoutProgress: true,
-        endContent: (
-          <Button
-            onPress={() => {
-              undoResolvedAlert(alertId);
-              setResolvedAlertIds((prev) => {
-                const next = new Set(prev);
-                next.delete(alertId);
-                return next;
-              });
-              router.refresh();
-              closeToast(key!);
-            }}
-            variant="flat"
-          >
-            Undo <Undo2 />
-          </Button>
-        ),
-      });
-    }
-  };
-
+export default function HouseMain({ house }: HouseProps) {
   return (
     <Card fullWidth>
       <CardBody className="flex flex-col items-center justify-center">
@@ -167,64 +64,10 @@ export default function HouseMain({ house }: Payload<House>) {
           <AccordionItem
             key="1"
             aria-label="Alerts"
-            title={
-              <p className="text-foreground/90 font-bold">
-                Alerts ({activeAlerts.length})
-              </p>
-            }
+            title={<p className="text-foreground/90 font-bold">Alerts</p>}
             indicator={<TriangleAlert color="#ff0000" />}
-            // className="bg-red-600/20"
           >
-            <div className="flex flex-col gap-2">
-              {house.alerts.map((alert) =>
-                alert.isResolved ? null : (
-                  <Alert
-                    description={alert.description}
-                    title={alert.title}
-                    key={alert.id}
-                    color={defineAlertColor(alert.id, alert.priority)}
-                    variant={defineAlertVariant(alert.priority)}
-                    endContent={
-                      resolvingAlertId === alert.id ? (
-                        <Button
-                          className="w-24"
-                          isLoading
-                          size="sm"
-                          variant="flat"
-                        >
-                          Resolving...
-                        </Button>
-                      ) : (
-                        <Button
-                          size="sm"
-                          variant="flat"
-                          disabled={resolvedAlertIds.has(alert.id)}
-                          onPress={() =>
-                            handleResolveAlert(alert.id, alert.title)
-                          }
-                        >
-                          {resolvedAlertIds.has(alert.id)
-                            ? "Resolved"
-                            : "Mark as resolved"}
-                        </Button>
-                      )
-                    }
-                  />
-                )
-              )}
-            </div>
-
-            {/* <HouseInfoTable infos={house.infos} /> */}
-            {/* <div className="flex flex-col gap-4">
-              {house.infos.map((info) => (
-                <Card key={info.id}>
-                  <CardBody className="flex justify-between items-center">
-                    <p className="font-medium">{info.key}</p>
-                    <p className="text-muted-foreground">{info.value}</p>
-                  </CardBody>
-                </Card>
-              ))}
-            </div> */}
+            <Alerts houseAlerts={house.alerts} />
           </AccordionItem>
           <AccordionItem
             key="2"
@@ -240,10 +83,6 @@ export default function HouseMain({ house }: Payload<House>) {
             indicator={<ClipboardList />}
           ></AccordionItem>
         </Accordion>
-
-        {/* <Button size="sm" variant="outline" fullWidth>
-          View House Details
-        </Button> */}
       </CardFooter>
     </Card>
   );

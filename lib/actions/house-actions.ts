@@ -140,6 +140,7 @@ export async function getHouseById(houseId: number) {
       bills: true,
       infos: true,
       alerts: true,
+      credentials: true,
       rooms: {
         include: {
           tasks: {

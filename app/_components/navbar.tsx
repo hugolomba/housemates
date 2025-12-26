@@ -66,7 +66,7 @@ export default function App({ session }: { session: Session | null }) {
           <ThemeSwitcher />
         </NavbarItem>
         <NavbarItem className="hidden sm:flex">
-          <NavbarWithSession session={session} />
+          {session && <NavbarWithSession session={session} />}
         </NavbarItem>
 
         {session ? (
