@@ -15,22 +15,22 @@ export default async function Home() {
     headers: await headers(),
   });
 
-  // get user info
-  const user = await getUserById(session!.user.id);
-  const userHouseId = user?.houseId;
-  const house = await getHouseById(userHouseId!);
-
   // security check
   if (!session) {
     redirect("/auth");
   }
+
+  // get user info
+  const user = await getUserById(session!.user.id);
+  const userHouseId = user?.houseId;
+  const house = await getHouseById(userHouseId!);
 
   if (user?.houseId !== house?.id) {
     throw new Error("User does not belong to this house");
   }
 
   return (
-    <div className="container flex flex-col items-center p-6">
+    <div className="container flex flex-col items-center p-6 mx-auto">
       <HouseMain house={house} />
     </div>
   );

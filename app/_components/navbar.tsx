@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 
 import { auth } from "@/lib/auth";
 import {
@@ -13,6 +14,9 @@ import {
   Dropdown,
   DropdownMenu,
   Avatar,
+  NavbarMenuToggle,
+  NavbarMenuItem,
+  NavbarMenu,
 } from "@heroui/react";
 
 import { signOut } from "@/lib/actions/auth-actions";
@@ -21,32 +25,115 @@ import { ThemeSwitcher } from "./theme-switcher";
 type Session = typeof auth.$Infer.Session;
 
 export default function App({ session }: { session: Session | null }) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
-    <Navbar isBordered shouldHideOnScroll maxWidth="xl">
+    <Navbar
+      isBordered
+      shouldHideOnScroll
+      maxWidth="xl"
+      isMenuOpen={isMenuOpen}
+      onMenuOpenChange={setIsMenuOpen}
+    >
       <NavbarBrand>
         <Link href="/" className="flex items-center gap-2">
           <p className="font-bold text-2xl text-foreground hover:scale-105 transition bg-clip-text">
-            HO .alpha
+            HO
           </p>
         </Link>
       </NavbarBrand>
+
+      <NavbarContent className="hidden sm:flex" justify="center">
+        <NavbarItem>
+          <Link color="foreground" href="#">
+            Bills
+          </Link>
+        </NavbarItem>
+        <NavbarItem>
+          <Link color="foreground" href="#">
+            Tasks
+          </Link>
+        </NavbarItem>
+        <NavbarItem>
+          <Link color="foreground" href="#">
+            Rooms
+          </Link>
+        </NavbarItem>
+      </NavbarContent>
 
       <NavbarContent justify="end">
         <NavbarItem>
           <ThemeSwitcher />
         </NavbarItem>
-        <NavbarItem>
-          {session ? (
-            <NavbarWithSession session={session} />
-          ) : (
+        <NavbarItem className="hidden sm:flex">
+          <NavbarWithSession session={session} />
+        </NavbarItem>
+
+        {session ? (
+          // <NavbarItem>
+          <NavbarMenuToggle
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            className="sm:hidden"
+          />
+        ) : (
+          // </NavbarItem>
+          <NavbarItem>
             <div className="flex items-center gap-3">
               <Button as={Link} color="default" href="/auth" variant="solid">
                 Sign Up / Login
               </Button>
             </div>
-          )}
-        </NavbarItem>
+          </NavbarItem>
+        )}
       </NavbarContent>
+
+      <NavbarMenu className="flex flex-col items-center">
+        <NavbarMenuItem>
+          <Avatar
+            isBordered
+            as="button"
+            className="transition-transform"
+            color="secondary"
+            name={session?.user?.name || "User"}
+            size="md"
+            src={session?.user?.image || ""}
+          />
+        </NavbarMenuItem>
+        <NavbarMenuItem key="profile">
+          <Link className="" href="/user/profile" color="primary" size="lg">
+            Profile
+          </Link>
+        </NavbarMenuItem>
+        <NavbarMenuItem key="bills">
+          <Link className="" href="/house/bills" color="primary" size="lg">
+            Bills
+          </Link>
+        </NavbarMenuItem>
+        <NavbarMenuItem key="tasks">
+          <Link href="/house/tasks" color="primary" size="lg">
+            Tasks
+          </Link>
+        </NavbarMenuItem>
+        <NavbarMenuItem key="rooms">
+          <Link href="/house/rooms" color="primary" size="lg">
+            Rooms
+          </Link>
+        </NavbarMenuItem>
+        <NavbarMenuItem key="logout">
+          <Link
+            as="button"
+            href="/house/rooms"
+            color="danger"
+            size="lg"
+            onPress={() => {
+              setIsMenuOpen(false);
+              signOut();
+            }}
+          >
+            Logout
+          </Link>
+        </NavbarMenuItem>
+      </NavbarMenu>
     </Navbar>
   );
 }
