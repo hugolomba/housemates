@@ -72,6 +72,17 @@ async function main() {
     },
   });
 
+  await prisma.activity.create({
+    data: {
+      houseId: house.id,
+      userId: user1.id,
+      type: "CREATE",
+      entity: "HOUSE",
+      title: "Medusa's House has been created",
+      message: "created the house Medusa's House",
+    },
+  });
+
   // 🚪 Rooms
   const livingRoom = await prisma.room.create({
     data: {
@@ -88,10 +99,11 @@ async function main() {
   });
 
   // ✅ Tasks
-  await prisma.task.create({
+  const task1 = await prisma.task.create({
     data: {
       title: "Clean the living room",
       status: true,
+      houseId: house.id,
       roomId: livingRoom.id,
       assigned: {
         connect: [{ id: user2.id }],
@@ -99,10 +111,23 @@ async function main() {
     },
   });
 
-  await prisma.task.create({
+  await prisma.activity.create({
+    data: {
+      houseId: house.id,
+      userId: user2.id,
+      type: "COMPLETE",
+      entity: "TASK",
+      title: "Clean the living room has been completed",
+      entityId: task1.id,
+      message: "completed the task Clean the living room",
+    },
+  });
+
+  const task2 = await prisma.task.create({
     data: {
       title: "Wash the dishes",
       description: "Wash plates, glasses, and cutlery",
+      houseId: house.id,
       roomId: bedroom.id,
       assigned: {
         connect: [{ id: user1.id }],
@@ -110,17 +135,27 @@ async function main() {
     },
   });
 
+  await prisma.activity.create({
+    data: {
+      houseId: house.id,
+      userId: user1.id,
+      type: "CREATE",
+      entity: "TASK",
+      entityId: task2.id,
+      title: "Wash the dishes has been created",
+      message: "created the task Wash the dishes",
+    },
+  });
+
   // 💸 Bill + Shares
-  await prisma.bill.create({
+  const bill1 = await prisma.bill.create({
     data: {
       title: "Electricity Bill",
       description: "Bill for the month of December",
       totalValue: 120.5,
       dueDate: new Date("2025-12-31"),
-
       houseId: house.id,
       responsibleId: user1.id,
-
       shares: {
         create: [
           {
@@ -135,6 +170,18 @@ async function main() {
           },
         ],
       },
+    },
+  });
+
+  await prisma.activity.create({
+    data: {
+      houseId: house.id,
+      userId: user1.id,
+      type: "CREATE",
+      entity: "BILL",
+      title: "Electricity Bill has been created",
+      entityId: bill1.id,
+      message: "created the bill Electricity Bill",
     },
   });
 
@@ -224,6 +271,36 @@ async function main() {
         houseId: house.id,
 
         expiresAt: new Date(Date.now() + 1000 * 60 * 60 * 24),
+      },
+    ],
+  });
+
+  await prisma.activity.createMany({
+    data: [
+      {
+        houseId: house.id,
+        userId: user1.id,
+        type: "CREATE",
+        entity: "ALERT",
+        title: "Test warning has been created",
+        message: "created an alert Test warning",
+      },
+      {
+        houseId: house.id,
+        userId: user1.id,
+
+        type: "CREATE",
+        entity: "ALERT",
+        title: "Test warning 2 has been created",
+        message: "created an alert Test warning 2",
+      },
+      {
+        houseId: house.id,
+        userId: user1.id,
+        type: "CREATE",
+        entity: "ALERT",
+        title: "Test warning 3 has been created",
+        message: "created an alert Test warning 3",
       },
     ],
   });

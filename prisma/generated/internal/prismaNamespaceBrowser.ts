@@ -62,7 +62,8 @@ export const ModelName = {
   Share: 'Share',
   HouseInfo: 'HouseInfo',
   HouseCredential: 'HouseCredential',
-  Alert: 'Alert'
+  Alert: 'Alert',
+  Activity: 'Activity'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -166,6 +167,7 @@ export const TaskScalarFieldEnum = {
   title: 'title',
   description: 'description',
   status: 'status',
+  houseId: 'houseId',
   roomId: 'roomId'
 } as const
 
@@ -235,6 +237,21 @@ export const AlertScalarFieldEnum = {
 } as const
 
 export type AlertScalarFieldEnum = (typeof AlertScalarFieldEnum)[keyof typeof AlertScalarFieldEnum]
+
+
+export const ActivityScalarFieldEnum = {
+  id: 'id',
+  houseId: 'houseId',
+  userId: 'userId',
+  type: 'type',
+  entity: 'entity',
+  entityId: 'entityId',
+  title: 'title',
+  message: 'message',
+  createdAt: 'createdAt'
+} as const
+
+export type ActivityScalarFieldEnum = (typeof ActivityScalarFieldEnum)[keyof typeof ActivityScalarFieldEnum]
 
 
 export const SortOrder = {

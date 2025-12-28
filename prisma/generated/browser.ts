@@ -77,3 +77,8 @@ export type HouseCredential = Prisma.HouseCredentialModel
  * 
  */
 export type Alert = Prisma.AlertModel
+/**
+ * Model Activity
+ * 
+ */
+export type Activity = Prisma.ActivityModel

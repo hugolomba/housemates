@@ -213,6 +213,9 @@ export default function Bills({ houseBills }: { houseBills: HouseBills }) {
           </ModalFooter>
         </ModalContent>
       </Modal>
+      <Button as={Link} href="/house/bills" variant="flat" color="primary">
+        View All Bills
+      </Button>
     </div>
   );
 }

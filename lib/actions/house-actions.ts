@@ -3,6 +3,8 @@ import { prisma } from "@/lib/prisma";
 import { auth } from "../auth";
 import { headers } from "next/dist/server/request/headers";
 import { House, Prisma } from "@/prisma/generated/client";
+import { log } from "console";
+import { logActivity } from "../activity";
 
 // create a house
 export async function createHouse({
@@ -45,6 +47,16 @@ export async function createHouse({
         connect: { id: session.user.id },
       },
     },
+  });
+
+  await logActivity({
+    houseId: newHouse.id,
+    userId: session.user.id,
+    type: "CREATE",
+    entity: "HOUSE",
+    entityId: newHouse.id,
+    title: `${newHouse.name} has been created`,
+    message: `${session.user.name} created the house ${newHouse.name}`,
   });
 
   return newHouse;
@@ -91,6 +103,16 @@ export async function joinHouseByInviteCode(inviteCode: string) {
     data: {
       houseId: house.id,
     },
+  });
+
+  await logActivity({
+    houseId: house.id,
+    userId: session.user.id,
+    type: "UPDATE",
+    entity: "HOUSE",
+    entityId: house.id,
+    title: `${session.user.name} joined the house`,
+    message: `${session.user.name} joined the house ${house.name}`,
   });
 
   return updatedUser;
@@ -151,6 +173,10 @@ export async function getHouseById(houseId: number) {
       infos: true,
       alerts: true,
       credentials: true,
+      activities: {
+        orderBy: { createdAt: "desc" },
+        take: 5,
+      },
       rooms: {
         include: {
           tasks: {

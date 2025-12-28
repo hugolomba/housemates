@@ -19,6 +19,11 @@ export async function GET() {
           responsible: true,
         },
       },
+      tasks: true,
+      activities: {
+        orderBy: { createdAt: "desc" },
+        take: 5,
+      },
       createdBy: true,
       infos: true,
       rooms: true,

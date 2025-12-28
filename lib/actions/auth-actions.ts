@@ -9,7 +9,7 @@ export const signUp = async (email: string, password: string, name: string) => {
       email,
       password,
       name,
-      callbackURL: "/",
+      callbackURL: "/setup-house",
     },
   });
 

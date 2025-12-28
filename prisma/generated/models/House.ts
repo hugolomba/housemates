@@ -228,6 +228,8 @@ export type HouseWhereInput = {
   bills?: Prisma.BillListRelationFilter
   createdBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   infos?: Prisma.HouseInfoListRelationFilter
+  tasks?: Prisma.TaskListRelationFilter
+  activities?: Prisma.ActivityListRelationFilter
   rooms?: Prisma.RoomListRelationFilter
   users?: Prisma.UserListRelationFilter
   credentials?: Prisma.HouseCredentialListRelationFilter
@@ -244,6 +246,8 @@ export type HouseOrderByWithRelationInput = {
   bills?: Prisma.BillOrderByRelationAggregateInput
   createdBy?: Prisma.UserOrderByWithRelationInput
   infos?: Prisma.HouseInfoOrderByRelationAggregateInput
+  tasks?: Prisma.TaskOrderByRelationAggregateInput
+  activities?: Prisma.ActivityOrderByRelationAggregateInput
   rooms?: Prisma.RoomOrderByRelationAggregateInput
   users?: Prisma.UserOrderByRelationAggregateInput
   credentials?: Prisma.HouseCredentialOrderByRelationAggregateInput
@@ -263,6 +267,8 @@ export type HouseWhereUniqueInput = Prisma.AtLeast<{
   bills?: Prisma.BillListRelationFilter
   createdBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   infos?: Prisma.HouseInfoListRelationFilter
+  tasks?: Prisma.TaskListRelationFilter
+  activities?: Prisma.ActivityListRelationFilter
   rooms?: Prisma.RoomListRelationFilter
   users?: Prisma.UserListRelationFilter
   credentials?: Prisma.HouseCredentialListRelationFilter
@@ -303,6 +309,8 @@ export type HouseCreateInput = {
   bills?: Prisma.BillCreateNestedManyWithoutHouseInput
   createdBy: Prisma.UserCreateNestedOneWithoutHousesCreatedInput
   infos?: Prisma.HouseInfoCreateNestedManyWithoutHouseInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutHouseInput
+  activities?: Prisma.ActivityCreateNestedManyWithoutHouseInput
   rooms?: Prisma.RoomCreateNestedManyWithoutHouseInput
   users?: Prisma.UserCreateNestedManyWithoutHouseInput
   credentials?: Prisma.HouseCredentialCreateNestedManyWithoutHouseInput
@@ -318,6 +326,8 @@ export type HouseUncheckedCreateInput = {
   alerts?: Prisma.AlertUncheckedCreateNestedManyWithoutHouseInput
   bills?: Prisma.BillUncheckedCreateNestedManyWithoutHouseInput
   infos?: Prisma.HouseInfoUncheckedCreateNestedManyWithoutHouseInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutHouseInput
+  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutHouseInput
   rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutHouseInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutHouseInput
   credentials?: Prisma.HouseCredentialUncheckedCreateNestedManyWithoutHouseInput
@@ -332,6 +342,8 @@ export type HouseUpdateInput = {
   bills?: Prisma.BillUpdateManyWithoutHouseNestedInput
   createdBy?: Prisma.UserUpdateOneRequiredWithoutHousesCreatedNestedInput
   infos?: Prisma.HouseInfoUpdateManyWithoutHouseNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutHouseNestedInput
+  activities?: Prisma.ActivityUpdateManyWithoutHouseNestedInput
   rooms?: Prisma.RoomUpdateManyWithoutHouseNestedInput
   users?: Prisma.UserUpdateManyWithoutHouseNestedInput
   credentials?: Prisma.HouseCredentialUpdateManyWithoutHouseNestedInput
@@ -347,6 +359,8 @@ export type HouseUncheckedUpdateInput = {
   alerts?: Prisma.AlertUncheckedUpdateManyWithoutHouseNestedInput
   bills?: Prisma.BillUncheckedUpdateManyWithoutHouseNestedInput
   infos?: Prisma.HouseInfoUncheckedUpdateManyWithoutHouseNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutHouseNestedInput
+  activities?: Prisma.ActivityUncheckedUpdateManyWithoutHouseNestedInput
   rooms?: Prisma.RoomUncheckedUpdateManyWithoutHouseNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutHouseNestedInput
   credentials?: Prisma.HouseCredentialUncheckedUpdateManyWithoutHouseNestedInput
@@ -512,6 +526,20 @@ export type HouseUpdateOneRequiredWithoutRoomsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.HouseUpdateToOneWithWhereWithoutRoomsInput, Prisma.HouseUpdateWithoutRoomsInput>, Prisma.HouseUncheckedUpdateWithoutRoomsInput>
 }
 
+export type HouseCreateNestedOneWithoutTasksInput = {
+  create?: Prisma.XOR<Prisma.HouseCreateWithoutTasksInput, Prisma.HouseUncheckedCreateWithoutTasksInput>
+  connectOrCreate?: Prisma.HouseCreateOrConnectWithoutTasksInput
+  connect?: Prisma.HouseWhereUniqueInput
+}
+
+export type HouseUpdateOneRequiredWithoutTasksNestedInput = {
+  create?: Prisma.XOR<Prisma.HouseCreateWithoutTasksInput, Prisma.HouseUncheckedCreateWithoutTasksInput>
+  connectOrCreate?: Prisma.HouseCreateOrConnectWithoutTasksInput
+  upsert?: Prisma.HouseUpsertWithoutTasksInput
+  connect?: Prisma.HouseWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.HouseUpdateToOneWithWhereWithoutTasksInput, Prisma.HouseUpdateWithoutTasksInput>, Prisma.HouseUncheckedUpdateWithoutTasksInput>
+}
+
 export type HouseCreateNestedOneWithoutBillsInput = {
   create?: Prisma.XOR<Prisma.HouseCreateWithoutBillsInput, Prisma.HouseUncheckedCreateWithoutBillsInput>
   connectOrCreate?: Prisma.HouseCreateOrConnectWithoutBillsInput
@@ -568,6 +596,20 @@ export type HouseUpdateOneRequiredWithoutAlertsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.HouseUpdateToOneWithWhereWithoutAlertsInput, Prisma.HouseUpdateWithoutAlertsInput>, Prisma.HouseUncheckedUpdateWithoutAlertsInput>
 }
 
+export type HouseCreateNestedOneWithoutActivitiesInput = {
+  create?: Prisma.XOR<Prisma.HouseCreateWithoutActivitiesInput, Prisma.HouseUncheckedCreateWithoutActivitiesInput>
+  connectOrCreate?: Prisma.HouseCreateOrConnectWithoutActivitiesInput
+  connect?: Prisma.HouseWhereUniqueInput
+}
+
+export type HouseUpdateOneRequiredWithoutActivitiesNestedInput = {
+  create?: Prisma.XOR<Prisma.HouseCreateWithoutActivitiesInput, Prisma.HouseUncheckedCreateWithoutActivitiesInput>
+  connectOrCreate?: Prisma.HouseCreateOrConnectWithoutActivitiesInput
+  upsert?: Prisma.HouseUpsertWithoutActivitiesInput
+  connect?: Prisma.HouseWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.HouseUpdateToOneWithWhereWithoutActivitiesInput, Prisma.HouseUpdateWithoutActivitiesInput>, Prisma.HouseUncheckedUpdateWithoutActivitiesInput>
+}
+
 export type HouseCreateWithoutCreatedByInput = {
   name: string
   address?: string | null
@@ -576,6 +618,8 @@ export type HouseCreateWithoutCreatedByInput = {
   alerts?: Prisma.AlertCreateNestedManyWithoutHouseInput
   bills?: Prisma.BillCreateNestedManyWithoutHouseInput
   infos?: Prisma.HouseInfoCreateNestedManyWithoutHouseInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutHouseInput
+  activities?: Prisma.ActivityCreateNestedManyWithoutHouseInput
   rooms?: Prisma.RoomCreateNestedManyWithoutHouseInput
   users?: Prisma.UserCreateNestedManyWithoutHouseInput
   credentials?: Prisma.HouseCredentialCreateNestedManyWithoutHouseInput
@@ -590,6 +634,8 @@ export type HouseUncheckedCreateWithoutCreatedByInput = {
   alerts?: Prisma.AlertUncheckedCreateNestedManyWithoutHouseInput
   bills?: Prisma.BillUncheckedCreateNestedManyWithoutHouseInput
   infos?: Prisma.HouseInfoUncheckedCreateNestedManyWithoutHouseInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutHouseInput
+  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutHouseInput
   rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutHouseInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutHouseInput
   credentials?: Prisma.HouseCredentialUncheckedCreateNestedManyWithoutHouseInput
@@ -614,6 +660,8 @@ export type HouseCreateWithoutUsersInput = {
   bills?: Prisma.BillCreateNestedManyWithoutHouseInput
   createdBy: Prisma.UserCreateNestedOneWithoutHousesCreatedInput
   infos?: Prisma.HouseInfoCreateNestedManyWithoutHouseInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutHouseInput
+  activities?: Prisma.ActivityCreateNestedManyWithoutHouseInput
   rooms?: Prisma.RoomCreateNestedManyWithoutHouseInput
   credentials?: Prisma.HouseCredentialCreateNestedManyWithoutHouseInput
 }
@@ -628,6 +676,8 @@ export type HouseUncheckedCreateWithoutUsersInput = {
   alerts?: Prisma.AlertUncheckedCreateNestedManyWithoutHouseInput
   bills?: Prisma.BillUncheckedCreateNestedManyWithoutHouseInput
   infos?: Prisma.HouseInfoUncheckedCreateNestedManyWithoutHouseInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutHouseInput
+  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutHouseInput
   rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutHouseInput
   credentials?: Prisma.HouseCredentialUncheckedCreateNestedManyWithoutHouseInput
 }
@@ -685,6 +735,8 @@ export type HouseUpdateWithoutUsersInput = {
   bills?: Prisma.BillUpdateManyWithoutHouseNestedInput
   createdBy?: Prisma.UserUpdateOneRequiredWithoutHousesCreatedNestedInput
   infos?: Prisma.HouseInfoUpdateManyWithoutHouseNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutHouseNestedInput
+  activities?: Prisma.ActivityUpdateManyWithoutHouseNestedInput
   rooms?: Prisma.RoomUpdateManyWithoutHouseNestedInput
   credentials?: Prisma.HouseCredentialUpdateManyWithoutHouseNestedInput
 }
@@ -699,6 +751,8 @@ export type HouseUncheckedUpdateWithoutUsersInput = {
   alerts?: Prisma.AlertUncheckedUpdateManyWithoutHouseNestedInput
   bills?: Prisma.BillUncheckedUpdateManyWithoutHouseNestedInput
   infos?: Prisma.HouseInfoUncheckedUpdateManyWithoutHouseNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutHouseNestedInput
+  activities?: Prisma.ActivityUncheckedUpdateManyWithoutHouseNestedInput
   rooms?: Prisma.RoomUncheckedUpdateManyWithoutHouseNestedInput
   credentials?: Prisma.HouseCredentialUncheckedUpdateManyWithoutHouseNestedInput
 }
@@ -712,6 +766,8 @@ export type HouseCreateWithoutRoomsInput = {
   bills?: Prisma.BillCreateNestedManyWithoutHouseInput
   createdBy: Prisma.UserCreateNestedOneWithoutHousesCreatedInput
   infos?: Prisma.HouseInfoCreateNestedManyWithoutHouseInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutHouseInput
+  activities?: Prisma.ActivityCreateNestedManyWithoutHouseInput
   users?: Prisma.UserCreateNestedManyWithoutHouseInput
   credentials?: Prisma.HouseCredentialCreateNestedManyWithoutHouseInput
 }
@@ -726,6 +782,8 @@ export type HouseUncheckedCreateWithoutRoomsInput = {
   alerts?: Prisma.AlertUncheckedCreateNestedManyWithoutHouseInput
   bills?: Prisma.BillUncheckedCreateNestedManyWithoutHouseInput
   infos?: Prisma.HouseInfoUncheckedCreateNestedManyWithoutHouseInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutHouseInput
+  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutHouseInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutHouseInput
   credentials?: Prisma.HouseCredentialUncheckedCreateNestedManyWithoutHouseInput
 }
@@ -755,6 +813,8 @@ export type HouseUpdateWithoutRoomsInput = {
   bills?: Prisma.BillUpdateManyWithoutHouseNestedInput
   createdBy?: Prisma.UserUpdateOneRequiredWithoutHousesCreatedNestedInput
   infos?: Prisma.HouseInfoUpdateManyWithoutHouseNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutHouseNestedInput
+  activities?: Prisma.ActivityUpdateManyWithoutHouseNestedInput
   users?: Prisma.UserUpdateManyWithoutHouseNestedInput
   credentials?: Prisma.HouseCredentialUpdateManyWithoutHouseNestedInput
 }
@@ -769,6 +829,86 @@ export type HouseUncheckedUpdateWithoutRoomsInput = {
   alerts?: Prisma.AlertUncheckedUpdateManyWithoutHouseNestedInput
   bills?: Prisma.BillUncheckedUpdateManyWithoutHouseNestedInput
   infos?: Prisma.HouseInfoUncheckedUpdateManyWithoutHouseNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutHouseNestedInput
+  activities?: Prisma.ActivityUncheckedUpdateManyWithoutHouseNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutHouseNestedInput
+  credentials?: Prisma.HouseCredentialUncheckedUpdateManyWithoutHouseNestedInput
+}
+
+export type HouseCreateWithoutTasksInput = {
+  name: string
+  address?: string | null
+  imageUrl?: string | null
+  inviteCode?: string
+  alerts?: Prisma.AlertCreateNestedManyWithoutHouseInput
+  bills?: Prisma.BillCreateNestedManyWithoutHouseInput
+  createdBy: Prisma.UserCreateNestedOneWithoutHousesCreatedInput
+  infos?: Prisma.HouseInfoCreateNestedManyWithoutHouseInput
+  activities?: Prisma.ActivityCreateNestedManyWithoutHouseInput
+  rooms?: Prisma.RoomCreateNestedManyWithoutHouseInput
+  users?: Prisma.UserCreateNestedManyWithoutHouseInput
+  credentials?: Prisma.HouseCredentialCreateNestedManyWithoutHouseInput
+}
+
+export type HouseUncheckedCreateWithoutTasksInput = {
+  id?: number
+  name: string
+  address?: string | null
+  imageUrl?: string | null
+  createdById: string
+  inviteCode?: string
+  alerts?: Prisma.AlertUncheckedCreateNestedManyWithoutHouseInput
+  bills?: Prisma.BillUncheckedCreateNestedManyWithoutHouseInput
+  infos?: Prisma.HouseInfoUncheckedCreateNestedManyWithoutHouseInput
+  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutHouseInput
+  rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutHouseInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutHouseInput
+  credentials?: Prisma.HouseCredentialUncheckedCreateNestedManyWithoutHouseInput
+}
+
+export type HouseCreateOrConnectWithoutTasksInput = {
+  where: Prisma.HouseWhereUniqueInput
+  create: Prisma.XOR<Prisma.HouseCreateWithoutTasksInput, Prisma.HouseUncheckedCreateWithoutTasksInput>
+}
+
+export type HouseUpsertWithoutTasksInput = {
+  update: Prisma.XOR<Prisma.HouseUpdateWithoutTasksInput, Prisma.HouseUncheckedUpdateWithoutTasksInput>
+  create: Prisma.XOR<Prisma.HouseCreateWithoutTasksInput, Prisma.HouseUncheckedCreateWithoutTasksInput>
+  where?: Prisma.HouseWhereInput
+}
+
+export type HouseUpdateToOneWithWhereWithoutTasksInput = {
+  where?: Prisma.HouseWhereInput
+  data: Prisma.XOR<Prisma.HouseUpdateWithoutTasksInput, Prisma.HouseUncheckedUpdateWithoutTasksInput>
+}
+
+export type HouseUpdateWithoutTasksInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  inviteCode?: Prisma.StringFieldUpdateOperationsInput | string
+  alerts?: Prisma.AlertUpdateManyWithoutHouseNestedInput
+  bills?: Prisma.BillUpdateManyWithoutHouseNestedInput
+  createdBy?: Prisma.UserUpdateOneRequiredWithoutHousesCreatedNestedInput
+  infos?: Prisma.HouseInfoUpdateManyWithoutHouseNestedInput
+  activities?: Prisma.ActivityUpdateManyWithoutHouseNestedInput
+  rooms?: Prisma.RoomUpdateManyWithoutHouseNestedInput
+  users?: Prisma.UserUpdateManyWithoutHouseNestedInput
+  credentials?: Prisma.HouseCredentialUpdateManyWithoutHouseNestedInput
+}
+
+export type HouseUncheckedUpdateWithoutTasksInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  inviteCode?: Prisma.StringFieldUpdateOperationsInput | string
+  alerts?: Prisma.AlertUncheckedUpdateManyWithoutHouseNestedInput
+  bills?: Prisma.BillUncheckedUpdateManyWithoutHouseNestedInput
+  infos?: Prisma.HouseInfoUncheckedUpdateManyWithoutHouseNestedInput
+  activities?: Prisma.ActivityUncheckedUpdateManyWithoutHouseNestedInput
+  rooms?: Prisma.RoomUncheckedUpdateManyWithoutHouseNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutHouseNestedInput
   credentials?: Prisma.HouseCredentialUncheckedUpdateManyWithoutHouseNestedInput
 }
@@ -781,6 +921,8 @@ export type HouseCreateWithoutBillsInput = {
   alerts?: Prisma.AlertCreateNestedManyWithoutHouseInput
   createdBy: Prisma.UserCreateNestedOneWithoutHousesCreatedInput
   infos?: Prisma.HouseInfoCreateNestedManyWithoutHouseInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutHouseInput
+  activities?: Prisma.ActivityCreateNestedManyWithoutHouseInput
   rooms?: Prisma.RoomCreateNestedManyWithoutHouseInput
   users?: Prisma.UserCreateNestedManyWithoutHouseInput
   credentials?: Prisma.HouseCredentialCreateNestedManyWithoutHouseInput
@@ -795,6 +937,8 @@ export type HouseUncheckedCreateWithoutBillsInput = {
   inviteCode?: string
   alerts?: Prisma.AlertUncheckedCreateNestedManyWithoutHouseInput
   infos?: Prisma.HouseInfoUncheckedCreateNestedManyWithoutHouseInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutHouseInput
+  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutHouseInput
   rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutHouseInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutHouseInput
   credentials?: Prisma.HouseCredentialUncheckedCreateNestedManyWithoutHouseInput
@@ -824,6 +968,8 @@ export type HouseUpdateWithoutBillsInput = {
   alerts?: Prisma.AlertUpdateManyWithoutHouseNestedInput
   createdBy?: Prisma.UserUpdateOneRequiredWithoutHousesCreatedNestedInput
   infos?: Prisma.HouseInfoUpdateManyWithoutHouseNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutHouseNestedInput
+  activities?: Prisma.ActivityUpdateManyWithoutHouseNestedInput
   rooms?: Prisma.RoomUpdateManyWithoutHouseNestedInput
   users?: Prisma.UserUpdateManyWithoutHouseNestedInput
   credentials?: Prisma.HouseCredentialUpdateManyWithoutHouseNestedInput
@@ -838,6 +984,8 @@ export type HouseUncheckedUpdateWithoutBillsInput = {
   inviteCode?: Prisma.StringFieldUpdateOperationsInput | string
   alerts?: Prisma.AlertUncheckedUpdateManyWithoutHouseNestedInput
   infos?: Prisma.HouseInfoUncheckedUpdateManyWithoutHouseNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutHouseNestedInput
+  activities?: Prisma.ActivityUncheckedUpdateManyWithoutHouseNestedInput
   rooms?: Prisma.RoomUncheckedUpdateManyWithoutHouseNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutHouseNestedInput
   credentials?: Prisma.HouseCredentialUncheckedUpdateManyWithoutHouseNestedInput
@@ -851,6 +999,8 @@ export type HouseCreateWithoutInfosInput = {
   alerts?: Prisma.AlertCreateNestedManyWithoutHouseInput
   bills?: Prisma.BillCreateNestedManyWithoutHouseInput
   createdBy: Prisma.UserCreateNestedOneWithoutHousesCreatedInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutHouseInput
+  activities?: Prisma.ActivityCreateNestedManyWithoutHouseInput
   rooms?: Prisma.RoomCreateNestedManyWithoutHouseInput
   users?: Prisma.UserCreateNestedManyWithoutHouseInput
   credentials?: Prisma.HouseCredentialCreateNestedManyWithoutHouseInput
@@ -865,6 +1015,8 @@ export type HouseUncheckedCreateWithoutInfosInput = {
   inviteCode?: string
   alerts?: Prisma.AlertUncheckedCreateNestedManyWithoutHouseInput
   bills?: Prisma.BillUncheckedCreateNestedManyWithoutHouseInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutHouseInput
+  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutHouseInput
   rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutHouseInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutHouseInput
   credentials?: Prisma.HouseCredentialUncheckedCreateNestedManyWithoutHouseInput
@@ -894,6 +1046,8 @@ export type HouseUpdateWithoutInfosInput = {
   alerts?: Prisma.AlertUpdateManyWithoutHouseNestedInput
   bills?: Prisma.BillUpdateManyWithoutHouseNestedInput
   createdBy?: Prisma.UserUpdateOneRequiredWithoutHousesCreatedNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutHouseNestedInput
+  activities?: Prisma.ActivityUpdateManyWithoutHouseNestedInput
   rooms?: Prisma.RoomUpdateManyWithoutHouseNestedInput
   users?: Prisma.UserUpdateManyWithoutHouseNestedInput
   credentials?: Prisma.HouseCredentialUpdateManyWithoutHouseNestedInput
@@ -908,6 +1062,8 @@ export type HouseUncheckedUpdateWithoutInfosInput = {
   inviteCode?: Prisma.StringFieldUpdateOperationsInput | string
   alerts?: Prisma.AlertUncheckedUpdateManyWithoutHouseNestedInput
   bills?: Prisma.BillUncheckedUpdateManyWithoutHouseNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutHouseNestedInput
+  activities?: Prisma.ActivityUncheckedUpdateManyWithoutHouseNestedInput
   rooms?: Prisma.RoomUncheckedUpdateManyWithoutHouseNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutHouseNestedInput
   credentials?: Prisma.HouseCredentialUncheckedUpdateManyWithoutHouseNestedInput
@@ -922,6 +1078,8 @@ export type HouseCreateWithoutCredentialsInput = {
   bills?: Prisma.BillCreateNestedManyWithoutHouseInput
   createdBy: Prisma.UserCreateNestedOneWithoutHousesCreatedInput
   infos?: Prisma.HouseInfoCreateNestedManyWithoutHouseInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutHouseInput
+  activities?: Prisma.ActivityCreateNestedManyWithoutHouseInput
   rooms?: Prisma.RoomCreateNestedManyWithoutHouseInput
   users?: Prisma.UserCreateNestedManyWithoutHouseInput
 }
@@ -936,6 +1094,8 @@ export type HouseUncheckedCreateWithoutCredentialsInput = {
   alerts?: Prisma.AlertUncheckedCreateNestedManyWithoutHouseInput
   bills?: Prisma.BillUncheckedCreateNestedManyWithoutHouseInput
   infos?: Prisma.HouseInfoUncheckedCreateNestedManyWithoutHouseInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutHouseInput
+  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutHouseInput
   rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutHouseInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutHouseInput
 }
@@ -965,6 +1125,8 @@ export type HouseUpdateWithoutCredentialsInput = {
   bills?: Prisma.BillUpdateManyWithoutHouseNestedInput
   createdBy?: Prisma.UserUpdateOneRequiredWithoutHousesCreatedNestedInput
   infos?: Prisma.HouseInfoUpdateManyWithoutHouseNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutHouseNestedInput
+  activities?: Prisma.ActivityUpdateManyWithoutHouseNestedInput
   rooms?: Prisma.RoomUpdateManyWithoutHouseNestedInput
   users?: Prisma.UserUpdateManyWithoutHouseNestedInput
 }
@@ -979,6 +1141,8 @@ export type HouseUncheckedUpdateWithoutCredentialsInput = {
   alerts?: Prisma.AlertUncheckedUpdateManyWithoutHouseNestedInput
   bills?: Prisma.BillUncheckedUpdateManyWithoutHouseNestedInput
   infos?: Prisma.HouseInfoUncheckedUpdateManyWithoutHouseNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutHouseNestedInput
+  activities?: Prisma.ActivityUncheckedUpdateManyWithoutHouseNestedInput
   rooms?: Prisma.RoomUncheckedUpdateManyWithoutHouseNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutHouseNestedInput
 }
@@ -991,6 +1155,8 @@ export type HouseCreateWithoutAlertsInput = {
   bills?: Prisma.BillCreateNestedManyWithoutHouseInput
   createdBy: Prisma.UserCreateNestedOneWithoutHousesCreatedInput
   infos?: Prisma.HouseInfoCreateNestedManyWithoutHouseInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutHouseInput
+  activities?: Prisma.ActivityCreateNestedManyWithoutHouseInput
   rooms?: Prisma.RoomCreateNestedManyWithoutHouseInput
   users?: Prisma.UserCreateNestedManyWithoutHouseInput
   credentials?: Prisma.HouseCredentialCreateNestedManyWithoutHouseInput
@@ -1005,6 +1171,8 @@ export type HouseUncheckedCreateWithoutAlertsInput = {
   inviteCode?: string
   bills?: Prisma.BillUncheckedCreateNestedManyWithoutHouseInput
   infos?: Prisma.HouseInfoUncheckedCreateNestedManyWithoutHouseInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutHouseInput
+  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutHouseInput
   rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutHouseInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutHouseInput
   credentials?: Prisma.HouseCredentialUncheckedCreateNestedManyWithoutHouseInput
@@ -1034,6 +1202,8 @@ export type HouseUpdateWithoutAlertsInput = {
   bills?: Prisma.BillUpdateManyWithoutHouseNestedInput
   createdBy?: Prisma.UserUpdateOneRequiredWithoutHousesCreatedNestedInput
   infos?: Prisma.HouseInfoUpdateManyWithoutHouseNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutHouseNestedInput
+  activities?: Prisma.ActivityUpdateManyWithoutHouseNestedInput
   rooms?: Prisma.RoomUpdateManyWithoutHouseNestedInput
   users?: Prisma.UserUpdateManyWithoutHouseNestedInput
   credentials?: Prisma.HouseCredentialUpdateManyWithoutHouseNestedInput
@@ -1048,6 +1218,86 @@ export type HouseUncheckedUpdateWithoutAlertsInput = {
   inviteCode?: Prisma.StringFieldUpdateOperationsInput | string
   bills?: Prisma.BillUncheckedUpdateManyWithoutHouseNestedInput
   infos?: Prisma.HouseInfoUncheckedUpdateManyWithoutHouseNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutHouseNestedInput
+  activities?: Prisma.ActivityUncheckedUpdateManyWithoutHouseNestedInput
+  rooms?: Prisma.RoomUncheckedUpdateManyWithoutHouseNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutHouseNestedInput
+  credentials?: Prisma.HouseCredentialUncheckedUpdateManyWithoutHouseNestedInput
+}
+
+export type HouseCreateWithoutActivitiesInput = {
+  name: string
+  address?: string | null
+  imageUrl?: string | null
+  inviteCode?: string
+  alerts?: Prisma.AlertCreateNestedManyWithoutHouseInput
+  bills?: Prisma.BillCreateNestedManyWithoutHouseInput
+  createdBy: Prisma.UserCreateNestedOneWithoutHousesCreatedInput
+  infos?: Prisma.HouseInfoCreateNestedManyWithoutHouseInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutHouseInput
+  rooms?: Prisma.RoomCreateNestedManyWithoutHouseInput
+  users?: Prisma.UserCreateNestedManyWithoutHouseInput
+  credentials?: Prisma.HouseCredentialCreateNestedManyWithoutHouseInput
+}
+
+export type HouseUncheckedCreateWithoutActivitiesInput = {
+  id?: number
+  name: string
+  address?: string | null
+  imageUrl?: string | null
+  createdById: string
+  inviteCode?: string
+  alerts?: Prisma.AlertUncheckedCreateNestedManyWithoutHouseInput
+  bills?: Prisma.BillUncheckedCreateNestedManyWithoutHouseInput
+  infos?: Prisma.HouseInfoUncheckedCreateNestedManyWithoutHouseInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutHouseInput
+  rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutHouseInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutHouseInput
+  credentials?: Prisma.HouseCredentialUncheckedCreateNestedManyWithoutHouseInput
+}
+
+export type HouseCreateOrConnectWithoutActivitiesInput = {
+  where: Prisma.HouseWhereUniqueInput
+  create: Prisma.XOR<Prisma.HouseCreateWithoutActivitiesInput, Prisma.HouseUncheckedCreateWithoutActivitiesInput>
+}
+
+export type HouseUpsertWithoutActivitiesInput = {
+  update: Prisma.XOR<Prisma.HouseUpdateWithoutActivitiesInput, Prisma.HouseUncheckedUpdateWithoutActivitiesInput>
+  create: Prisma.XOR<Prisma.HouseCreateWithoutActivitiesInput, Prisma.HouseUncheckedCreateWithoutActivitiesInput>
+  where?: Prisma.HouseWhereInput
+}
+
+export type HouseUpdateToOneWithWhereWithoutActivitiesInput = {
+  where?: Prisma.HouseWhereInput
+  data: Prisma.XOR<Prisma.HouseUpdateWithoutActivitiesInput, Prisma.HouseUncheckedUpdateWithoutActivitiesInput>
+}
+
+export type HouseUpdateWithoutActivitiesInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  inviteCode?: Prisma.StringFieldUpdateOperationsInput | string
+  alerts?: Prisma.AlertUpdateManyWithoutHouseNestedInput
+  bills?: Prisma.BillUpdateManyWithoutHouseNestedInput
+  createdBy?: Prisma.UserUpdateOneRequiredWithoutHousesCreatedNestedInput
+  infos?: Prisma.HouseInfoUpdateManyWithoutHouseNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutHouseNestedInput
+  rooms?: Prisma.RoomUpdateManyWithoutHouseNestedInput
+  users?: Prisma.UserUpdateManyWithoutHouseNestedInput
+  credentials?: Prisma.HouseCredentialUpdateManyWithoutHouseNestedInput
+}
+
+export type HouseUncheckedUpdateWithoutActivitiesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  inviteCode?: Prisma.StringFieldUpdateOperationsInput | string
+  alerts?: Prisma.AlertUncheckedUpdateManyWithoutHouseNestedInput
+  bills?: Prisma.BillUncheckedUpdateManyWithoutHouseNestedInput
+  infos?: Prisma.HouseInfoUncheckedUpdateManyWithoutHouseNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutHouseNestedInput
   rooms?: Prisma.RoomUncheckedUpdateManyWithoutHouseNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutHouseNestedInput
   credentials?: Prisma.HouseCredentialUncheckedUpdateManyWithoutHouseNestedInput
@@ -1069,6 +1319,8 @@ export type HouseUpdateWithoutCreatedByInput = {
   alerts?: Prisma.AlertUpdateManyWithoutHouseNestedInput
   bills?: Prisma.BillUpdateManyWithoutHouseNestedInput
   infos?: Prisma.HouseInfoUpdateManyWithoutHouseNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutHouseNestedInput
+  activities?: Prisma.ActivityUpdateManyWithoutHouseNestedInput
   rooms?: Prisma.RoomUpdateManyWithoutHouseNestedInput
   users?: Prisma.UserUpdateManyWithoutHouseNestedInput
   credentials?: Prisma.HouseCredentialUpdateManyWithoutHouseNestedInput
@@ -1083,6 +1335,8 @@ export type HouseUncheckedUpdateWithoutCreatedByInput = {
   alerts?: Prisma.AlertUncheckedUpdateManyWithoutHouseNestedInput
   bills?: Prisma.BillUncheckedUpdateManyWithoutHouseNestedInput
   infos?: Prisma.HouseInfoUncheckedUpdateManyWithoutHouseNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutHouseNestedInput
+  activities?: Prisma.ActivityUncheckedUpdateManyWithoutHouseNestedInput
   rooms?: Prisma.RoomUncheckedUpdateManyWithoutHouseNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutHouseNestedInput
   credentials?: Prisma.HouseCredentialUncheckedUpdateManyWithoutHouseNestedInput
@@ -1105,6 +1359,8 @@ export type HouseCountOutputType = {
   alerts: number
   bills: number
   infos: number
+  tasks: number
+  activities: number
   rooms: number
   users: number
   credentials: number
@@ -1114,6 +1370,8 @@ export type HouseCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.
   alerts?: boolean | HouseCountOutputTypeCountAlertsArgs
   bills?: boolean | HouseCountOutputTypeCountBillsArgs
   infos?: boolean | HouseCountOutputTypeCountInfosArgs
+  tasks?: boolean | HouseCountOutputTypeCountTasksArgs
+  activities?: boolean | HouseCountOutputTypeCountActivitiesArgs
   rooms?: boolean | HouseCountOutputTypeCountRoomsArgs
   users?: boolean | HouseCountOutputTypeCountUsersArgs
   credentials?: boolean | HouseCountOutputTypeCountCredentialsArgs
@@ -1153,6 +1411,20 @@ export type HouseCountOutputTypeCountInfosArgs<ExtArgs extends runtime.Types.Ext
 /**
  * HouseCountOutputType without action
  */
+export type HouseCountOutputTypeCountTasksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TaskWhereInput
+}
+
+/**
+ * HouseCountOutputType without action
+ */
+export type HouseCountOutputTypeCountActivitiesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ActivityWhereInput
+}
+
+/**
+ * HouseCountOutputType without action
+ */
 export type HouseCountOutputTypeCountRoomsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.RoomWhereInput
 }
@@ -1183,6 +1455,8 @@ export type HouseSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   bills?: boolean | Prisma.House$billsArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   infos?: boolean | Prisma.House$infosArgs<ExtArgs>
+  tasks?: boolean | Prisma.House$tasksArgs<ExtArgs>
+  activities?: boolean | Prisma.House$activitiesArgs<ExtArgs>
   rooms?: boolean | Prisma.House$roomsArgs<ExtArgs>
   users?: boolean | Prisma.House$usersArgs<ExtArgs>
   credentials?: boolean | Prisma.House$credentialsArgs<ExtArgs>
@@ -1224,6 +1498,8 @@ export type HouseInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   bills?: boolean | Prisma.House$billsArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   infos?: boolean | Prisma.House$infosArgs<ExtArgs>
+  tasks?: boolean | Prisma.House$tasksArgs<ExtArgs>
+  activities?: boolean | Prisma.House$activitiesArgs<ExtArgs>
   rooms?: boolean | Prisma.House$roomsArgs<ExtArgs>
   users?: boolean | Prisma.House$usersArgs<ExtArgs>
   credentials?: boolean | Prisma.House$credentialsArgs<ExtArgs>
@@ -1243,6 +1519,8 @@ export type $HousePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     bills: Prisma.$BillPayload<ExtArgs>[]
     createdBy: Prisma.$UserPayload<ExtArgs>
     infos: Prisma.$HouseInfoPayload<ExtArgs>[]
+    tasks: Prisma.$TaskPayload<ExtArgs>[]
+    activities: Prisma.$ActivityPayload<ExtArgs>[]
     rooms: Prisma.$RoomPayload<ExtArgs>[]
     users: Prisma.$UserPayload<ExtArgs>[]
     credentials: Prisma.$HouseCredentialPayload<ExtArgs>[]
@@ -1652,6 +1930,8 @@ export interface Prisma__HouseClient<T, Null = never, ExtArgs extends runtime.Ty
   bills<T extends Prisma.House$billsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.House$billsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BillPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   createdBy<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   infos<T extends Prisma.House$infosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.House$infosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HouseInfoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  tasks<T extends Prisma.House$tasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.House$tasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  activities<T extends Prisma.House$activitiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.House$activitiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ActivityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   rooms<T extends Prisma.House$roomsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.House$roomsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RoomPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   users<T extends Prisma.House$usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.House$usersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   credentials<T extends Prisma.House$credentialsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.House$credentialsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HouseCredentialPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -2155,6 +2435,54 @@ export type House$infosArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
   take?: number
   skip?: number
   distinct?: Prisma.HouseInfoScalarFieldEnum | Prisma.HouseInfoScalarFieldEnum[]
+}
+
+/**
+ * House.tasks
+ */
+export type House$tasksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Task
+   */
+  select?: Prisma.TaskSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Task
+   */
+  omit?: Prisma.TaskOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TaskInclude<ExtArgs> | null
+  where?: Prisma.TaskWhereInput
+  orderBy?: Prisma.TaskOrderByWithRelationInput | Prisma.TaskOrderByWithRelationInput[]
+  cursor?: Prisma.TaskWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TaskScalarFieldEnum | Prisma.TaskScalarFieldEnum[]
+}
+
+/**
+ * House.activities
+ */
+export type House$activitiesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Activity
+   */
+  select?: Prisma.ActivitySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Activity
+   */
+  omit?: Prisma.ActivityOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ActivityInclude<ExtArgs> | null
+  where?: Prisma.ActivityWhereInput
+  orderBy?: Prisma.ActivityOrderByWithRelationInput | Prisma.ActivityOrderByWithRelationInput[]
+  cursor?: Prisma.ActivityWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ActivityScalarFieldEnum | Prisma.ActivityScalarFieldEnum[]
 }
 
 /**

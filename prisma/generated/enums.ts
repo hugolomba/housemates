@@ -9,6 +9,29 @@
 * 🟢 You can import this file directly.
 */
 
+export const ActivityType = {
+  CREATE: 'CREATE',
+  UPDATE: 'UPDATE',
+  COMPLETE: 'COMPLETE',
+  PAY: 'PAY',
+  RESOLVE: 'RESOLVE'
+} as const
+
+export type ActivityType = (typeof ActivityType)[keyof typeof ActivityType]
+
+
+export const ActivityEntity = {
+  HOUSE: 'HOUSE',
+  ROOM: 'ROOM',
+  TASK: 'TASK',
+  BILL: 'BILL',
+  SHARE: 'SHARE',
+  ALERT: 'ALERT'
+} as const
+
+export type ActivityEntity = (typeof ActivityEntity)[keyof typeof ActivityEntity]
+
+
 export const Priority = {
   LOW: 'LOW',
   MEDIUM: 'MEDIUM',

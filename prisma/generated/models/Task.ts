@@ -28,11 +28,13 @@ export type AggregateTask = {
 
 export type TaskAvgAggregateOutputType = {
   id: number | null
+  houseId: number | null
   roomId: number | null
 }
 
 export type TaskSumAggregateOutputType = {
   id: number | null
+  houseId: number | null
   roomId: number | null
 }
 
@@ -41,6 +43,7 @@ export type TaskMinAggregateOutputType = {
   title: string | null
   description: string | null
   status: boolean | null
+  houseId: number | null
   roomId: number | null
 }
 
@@ -49,6 +52,7 @@ export type TaskMaxAggregateOutputType = {
   title: string | null
   description: string | null
   status: boolean | null
+  houseId: number | null
   roomId: number | null
 }
 
@@ -57,6 +61,7 @@ export type TaskCountAggregateOutputType = {
   title: number
   description: number
   status: number
+  houseId: number
   roomId: number
   _all: number
 }
@@ -64,11 +69,13 @@ export type TaskCountAggregateOutputType = {
 
 export type TaskAvgAggregateInputType = {
   id?: true
+  houseId?: true
   roomId?: true
 }
 
 export type TaskSumAggregateInputType = {
   id?: true
+  houseId?: true
   roomId?: true
 }
 
@@ -77,6 +84,7 @@ export type TaskMinAggregateInputType = {
   title?: true
   description?: true
   status?: true
+  houseId?: true
   roomId?: true
 }
 
@@ -85,6 +93,7 @@ export type TaskMaxAggregateInputType = {
   title?: true
   description?: true
   status?: true
+  houseId?: true
   roomId?: true
 }
 
@@ -93,6 +102,7 @@ export type TaskCountAggregateInputType = {
   title?: true
   description?: true
   status?: true
+  houseId?: true
   roomId?: true
   _all?: true
 }
@@ -188,6 +198,7 @@ export type TaskGroupByOutputType = {
   title: string
   description: string | null
   status: boolean
+  houseId: number
   roomId: number
   _count: TaskCountAggregateOutputType | null
   _avg: TaskAvgAggregateOutputType | null
@@ -219,7 +230,9 @@ export type TaskWhereInput = {
   title?: Prisma.StringFilter<"Task"> | string
   description?: Prisma.StringNullableFilter<"Task"> | string | null
   status?: Prisma.BoolFilter<"Task"> | boolean
+  houseId?: Prisma.IntFilter<"Task"> | number
   roomId?: Prisma.IntFilter<"Task"> | number
+  house?: Prisma.XOR<Prisma.HouseScalarRelationFilter, Prisma.HouseWhereInput>
   room?: Prisma.XOR<Prisma.RoomScalarRelationFilter, Prisma.RoomWhereInput>
   assigned?: Prisma.UserListRelationFilter
 }
@@ -229,7 +242,9 @@ export type TaskOrderByWithRelationInput = {
   title?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
+  houseId?: Prisma.SortOrder
   roomId?: Prisma.SortOrder
+  house?: Prisma.HouseOrderByWithRelationInput
   room?: Prisma.RoomOrderByWithRelationInput
   assigned?: Prisma.UserOrderByRelationAggregateInput
 }
@@ -242,7 +257,9 @@ export type TaskWhereUniqueInput = Prisma.AtLeast<{
   title?: Prisma.StringFilter<"Task"> | string
   description?: Prisma.StringNullableFilter<"Task"> | string | null
   status?: Prisma.BoolFilter<"Task"> | boolean
+  houseId?: Prisma.IntFilter<"Task"> | number
   roomId?: Prisma.IntFilter<"Task"> | number
+  house?: Prisma.XOR<Prisma.HouseScalarRelationFilter, Prisma.HouseWhereInput>
   room?: Prisma.XOR<Prisma.RoomScalarRelationFilter, Prisma.RoomWhereInput>
   assigned?: Prisma.UserListRelationFilter
 }, "id">
@@ -252,6 +269,7 @@ export type TaskOrderByWithAggregationInput = {
   title?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
+  houseId?: Prisma.SortOrder
   roomId?: Prisma.SortOrder
   _count?: Prisma.TaskCountOrderByAggregateInput
   _avg?: Prisma.TaskAvgOrderByAggregateInput
@@ -268,6 +286,7 @@ export type TaskScalarWhereWithAggregatesInput = {
   title?: Prisma.StringWithAggregatesFilter<"Task"> | string
   description?: Prisma.StringNullableWithAggregatesFilter<"Task"> | string | null
   status?: Prisma.BoolWithAggregatesFilter<"Task"> | boolean
+  houseId?: Prisma.IntWithAggregatesFilter<"Task"> | number
   roomId?: Prisma.IntWithAggregatesFilter<"Task"> | number
 }
 
@@ -275,6 +294,7 @@ export type TaskCreateInput = {
   title: string
   description?: string | null
   status?: boolean
+  house: Prisma.HouseCreateNestedOneWithoutTasksInput
   room: Prisma.RoomCreateNestedOneWithoutTasksInput
   assigned?: Prisma.UserCreateNestedManyWithoutTasksInput
 }
@@ -284,6 +304,7 @@ export type TaskUncheckedCreateInput = {
   title: string
   description?: string | null
   status?: boolean
+  houseId: number
   roomId: number
   assigned?: Prisma.UserUncheckedCreateNestedManyWithoutTasksInput
 }
@@ -292,6 +313,7 @@ export type TaskUpdateInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  house?: Prisma.HouseUpdateOneRequiredWithoutTasksNestedInput
   room?: Prisma.RoomUpdateOneRequiredWithoutTasksNestedInput
   assigned?: Prisma.UserUpdateManyWithoutTasksNestedInput
 }
@@ -301,6 +323,7 @@ export type TaskUncheckedUpdateInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  houseId?: Prisma.IntFieldUpdateOperationsInput | number
   roomId?: Prisma.IntFieldUpdateOperationsInput | number
   assigned?: Prisma.UserUncheckedUpdateManyWithoutTasksNestedInput
 }
@@ -310,6 +333,7 @@ export type TaskCreateManyInput = {
   title: string
   description?: string | null
   status?: boolean
+  houseId: number
   roomId: number
 }
 
@@ -324,6 +348,7 @@ export type TaskUncheckedUpdateManyInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  houseId?: Prisma.IntFieldUpdateOperationsInput | number
   roomId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
@@ -342,11 +367,13 @@ export type TaskCountOrderByAggregateInput = {
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  houseId?: Prisma.SortOrder
   roomId?: Prisma.SortOrder
 }
 
 export type TaskAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  houseId?: Prisma.SortOrder
   roomId?: Prisma.SortOrder
 }
 
@@ -355,6 +382,7 @@ export type TaskMaxOrderByAggregateInput = {
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  houseId?: Prisma.SortOrder
   roomId?: Prisma.SortOrder
 }
 
@@ -363,11 +391,13 @@ export type TaskMinOrderByAggregateInput = {
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  houseId?: Prisma.SortOrder
   roomId?: Prisma.SortOrder
 }
 
 export type TaskSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  houseId?: Prisma.SortOrder
   roomId?: Prisma.SortOrder
 }
 
@@ -406,6 +436,48 @@ export type TaskUncheckedUpdateManyWithoutAssignedNestedInput = {
   connect?: Prisma.TaskWhereUniqueInput | Prisma.TaskWhereUniqueInput[]
   update?: Prisma.TaskUpdateWithWhereUniqueWithoutAssignedInput | Prisma.TaskUpdateWithWhereUniqueWithoutAssignedInput[]
   updateMany?: Prisma.TaskUpdateManyWithWhereWithoutAssignedInput | Prisma.TaskUpdateManyWithWhereWithoutAssignedInput[]
+  deleteMany?: Prisma.TaskScalarWhereInput | Prisma.TaskScalarWhereInput[]
+}
+
+export type TaskCreateNestedManyWithoutHouseInput = {
+  create?: Prisma.XOR<Prisma.TaskCreateWithoutHouseInput, Prisma.TaskUncheckedCreateWithoutHouseInput> | Prisma.TaskCreateWithoutHouseInput[] | Prisma.TaskUncheckedCreateWithoutHouseInput[]
+  connectOrCreate?: Prisma.TaskCreateOrConnectWithoutHouseInput | Prisma.TaskCreateOrConnectWithoutHouseInput[]
+  createMany?: Prisma.TaskCreateManyHouseInputEnvelope
+  connect?: Prisma.TaskWhereUniqueInput | Prisma.TaskWhereUniqueInput[]
+}
+
+export type TaskUncheckedCreateNestedManyWithoutHouseInput = {
+  create?: Prisma.XOR<Prisma.TaskCreateWithoutHouseInput, Prisma.TaskUncheckedCreateWithoutHouseInput> | Prisma.TaskCreateWithoutHouseInput[] | Prisma.TaskUncheckedCreateWithoutHouseInput[]
+  connectOrCreate?: Prisma.TaskCreateOrConnectWithoutHouseInput | Prisma.TaskCreateOrConnectWithoutHouseInput[]
+  createMany?: Prisma.TaskCreateManyHouseInputEnvelope
+  connect?: Prisma.TaskWhereUniqueInput | Prisma.TaskWhereUniqueInput[]
+}
+
+export type TaskUpdateManyWithoutHouseNestedInput = {
+  create?: Prisma.XOR<Prisma.TaskCreateWithoutHouseInput, Prisma.TaskUncheckedCreateWithoutHouseInput> | Prisma.TaskCreateWithoutHouseInput[] | Prisma.TaskUncheckedCreateWithoutHouseInput[]
+  connectOrCreate?: Prisma.TaskCreateOrConnectWithoutHouseInput | Prisma.TaskCreateOrConnectWithoutHouseInput[]
+  upsert?: Prisma.TaskUpsertWithWhereUniqueWithoutHouseInput | Prisma.TaskUpsertWithWhereUniqueWithoutHouseInput[]
+  createMany?: Prisma.TaskCreateManyHouseInputEnvelope
+  set?: Prisma.TaskWhereUniqueInput | Prisma.TaskWhereUniqueInput[]
+  disconnect?: Prisma.TaskWhereUniqueInput | Prisma.TaskWhereUniqueInput[]
+  delete?: Prisma.TaskWhereUniqueInput | Prisma.TaskWhereUniqueInput[]
+  connect?: Prisma.TaskWhereUniqueInput | Prisma.TaskWhereUniqueInput[]
+  update?: Prisma.TaskUpdateWithWhereUniqueWithoutHouseInput | Prisma.TaskUpdateWithWhereUniqueWithoutHouseInput[]
+  updateMany?: Prisma.TaskUpdateManyWithWhereWithoutHouseInput | Prisma.TaskUpdateManyWithWhereWithoutHouseInput[]
+  deleteMany?: Prisma.TaskScalarWhereInput | Prisma.TaskScalarWhereInput[]
+}
+
+export type TaskUncheckedUpdateManyWithoutHouseNestedInput = {
+  create?: Prisma.XOR<Prisma.TaskCreateWithoutHouseInput, Prisma.TaskUncheckedCreateWithoutHouseInput> | Prisma.TaskCreateWithoutHouseInput[] | Prisma.TaskUncheckedCreateWithoutHouseInput[]
+  connectOrCreate?: Prisma.TaskCreateOrConnectWithoutHouseInput | Prisma.TaskCreateOrConnectWithoutHouseInput[]
+  upsert?: Prisma.TaskUpsertWithWhereUniqueWithoutHouseInput | Prisma.TaskUpsertWithWhereUniqueWithoutHouseInput[]
+  createMany?: Prisma.TaskCreateManyHouseInputEnvelope
+  set?: Prisma.TaskWhereUniqueInput | Prisma.TaskWhereUniqueInput[]
+  disconnect?: Prisma.TaskWhereUniqueInput | Prisma.TaskWhereUniqueInput[]
+  delete?: Prisma.TaskWhereUniqueInput | Prisma.TaskWhereUniqueInput[]
+  connect?: Prisma.TaskWhereUniqueInput | Prisma.TaskWhereUniqueInput[]
+  update?: Prisma.TaskUpdateWithWhereUniqueWithoutHouseInput | Prisma.TaskUpdateWithWhereUniqueWithoutHouseInput[]
+  updateMany?: Prisma.TaskUpdateManyWithWhereWithoutHouseInput | Prisma.TaskUpdateManyWithWhereWithoutHouseInput[]
   deleteMany?: Prisma.TaskScalarWhereInput | Prisma.TaskScalarWhereInput[]
 }
 
@@ -455,6 +527,7 @@ export type TaskCreateWithoutAssignedInput = {
   title: string
   description?: string | null
   status?: boolean
+  house: Prisma.HouseCreateNestedOneWithoutTasksInput
   room: Prisma.RoomCreateNestedOneWithoutTasksInput
 }
 
@@ -463,6 +536,7 @@ export type TaskUncheckedCreateWithoutAssignedInput = {
   title: string
   description?: string | null
   status?: boolean
+  houseId: number
   roomId: number
 }
 
@@ -495,13 +569,58 @@ export type TaskScalarWhereInput = {
   title?: Prisma.StringFilter<"Task"> | string
   description?: Prisma.StringNullableFilter<"Task"> | string | null
   status?: Prisma.BoolFilter<"Task"> | boolean
+  houseId?: Prisma.IntFilter<"Task"> | number
   roomId?: Prisma.IntFilter<"Task"> | number
+}
+
+export type TaskCreateWithoutHouseInput = {
+  title: string
+  description?: string | null
+  status?: boolean
+  room: Prisma.RoomCreateNestedOneWithoutTasksInput
+  assigned?: Prisma.UserCreateNestedManyWithoutTasksInput
+}
+
+export type TaskUncheckedCreateWithoutHouseInput = {
+  id?: number
+  title: string
+  description?: string | null
+  status?: boolean
+  roomId: number
+  assigned?: Prisma.UserUncheckedCreateNestedManyWithoutTasksInput
+}
+
+export type TaskCreateOrConnectWithoutHouseInput = {
+  where: Prisma.TaskWhereUniqueInput
+  create: Prisma.XOR<Prisma.TaskCreateWithoutHouseInput, Prisma.TaskUncheckedCreateWithoutHouseInput>
+}
+
+export type TaskCreateManyHouseInputEnvelope = {
+  data: Prisma.TaskCreateManyHouseInput | Prisma.TaskCreateManyHouseInput[]
+  skipDuplicates?: boolean
+}
+
+export type TaskUpsertWithWhereUniqueWithoutHouseInput = {
+  where: Prisma.TaskWhereUniqueInput
+  update: Prisma.XOR<Prisma.TaskUpdateWithoutHouseInput, Prisma.TaskUncheckedUpdateWithoutHouseInput>
+  create: Prisma.XOR<Prisma.TaskCreateWithoutHouseInput, Prisma.TaskUncheckedCreateWithoutHouseInput>
+}
+
+export type TaskUpdateWithWhereUniqueWithoutHouseInput = {
+  where: Prisma.TaskWhereUniqueInput
+  data: Prisma.XOR<Prisma.TaskUpdateWithoutHouseInput, Prisma.TaskUncheckedUpdateWithoutHouseInput>
+}
+
+export type TaskUpdateManyWithWhereWithoutHouseInput = {
+  where: Prisma.TaskScalarWhereInput
+  data: Prisma.XOR<Prisma.TaskUpdateManyMutationInput, Prisma.TaskUncheckedUpdateManyWithoutHouseInput>
 }
 
 export type TaskCreateWithoutRoomInput = {
   title: string
   description?: string | null
   status?: boolean
+  house: Prisma.HouseCreateNestedOneWithoutTasksInput
   assigned?: Prisma.UserCreateNestedManyWithoutTasksInput
 }
 
@@ -510,6 +629,7 @@ export type TaskUncheckedCreateWithoutRoomInput = {
   title: string
   description?: string | null
   status?: boolean
+  houseId: number
   assigned?: Prisma.UserUncheckedCreateNestedManyWithoutTasksInput
 }
 
@@ -543,6 +663,7 @@ export type TaskUpdateWithoutAssignedInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  house?: Prisma.HouseUpdateOneRequiredWithoutTasksNestedInput
   room?: Prisma.RoomUpdateOneRequiredWithoutTasksNestedInput
 }
 
@@ -551,10 +672,45 @@ export type TaskUncheckedUpdateWithoutAssignedInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  houseId?: Prisma.IntFieldUpdateOperationsInput | number
   roomId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type TaskUncheckedUpdateManyWithoutAssignedInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  houseId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+}
+
+export type TaskCreateManyHouseInput = {
+  id?: number
+  title: string
+  description?: string | null
+  status?: boolean
+  roomId: number
+}
+
+export type TaskUpdateWithoutHouseInput = {
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  room?: Prisma.RoomUpdateOneRequiredWithoutTasksNestedInput
+  assigned?: Prisma.UserUpdateManyWithoutTasksNestedInput
+}
+
+export type TaskUncheckedUpdateWithoutHouseInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  assigned?: Prisma.UserUncheckedUpdateManyWithoutTasksNestedInput
+}
+
+export type TaskUncheckedUpdateManyWithoutHouseInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -567,12 +723,14 @@ export type TaskCreateManyRoomInput = {
   title: string
   description?: string | null
   status?: boolean
+  houseId: number
 }
 
 export type TaskUpdateWithoutRoomInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  house?: Prisma.HouseUpdateOneRequiredWithoutTasksNestedInput
   assigned?: Prisma.UserUpdateManyWithoutTasksNestedInput
 }
 
@@ -581,6 +739,7 @@ export type TaskUncheckedUpdateWithoutRoomInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  houseId?: Prisma.IntFieldUpdateOperationsInput | number
   assigned?: Prisma.UserUncheckedUpdateManyWithoutTasksNestedInput
 }
 
@@ -589,6 +748,7 @@ export type TaskUncheckedUpdateManyWithoutRoomInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  houseId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 
@@ -627,7 +787,9 @@ export type TaskSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   title?: boolean
   description?: boolean
   status?: boolean
+  houseId?: boolean
   roomId?: boolean
+  house?: boolean | Prisma.HouseDefaultArgs<ExtArgs>
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
   assigned?: boolean | Prisma.Task$assignedArgs<ExtArgs>
   _count?: boolean | Prisma.TaskCountOutputTypeDefaultArgs<ExtArgs>
@@ -638,7 +800,9 @@ export type TaskSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   title?: boolean
   description?: boolean
   status?: boolean
+  houseId?: boolean
   roomId?: boolean
+  house?: boolean | Prisma.HouseDefaultArgs<ExtArgs>
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["task"]>
 
@@ -647,7 +811,9 @@ export type TaskSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   title?: boolean
   description?: boolean
   status?: boolean
+  houseId?: boolean
   roomId?: boolean
+  house?: boolean | Prisma.HouseDefaultArgs<ExtArgs>
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["task"]>
 
@@ -656,25 +822,30 @@ export type TaskSelectScalar = {
   title?: boolean
   description?: boolean
   status?: boolean
+  houseId?: boolean
   roomId?: boolean
 }
 
-export type TaskOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "status" | "roomId", ExtArgs["result"]["task"]>
+export type TaskOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "status" | "houseId" | "roomId", ExtArgs["result"]["task"]>
 export type TaskInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  house?: boolean | Prisma.HouseDefaultArgs<ExtArgs>
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
   assigned?: boolean | Prisma.Task$assignedArgs<ExtArgs>
   _count?: boolean | Prisma.TaskCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type TaskIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  house?: boolean | Prisma.HouseDefaultArgs<ExtArgs>
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
 }
 export type TaskIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  house?: boolean | Prisma.HouseDefaultArgs<ExtArgs>
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
 }
 
 export type $TaskPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Task"
   objects: {
+    house: Prisma.$HousePayload<ExtArgs>
     room: Prisma.$RoomPayload<ExtArgs>
     assigned: Prisma.$UserPayload<ExtArgs>[]
   }
@@ -683,6 +854,7 @@ export type $TaskPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     title: string
     description: string | null
     status: boolean
+    houseId: number
     roomId: number
   }, ExtArgs["result"]["task"]>
   composites: {}
@@ -1078,6 +1250,7 @@ readonly fields: TaskFieldRefs;
  */
 export interface Prisma__TaskClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  house<T extends Prisma.HouseDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.HouseDefaultArgs<ExtArgs>>): Prisma.Prisma__HouseClient<runtime.Types.Result.GetResult<Prisma.$HousePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   room<T extends Prisma.RoomDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RoomDefaultArgs<ExtArgs>>): Prisma.Prisma__RoomClient<runtime.Types.Result.GetResult<Prisma.$RoomPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   assigned<T extends Prisma.Task$assignedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Task$assignedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
@@ -1113,6 +1286,7 @@ export interface TaskFieldRefs {
   readonly title: Prisma.FieldRef<"Task", 'String'>
   readonly description: Prisma.FieldRef<"Task", 'String'>
   readonly status: Prisma.FieldRef<"Task", 'Boolean'>
+  readonly houseId: Prisma.FieldRef<"Task", 'Int'>
   readonly roomId: Prisma.FieldRef<"Task", 'Int'>
 }
     

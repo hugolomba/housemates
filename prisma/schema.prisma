@@ -1,4 +1,3 @@
-
 generator client {
   provider = "prisma-client"
   output   = "./generated"
@@ -25,6 +24,7 @@ model User {
   shares        Share[]
   house         House?    @relation("HouseMembers", fields: [houseId], references: [id])
   tasks         Task[]    @relation("TaskAssignees")
+  activities    Activity[]
 
   @@unique([email])
   @@map("user")
@@ -89,6 +89,10 @@ model House {
   bills       Bill[]
   createdBy   User        @relation("HouseCreator", fields: [createdById], references: [id])
   infos       HouseInfo[]
+  tasks Task[]
+
+  activities Activity[]
+
   rooms       Room[]
   users       User[]      @relation("HouseMembers")
   credentials HouseCredential[]
@@ -107,9 +111,14 @@ model Task {
   title       String
   description String?
   status      Boolean @default(false)
-  roomId      Int
-  room        Room    @relation(fields: [roomId], references: [id])
-  assigned    User[]  @relation("TaskAssignees")
+
+  houseId Int
+  house   House @relation(fields: [houseId], references: [id])
+
+  roomId Int
+  room   Room  @relation(fields: [roomId], references: [id])
+
+  assigned User[] @relation("TaskAssignees")
 }
 
 model Bill {
@@ -170,6 +179,40 @@ model Alert {
   houseId     Int
   createdBy   User      @relation(fields: [createdById], references: [id])
   house       House     @relation(fields: [houseId], references: [id])
+}
+
+model Activity {
+  id        Int            @id @default(autoincrement())
+  houseId   Int
+  userId    String?
+  type      ActivityType
+  entity    ActivityEntity
+  entityId  Int?
+  title     String
+  message   String
+  createdAt DateTime       @default(now())
+
+  house House @relation(fields: [houseId], references: [id])
+  user  User? @relation(fields: [userId], references: [id])
+
+  @@index([houseId, createdAt])
+}
+
+enum ActivityType {
+  CREATE
+  UPDATE
+  COMPLETE
+  PAY
+  RESOLVE
+}
+
+enum ActivityEntity {
+  HOUSE
+  ROOM
+  TASK
+  BILL
+  SHARE
+  ALERT
 }
 
 enum Priority {

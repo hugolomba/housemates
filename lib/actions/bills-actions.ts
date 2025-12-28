@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { auth } from "@/lib/auth"; // ou getServerSession
 import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
+import { logActivity } from "../activity";
 
 export async function markShareAsPaid(billId: number) {
   const session = await auth.api.getSession({
@@ -14,12 +15,13 @@ export async function markShareAsPaid(billId: number) {
     throw new Error("Not authenticated");
   }
 
-  // Encontra a share do user para esse bill
+  // Find the share for the current user and bill
   const share = await prisma.share.findFirst({
     where: {
       billId,
       userId: session.user.id,
     },
+    include: { bill: true },
   });
 
   if (!share) {
@@ -33,6 +35,17 @@ export async function markShareAsPaid(billId: number) {
   await prisma.share.update({
     where: { id: share.id },
     data: { paid: true },
+    include: { bill: true },
+  });
+
+  await logActivity({
+    houseId: share.bill.houseId,
+    userId: session.user.id,
+    type: "UPDATE",
+    entity: "SHARE",
+    entityId: share.bill.id,
+    title: `${session.user.name} marked a share as paid`,
+    message: `${session.user.name} marked the share for bill ${share.bill.title} as paid`,
   });
 
   revalidatePath("/house");

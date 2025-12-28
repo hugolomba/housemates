@@ -17,6 +17,7 @@ import {
   NavbarMenuToggle,
   NavbarMenuItem,
   NavbarMenu,
+  Divider,
 } from "@heroui/react";
 
 import { signOut } from "@/lib/actions/auth-actions";
@@ -119,7 +120,10 @@ export default function App({ session }: { session: Session | null }) {
             Rooms
           </Link>
         </NavbarMenuItem>
+
         <NavbarMenuItem key="logout">
+          <Divider />
+
           <Link
             as="button"
             href="/house/rooms"
@@ -164,6 +168,7 @@ export function NavbarWithSession({ session }: { session: Session }) {
           <DropdownItem key="settings">
             <Link href="/settings">Settings</Link>
           </DropdownItem>
+
           <DropdownItem key="logout" color="danger" onPress={() => signOut()}>
             Log Out
           </DropdownItem>
