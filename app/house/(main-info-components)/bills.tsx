@@ -95,6 +95,9 @@ export default function Bills({ houseBills }: { houseBills: HouseBills }) {
 
   return (
     <div className="flex flex-col gap-2">
+      {upcomingBills.length === 0 && (
+        <p className="text-md text-default-500">No upcoming bills.</p>
+      )}
       {upcomingBills.map((bill) => (
         <Card
           key={bill.id}

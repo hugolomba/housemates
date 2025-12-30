@@ -21,7 +21,7 @@ async function main() {
       id: "user1",
       name: "Hugo",
       email: "hmlomba@gmail.com",
-      image: "https://avatars.githubusercontent.com/u/16869726?v=4",
+      image: "https://avatars.githubusercontent.com/u/98366477?v=4",
       emailVerified: true,
     },
   });
@@ -88,6 +88,7 @@ async function main() {
     data: {
       name: "Living Room",
       houseId: house.id,
+      roomType: "LIVING_ROOM",
     },
   });
 
@@ -95,6 +96,23 @@ async function main() {
     data: {
       name: "Hugo and Andrea's Room",
       houseId: house.id,
+      roomType: "BEDROOM",
+    },
+  });
+
+  const bathroom = await prisma.room.create({
+    data: {
+      name: "Bathroom",
+      houseId: house.id,
+      roomType: "BATHROOM",
+    },
+  });
+
+  const kitchen = await prisma.room.create({
+    data: {
+      name: "Kitchen",
+      houseId: house.id,
+      roomType: "KITCHEN",
     },
   });
 
@@ -128,7 +146,7 @@ async function main() {
       title: "Wash the dishes",
       description: "Wash plates, glasses, and cutlery",
       houseId: house.id,
-      roomId: bedroom.id,
+      roomId: kitchen.id,
       assigned: {
         connect: [{ id: user1.id }],
       },
@@ -144,6 +162,54 @@ async function main() {
       entityId: task2.id,
       title: "Wash the dishes has been created",
       message: "created the task Wash the dishes",
+    },
+  });
+
+  const task3 = await prisma.task.create({
+    data: {
+      title: "Clean the bathroom",
+      description: "Weekly cleaning",
+      houseId: house.id,
+      roomId: bathroom.id,
+      assigned: {
+        connect: [{ id: user1.id }],
+      },
+    },
+  });
+
+  await prisma.activity.create({
+    data: {
+      houseId: house.id,
+      userId: user1.id,
+      type: "CREATE",
+      entity: "TASK",
+      entityId: task3.id,
+      title: "Clean the toilet has been created",
+      message: "created the task Clean the toilet",
+    },
+  });
+
+  const task4 = await prisma.task.create({
+    data: {
+      title: "Clean the living room",
+      description: "Weekly cleaning",
+      houseId: house.id,
+      roomId: livingRoom.id,
+      assigned: {
+        connect: [{ id: user1.id }],
+      },
+    },
+  });
+
+  await prisma.activity.create({
+    data: {
+      houseId: house.id,
+      userId: user1.id,
+      type: "CREATE",
+      entity: "TASK",
+      entityId: task4.id,
+      title: "Clean the living room has been created",
+      message: "created the task Clean the living room",
     },
   });
 

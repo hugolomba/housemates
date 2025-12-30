@@ -202,6 +202,23 @@ export type IntWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedIntFilter<$PrismaModel>
 }
 
+export type EnumRoomTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.RoomType | Prisma.EnumRoomTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.RoomType[] | Prisma.ListEnumRoomTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.RoomType[] | Prisma.ListEnumRoomTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumRoomTypeFilter<$PrismaModel> | $Enums.RoomType
+}
+
+export type EnumRoomTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.RoomType | Prisma.EnumRoomTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.RoomType[] | Prisma.ListEnumRoomTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.RoomType[] | Prisma.ListEnumRoomTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumRoomTypeWithAggregatesFilter<$PrismaModel> | $Enums.RoomType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumRoomTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumRoomTypeFilter<$PrismaModel>
+}
+
 export type FloatFilter<$PrismaModel = never> = {
   equals?: number | Prisma.FloatFieldRefInput<$PrismaModel>
   in?: number[] | Prisma.ListFloatFieldRefInput<$PrismaModel>
@@ -496,6 +513,23 @@ export type NestedFloatFilter<$PrismaModel = never> = {
   gt?: number | Prisma.FloatFieldRefInput<$PrismaModel>
   gte?: number | Prisma.FloatFieldRefInput<$PrismaModel>
   not?: Prisma.NestedFloatFilter<$PrismaModel> | number
+}
+
+export type NestedEnumRoomTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.RoomType | Prisma.EnumRoomTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.RoomType[] | Prisma.ListEnumRoomTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.RoomType[] | Prisma.ListEnumRoomTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumRoomTypeFilter<$PrismaModel> | $Enums.RoomType
+}
+
+export type NestedEnumRoomTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.RoomType | Prisma.EnumRoomTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.RoomType[] | Prisma.ListEnumRoomTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.RoomType[] | Prisma.ListEnumRoomTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumRoomTypeWithAggregatesFilter<$PrismaModel> | $Enums.RoomType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumRoomTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumRoomTypeFilter<$PrismaModel>
 }
 
 export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {

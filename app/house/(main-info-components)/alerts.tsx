@@ -101,34 +101,38 @@ export default function Alerts({ houseAlerts }: { houseAlerts: HouseAlerts }) {
 
   return (
     <div className="flex flex-col gap-2">
-      {houseAlerts.map((alert) =>
-        alert.isResolved ? null : (
-          <Alert
-            description={alert.message}
-            title={alert.title}
-            key={alert.id}
-            color={defineAlertColor(alert.id, alert.priority)}
-            variant={defineAlertVariant(alert.priority)}
-            endContent={
-              resolvingAlertId === alert.id ? (
-                <Button className="w-24" isLoading size="sm" variant="flat">
-                  Resolving...
-                </Button>
-              ) : (
-                <Button
-                  size="sm"
-                  variant="flat"
-                  disabled={resolvedAlertIds.has(alert.id)}
-                  onPress={() => handleResolveAlert(alert.id, alert.title)}
-                >
-                  {resolvedAlertIds.has(alert.id)
-                    ? "Resolved"
-                    : "Mark as resolved"}
-                </Button>
-              )
-            }
-          />
-        )
+      {houseAlerts.filter((alert) => !alert.isResolved).length === 0 && (
+        <p className="text-md text-default-500">No active alerts.</p>
+      )}
+      {houseAlerts.map(
+        (alert) =>
+          !alert.isResolved && (
+            <Alert
+              description={alert.message}
+              title={alert.title}
+              key={alert.id}
+              color={defineAlertColor(alert.id, alert.priority)}
+              variant={defineAlertVariant(alert.priority)}
+              endContent={
+                resolvingAlertId === alert.id ? (
+                  <Button className="w-24" isLoading size="sm" variant="flat">
+                    Resolving...
+                  </Button>
+                ) : (
+                  <Button
+                    size="sm"
+                    variant="flat"
+                    disabled={resolvedAlertIds.has(alert.id)}
+                    onPress={() => handleResolveAlert(alert.id, alert.title)}
+                  >
+                    {resolvedAlertIds.has(alert.id)
+                      ? "Resolved"
+                      : "Mark as resolved"}
+                  </Button>
+                )
+              }
+            />
+          )
       )}
     </div>
   );

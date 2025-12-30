@@ -13,7 +13,7 @@ import {
   Modal,
   ModalContent,
   ModalHeader,
-  user,
+  Input,
 } from "@heroui/react";
 
 import {
@@ -25,12 +25,15 @@ import {
   ReceiptEuro,
   SquarePlus,
   TriangleAlert,
+  Check,
+  Copy,
 } from "lucide-react";
 import Alerts from "./(main-info-components)/alerts";
 import { getHouseById } from "@/lib/actions/house-actions";
 import Bills from "./(main-info-components)/bills";
 import { useState } from "react";
 import Credentials from "./(main-info-components)/credentials";
+import Tasks from "./(main-info-components)/tasks";
 
 type HouseProps = {
   house: NonNullable<Awaited<ReturnType<typeof getHouseById>>>;
@@ -39,9 +42,13 @@ type HouseProps = {
 export default function HouseMain({ house }: HouseProps) {
   const [credentialsOpen, setCredentialsOpen] = useState(false);
   const [usersOpen, setUsersOpen] = useState(false);
+  const [inviteIsOpen, setInviteIsOpen] = useState(false);
+  const [copied, setCopied] = useState(false);
+
   console.log(" users modal open:", usersOpen);
 
   const activeAlerts = house.alerts.filter((alert) => !alert.isResolved);
+  const activeTasks = house.tasks.filter((task) => !task.status);
 
   function timeAgoShort(date: Date) {
     const now = new Date();
@@ -67,6 +74,15 @@ export default function HouseMain({ house }: HouseProps) {
       });
     }
   }
+
+  const handleCopy = async () => {
+    await navigator.clipboard.writeText(house.inviteCode);
+    setCopied(true);
+
+    setTimeout(() => {
+      setCopied(false);
+    }, 2000);
+  };
 
   return (
     <div className="container p-2 flex flex-col gap-2">
@@ -104,7 +120,13 @@ export default function HouseMain({ house }: HouseProps) {
           </div>
         </CardBody>
         <CardFooter className="px-2 flex gap-4 justify-center">
-          <Button size="sm" variant="flat">
+          <Button
+            size="sm"
+            variant="flat"
+            onPress={() => {
+              setInviteIsOpen(true);
+            }}
+          >
             Invite
           </Button>
           <Button
@@ -159,9 +181,15 @@ export default function HouseMain({ house }: HouseProps) {
             <AccordionItem
               key="3"
               aria-label="Upcoming Tasks"
-              title="Upcoming Tasks"
-              indicator={<ClipboardList />}
-            ></AccordionItem>
+              title={
+                <p className="text-foreground/90 font-bold">
+                  Upcoming Tasks ({activeTasks.length})
+                </p>
+              }
+              indicator={<ClipboardList color="#008ee6" />}
+            >
+              {<Tasks houseTasks={house.tasks} />}
+            </AccordionItem>
           </Accordion>
         </CardBody>
       </Card>
@@ -170,6 +198,7 @@ export default function HouseMain({ house }: HouseProps) {
         <CardHeader className="flex flex-row items-center gap-2">
           <SquarePlus /> <h2 className="font-bold">Quick Actions</h2>
         </CardHeader>
+
         <Divider orientation="horizontal" />
         <CardBody className="flex flex-row gap-2">
           <Button
@@ -179,13 +208,13 @@ export default function HouseMain({ house }: HouseProps) {
           >
             Create Alert
           </Button>
-          <Button variant="flat" color="primary" startContent={<Euro />}>
+          <Button variant="flat" color="success" startContent={<Euro />}>
             Add Bill
           </Button>
 
           <Button
             variant="flat"
-            color="success"
+            color="primary"
             startContent={<ClipboardList />}
           >
             New Task
@@ -270,6 +299,43 @@ export default function HouseMain({ house }: HouseProps) {
                 </div>
               </div>
             ))}
+          </div>
+        </ModalContent>
+      </Modal>
+
+      {/* // Invite Modal */}
+      <Modal
+        isOpen={inviteIsOpen}
+        onClose={() => setInviteIsOpen(false)}
+        placement="center"
+        backdrop="blur"
+      >
+        <ModalContent>
+          <ModalHeader className="">Invite people to your house</ModalHeader>
+          <div className="mb-4 px-4 flex flex-col gap-4">
+            <p className="text-sm">
+              Share this link with people you want to invite. Anyone with this
+              link will be able to join this house.
+            </p>
+
+            <Input
+              label="Invite link"
+              value={house.inviteCode}
+              readOnly
+              endContent={
+                <Button isIconOnly variant="light" onPress={handleCopy}>
+                  {copied ? (
+                    <Check size={16} className="text-success" />
+                  ) : (
+                    <Copy size={16} />
+                  )}
+                </Button>
+              }
+            />
+
+            {copied && (
+              <p className="text-sm text-success">Link copied to clipboard</p>
+            )}
           </div>
         </ModalContent>
       </Modal>

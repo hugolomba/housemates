@@ -50,3 +50,15 @@ export const CredentialType = {
 } as const
 
 export type CredentialType = (typeof CredentialType)[keyof typeof CredentialType]
+
+
+export const RoomType = {
+  LIVING_ROOM: 'LIVING_ROOM',
+  KITCHEN: 'KITCHEN',
+  BATHROOM: 'BATHROOM',
+  BEDROOM: 'BEDROOM',
+  EXTERNAL: 'EXTERNAL',
+  OTHER: 'OTHER'
+} as const
+
+export type RoomType = (typeof RoomType)[keyof typeof RoomType]

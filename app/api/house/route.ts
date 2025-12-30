@@ -19,15 +19,37 @@ export async function GET() {
           responsible: true,
         },
       },
-      tasks: true,
-      activities: {
-        orderBy: { createdAt: "desc" },
-        take: 5,
-      },
       credentials: true,
       createdBy: true,
+      tasks: {
+        include: {
+          assigned: {
+            select: {
+              name: true,
+            },
+          },
+          room: {
+            select: {
+              name: true,
+              roomType: true,
+            },
+          },
+        },
+      },
       infos: true,
-      rooms: true,
+      rooms: {
+        include: {
+          tasks: {
+            include: {
+              assigned: {
+                select: {
+                  name: true,
+                },
+              },
+            },
+          },
+        },
+      },
       users: true,
     },
   });

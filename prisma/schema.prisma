@@ -103,6 +103,7 @@ model Room {
   name    String
   houseId Int
   house   House  @relation(fields: [houseId], references: [id])
+  roomType RoomType
   tasks   Task[]
 }
 
@@ -226,5 +227,14 @@ enum CredentialType {
   WIFI
   APPLIANCE
   SERVICE
+  OTHER
+}
+
+enum RoomType {
+  LIVING_ROOM
+  KITCHEN
+  BATHROOM
+  BEDROOM
+  EXTERNAL
   OTHER
 }
