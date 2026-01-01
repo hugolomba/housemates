@@ -11,7 +11,9 @@ import {
   DatePicker,
   Select,
   SelectItem,
+  ModalFooter,
 } from "@heroui/react";
+import { sub } from "framer-motion/client";
 import { useState } from "react";
 
 export default function CreateAlert({
@@ -47,7 +49,9 @@ export default function CreateAlert({
       placement="center"
     >
       <ModalContent className="p-4">
-        <ModalHeader>Create Alert</ModalHeader>
+        <ModalHeader>
+          {!submitted ? "Create Alert" : "Alert Created Successfully"}
+        </ModalHeader>
         {!submitted ? (
           <Form className="flex flex-col gap-4" onSubmit={handleSubmit}>
             <Input
@@ -88,12 +92,7 @@ export default function CreateAlert({
             )}
           </Form>
         ) : (
-          <div className="p-4">
-            {error ? (
-              <p className="text-red-500">{error}</p>
-            ) : (
-              <p>Alert created successfully!</p>
-            )}
+          <ModalFooter className="mt-4 flex gap-2">
             <Button
               variant="flat"
               onPress={() => {
@@ -111,7 +110,7 @@ export default function CreateAlert({
             >
               Create Another Alert
             </Button>
-          </div>
+          </ModalFooter>
         )}
       </ModalContent>
     </Modal>

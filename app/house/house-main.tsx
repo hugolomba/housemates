@@ -35,6 +35,7 @@ import { useState } from "react";
 import Credentials from "./(main-info-components)/credentials";
 import Tasks from "./(main-info-components)/tasks";
 import CreateAlert from "./(add-components)/create-alert";
+import CreateBill from "./(add-components)/create-bill";
 
 type HouseProps = {
   house: NonNullable<Awaited<ReturnType<typeof getHouseById>>>;
@@ -218,6 +219,7 @@ export default function HouseMain({ house }: HouseProps) {
             createAlertIsOpen={createAlertIsOpen}
             setCreateAlertIsOpen={setCreateAlertIsOpen}
           />
+
           <Button
             variant="flat"
             color="success"
@@ -226,6 +228,12 @@ export default function HouseMain({ house }: HouseProps) {
           >
             Add Bill
           </Button>
+          <CreateBill
+            createBillIsOpen={addBillIsOpen}
+            setCreateBillIsOpen={setAddBillIsOpen}
+            houseUsers={house.users}
+            houseId={house.id}
+          />
 
           <Button
             variant="flat"

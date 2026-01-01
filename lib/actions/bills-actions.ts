@@ -1,7 +1,7 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
-import { auth } from "@/lib/auth"; // ou getServerSession
+import { auth } from "@/lib/auth";
 import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
 import { logActivity } from "../activity";
@@ -51,4 +51,58 @@ export async function markShareAsPaid(billId: number) {
   revalidatePath("/house");
 
   return { success: true };
+}
+
+// Create a bill
+export async function createBill(formData: FormData, houseId: number) {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  if (!session?.user?.id) {
+    throw new Error("Not authenticated");
+  }
+
+  const title = formData.get("title") as string;
+  const description = formData.get("description") as string;
+  const rawTotalValue = formData.get("totalValue")?.toString() ?? "";
+  const totalValue = Number(rawTotalValue.replace(",", "."));
+
+  const dueDate = new Date(formData.get("dueDate") as string);
+  const responsibleId = formData.get("responsibleId") as string;
+  const shareUserIds = formData.getAll("shares").map((id) => id.toString());
+
+  const bill = await prisma.bill.create({
+    data: {
+      title,
+      description,
+      totalValue,
+      dueDate,
+      houseId,
+      responsibleId,
+      shares: {
+        create: shareUserIds.map((userId) => ({
+          userId,
+          value: totalValue / shareUserIds.length,
+        })),
+      },
+    },
+    include: { shares: true },
+  });
+
+  await logActivity({
+    houseId: bill.houseId,
+    userId: session.user.id,
+    type: "CREATE",
+    entity: "BILL",
+    entityId: bill.id,
+    title: `${session.user.name} created a new bill`,
+    message: `${session.user.name} created the bill ${
+      bill.title
+    } with amount $${bill.totalValue.toFixed(2)}`,
+  });
+
+  revalidatePath("/house");
+
+  return bill;
 }

@@ -37,6 +37,8 @@ type HouseBills = Prisma.HouseGetPayload<{
 }>["bills"];
 
 export default function Bills({ houseBills }: { houseBills: HouseBills }) {
+  console.log("House Bills:", houseBills);
+
   const [isPending, startTransition] = useTransition();
   const [selectedBill, setSelectedBill] = useState<HouseBills[number] | null>(
     null
@@ -95,6 +97,9 @@ export default function Bills({ houseBills }: { houseBills: HouseBills }) {
 
   return (
     <div className="flex flex-col gap-2">
+      <p className="text-sm">
+        You are seeing the upcoming bills within the next {UPCOMING_DAYS} days.
+      </p>
       {upcomingBills.length === 0 && (
         <p className="text-md text-default-500">No upcoming bills.</p>
       )}

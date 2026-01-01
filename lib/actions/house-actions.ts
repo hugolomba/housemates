@@ -183,7 +183,7 @@ export async function getHouseById(houseId: number) {
           },
           responsible: true,
         },
-        orderBy: { dueDate: "asc" },
+        orderBy: { dueDate: "desc" },
       },
       infos: true,
       alerts: true,
