@@ -106,3 +106,18 @@ export async function createBill(formData: FormData, houseId: number) {
 
   return bill;
 }
+
+// get bills by house id
+export async function getBillsByHouseId(houseId: number) {
+  const bills = await prisma.bill.findMany({
+    where: { houseId },
+    include: {
+      shares: {
+        include: { user: true },
+      },
+      responsible: true,
+    },
+  });
+
+  return bills;
+}

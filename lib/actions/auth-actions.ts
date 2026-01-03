@@ -41,6 +41,7 @@ export const signInSocial = async (provider: "google" | "github") => {
     body: {
       provider,
       callbackURL: "/setup-house",
+      newUserCallbackURL: "/setup-house",
     },
   });
 

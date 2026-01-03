@@ -9,6 +9,17 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
   },
+
+  user: {
+    additionalFields: {
+      houseId: {
+        type: "number",
+        required: false,
+        input: false,
+      },
+    },
+  },
+
   socialProviders: {
     github: {
       clientId: process.env.BETTER_AUTH_GITHUB_ID!,
