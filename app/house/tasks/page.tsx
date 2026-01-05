@@ -1,7 +1,7 @@
 import { headers } from "next/dist/server/request/headers";
 import { redirect } from "next/dist/client/components/navigation";
 import { auth } from "@/lib/auth";
-import Bills from "./(bill-components)/bills";
+import Tasks from "./(task-components)/tasks";
 import { getHouseById } from "@/lib/actions/house-actions";
 
 export default async function BillsPage() {
@@ -21,13 +21,14 @@ export default async function BillsPage() {
     <div className="w-full">
       <div className="mx-auto max-w-6xl px-4 py-6 space-y-6">
         <header className="space-y-1">
-          <h1 className="text-2xl font-semibold">House Bills</h1>
+          <h1 className="text-2xl font-semibold">House Tasks</h1>
           <p className="text-sm text-default-500">
-            Track and manage shared expenses in your house
+            Track and manage shared tasks in your house. Here you can see all
+            tasks organized by rooms.
           </p>
         </header>
 
-        <Bills house={house} />
+        <Tasks house={house} />
       </div>
     </div>
   );

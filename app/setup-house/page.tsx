@@ -1,7 +1,4 @@
-import {
-  checkIfUserHasHouse,
-  getHouseByUserId,
-} from "@/lib/actions/house-actions";
+import { checkIfUserHasHouse } from "@/lib/actions/house-actions";
 import SetupHouse from "./setup-house";
 import { auth } from "@/lib/auth";
 import { headers } from "next/dist/server/request/headers";

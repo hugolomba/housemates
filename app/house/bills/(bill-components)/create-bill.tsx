@@ -42,8 +42,7 @@ export default function CreateBill({
 
     const formData = new FormData(e.target as HTMLFormElement);
     try {
-      //   await createAlert(formData);
-      await createBill(formData, houseId); // Replace 1 with actual houseId
+      await createBill(formData, houseId);
     } catch (error) {
       setError(error instanceof Error ? error.message : String(error));
     } finally {

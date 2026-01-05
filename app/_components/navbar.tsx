@@ -18,6 +18,7 @@ import {
   NavbarMenuItem,
   NavbarMenu,
   Divider,
+  Chip,
 } from "@heroui/react";
 
 import { signOut } from "@/lib/actions/auth-actions";
@@ -101,16 +102,12 @@ export default function App({ session }: { session: Session | null }) {
             className="transition-transform"
             color="secondary"
             name={session?.user?.name || "User"}
-            size="md"
+            size="lg"
             src={session?.user?.image || ""}
           />
         </NavbarMenuItem>
-        <NavbarMenuItem key="profile">
-          <Link className="" href="/user/profile" color="primary" size="lg">
-            Profile
-          </Link>
-        </NavbarMenuItem>
-        <NavbarMenuItem key="alerts">
+        <Divider />
+        <NavbarMenuItem key="alerts" className="mt-4">
           <Link className="" href="/house/alerts" color="primary" size="lg">
             Alerts
           </Link>
@@ -126,11 +123,13 @@ export default function App({ session }: { session: Session | null }) {
           </Link>
         </NavbarMenuItem>
         <NavbarMenuItem key="rooms">
-          <Link href="/house/rooms" color="primary" size="lg">
+          <Link isDisabled href="/house/rooms" color="primary" size="lg">
             Rooms
           </Link>
         </NavbarMenuItem>
+
         <NavbarMenuItem key="logout">
+          <Divider />
           <Link
             as="button"
             href="/house/rooms"

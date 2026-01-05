@@ -305,6 +305,50 @@ async function main() {
     },
   });
 
+  // 🔐 House Credentials
+  await prisma.houseCredential.createMany({
+    data: [
+      {
+        houseId: house.id,
+        type: "WIFI",
+        label: "Home Wi-Fi",
+        username: "admin",
+        password: "MedusaWifi123",
+        notes: "Router is in the living room",
+      },
+      {
+        houseId: house.id,
+        type: "SERVICE",
+        label: "Electricity Provider Account",
+        email: "support@electricity.ie",
+        password: "ElectricityPass2025",
+        notes: "Used to manage electricity bills",
+      },
+      {
+        houseId: house.id,
+        type: "SERVICE",
+        label: "Internet Provider Account",
+        email: "support@internet.ie",
+        password: "InternetPass2025",
+        notes: "Account for internet service",
+      },
+      {
+        houseId: house.id,
+        type: "APPLIANCE",
+        label: "Security Alarm System",
+        username: "alarm_admin",
+        password: "SecureAlarm123",
+        notes: "Alarm panel code and app access",
+      },
+      {
+        houseId: house.id,
+        type: "OTHER",
+        label: "Main Gate Access",
+        notes: "Gate code changes every month",
+      },
+    ],
+  });
+
   // 🚨 Alert
   await prisma.alert.createMany({
     data: [

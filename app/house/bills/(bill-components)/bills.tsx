@@ -79,8 +79,6 @@ export default function Bills({ house }: HouseProps) {
       );
     });
 
-  console.log("seacrh temp:", search);
-
   return (
     <>
       <div className="flex items-center">

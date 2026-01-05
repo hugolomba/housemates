@@ -1,5 +1,6 @@
 "use client";
 
+import { deleteCredential } from "@/lib/actions/credentials-actions";
 import { Prisma } from "@/prisma/generated/browser";
 import { Accordion, AccordionItem, Button, Chip, Input } from "@heroui/react";
 import {
@@ -10,6 +11,7 @@ import {
   HousePlug,
   RectangleEllipsis,
   Toolbox,
+  Trash,
   Wifi,
 } from "lucide-react";
 import { useState } from "react";
@@ -26,12 +28,20 @@ export default function Credentials({
   const [visiblePasswordId, setVisiblePasswordId] = useState<number | null>(
     null
   );
+  const [isDeleting, setIsDeleting] = useState(false);
+
   const sortedCredentials = [...houseCredentials].sort((a, b) =>
     a.label.localeCompare(b.label)
   );
 
   const handleCopy = async (value: string) => {
     await navigator.clipboard.writeText(value);
+  };
+
+  const handleDelete = async (credentialId: number) => {
+    setIsDeleting(true);
+    await deleteCredential(credentialId);
+    setIsDeleting(false);
   };
 
   // function to decide icon to appliance type
@@ -166,6 +176,16 @@ export default function Credentials({
               </div>
             )}
           </div>
+          <Button
+            color="danger"
+            size="sm"
+            isLoading={isDeleting}
+            startContent={<Trash size={16} />}
+            className="mt-4"
+            onPress={() => handleDelete(credential.id)}
+          >
+            {isDeleting ? "Deleting..." : "Delete Credential"}
+          </Button>
         </AccordionItem>
       ))}
     </Accordion>

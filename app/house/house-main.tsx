@@ -14,6 +14,7 @@ import {
   ModalContent,
   ModalHeader,
   Input,
+  ModalBody,
 } from "@heroui/react";
 
 import {
@@ -36,7 +37,8 @@ import Credentials from "./(main-info-components)/credentials";
 import Tasks from "./(main-info-components)/tasks";
 import CreateAlert from "./alerts/(alerts-components)/create-alert";
 import CreateBill from "../house/bills/(bill-components)/create-bill";
-import CreateTask from "./(add-components)/create-task";
+import CreateTask from "./tasks/(task-components)/create-task";
+import AddCredential from "./(main-info-components)/add-credential";
 
 type HouseProps = {
   house: NonNullable<Awaited<ReturnType<typeof getHouseById>>>;
@@ -51,6 +53,7 @@ export default function HouseMain({ house }: HouseProps) {
   const [createAlertIsOpen, setCreateAlertIsOpen] = useState(false);
   const [addBillIsOpen, setAddBillIsOpen] = useState(false);
   const [newTaskIsOpen, setNewTaskIsOpen] = useState(false);
+  const [addCredentialIsOpen, setAddCredentialIsOpen] = useState(false);
 
   console.log(" users modal open:", usersOpen);
 
@@ -144,7 +147,7 @@ export default function HouseMain({ house }: HouseProps) {
               setCredentialsOpen(true);
             }}
           >
-            Passwords
+            Credentials
           </Button>
           <Button size="sm" variant="flat">
             More Info
@@ -154,12 +157,7 @@ export default function HouseMain({ house }: HouseProps) {
 
       <Card fullWidth shadow="md">
         <CardBody>
-          <Accordion
-            // variant="splitted"
-            // className="flex flex-col gap-2 px-0"
-            fullWidth
-            disableIndicatorAnimation
-          >
+          <Accordion fullWidth disableIndicatorAnimation>
             <AccordionItem
               key="1"
               aria-label="Alerts"
@@ -304,7 +302,33 @@ export default function HouseMain({ house }: HouseProps) {
           <ModalHeader>
             <Lock /> <span className="ml-2">House Credentials</span>
           </ModalHeader>
-          <Credentials houseCredentials={house.credentials} />
+
+          {/* <Button
+          size="sm"
+          variant="flat"
+          className="mb-2 mx-4"
+          onPress={() => setAddCredentialIsOpen(true)}
+        >
+          + Add Credential
+        </Button> */}
+          {!addCredentialIsOpen ? (
+            <ModalBody>
+              <Button
+                size="sm"
+                variant="flat"
+                className="mb-2 mx-4"
+                onPress={() => setAddCredentialIsOpen(true)}
+              >
+                + Add Credential
+              </Button>
+              <Credentials houseCredentials={house.credentials} />
+            </ModalBody>
+          ) : (
+            <AddCredential
+              setAddCredentialIsOpen={setAddCredentialIsOpen}
+              houseId={house.id}
+            />
+          )}
         </ModalContent>
       </Modal>
 

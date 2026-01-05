@@ -4,6 +4,7 @@ import { addToast, Alert, Button, closeToast, Link } from "@heroui/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import {
+  deleteAlert,
   markAlertAsResolved,
   undoResolvedAlert,
 } from "@/lib/actions/alerts-actions";
@@ -99,6 +100,11 @@ export default function AlertCard({ alert }: { alert: HouseAlerts[number] }) {
     }
   };
 
+  const handleDeleteAlert = async (alertId: string) => {
+    await deleteAlert(alertId);
+    // router.refresh();
+  };
+
   return (
     <Alert
       description={alert.message}
@@ -110,19 +116,33 @@ export default function AlertCard({ alert }: { alert: HouseAlerts[number] }) {
         title: "break-words line-clamp-4 break-all overflow-hidden",
       }}
       endContent={
-        resolvingAlertId === alert.id ? (
-          <Button className="w-24" isLoading size="sm" variant="flat">
-            Resolving...
-          </Button>
+        !alert.isResolved ? (
+          resolvingAlertId === alert.id ? (
+            <Button className="w-24" isLoading size="sm" variant="flat">
+              Resolving...
+            </Button>
+          ) : (
+            <Button
+              size="sm"
+              variant="flat"
+              className="shrink-0 whitespace-nowrap min-w-80px"
+              disabled={resolvedAlertIds.has(alert.id)}
+              onPress={() => handleResolveAlert(alert.id, alert.title)}
+            >
+              {resolvedAlertIds.has(alert.id) ? "Resolved" : "Mark as resolved"}
+            </Button>
+          )
         ) : (
           <Button
             size="sm"
             variant="flat"
+            color="danger"
             className="shrink-0 whitespace-nowrap min-w-80px"
-            disabled={resolvedAlertIds.has(alert.id)}
-            onPress={() => handleResolveAlert(alert.id, alert.title)}
+            onPress={async () => {
+              handleDeleteAlert(alert.id);
+            }}
           >
-            {resolvedAlertIds.has(alert.id) ? "Resolved" : "Mark as resolved"}
+            Delete
           </Button>
         )
       }

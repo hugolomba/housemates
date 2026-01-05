@@ -161,15 +161,15 @@ export async function getHouseById(houseId: number) {
       users: true,
       tasks: {
         include: {
-          assigned: {
-            select: {
-              name: true,
-            },
-          },
           room: {
             select: {
               name: true,
               roomType: true,
+            },
+          },
+          assigned: {
+            select: {
+              name: true,
             },
           },
         },
@@ -196,6 +196,12 @@ export async function getHouseById(houseId: number) {
         include: {
           tasks: {
             include: {
+              room: {
+                select: {
+                  name: true,
+                  roomType: true,
+                },
+              },
               assigned: {
                 select: {
                   name: true,

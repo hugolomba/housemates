@@ -3,7 +3,8 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { signIn, signUp, signInSocial } from "@/lib/actions/auth-actions";
-import { Button, Input } from "@heroui/react";
+import { Button, Input, Link, Card, CardBody, Tabs, Tab } from "@heroui/react";
+import { set } from "better-auth";
 
 export default function AuthClientPage() {
   const [isSignIn, setIsSignIn] = useState(true);
@@ -11,25 +12,33 @@ export default function AuthClientPage() {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState<string>("");
   const router = useRouter();
 
   // Get callback URL from search params (set by middleware)
 
+  // const handleSocialAuth = async (provider: "google" | "github") => {
+  //   setIsLoading(true);
+  //   setError("");
+  //   try {
+  //     await signInSocial(provider);
+  //   } catch (err) {
+  //     console.error("Social auth error:", err);
+  //     setError(err.message);
+  //     // setError(
+  //     //   `Error authenticating with ${provider}: ${
+  //     //     err instanceof Error ? err.message : "Unknown error"
+  //     //   }`
+  //     //   setError(err.message)
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
+
   const handleSocialAuth = async (provider: "google" | "github") => {
     setIsLoading(true);
-    setError("");
-    try {
-      await signInSocial(provider);
-    } catch (err) {
-      setError(
-        `Error authenticating with ${provider}: ${
-          err instanceof Error ? err.message : "Unknown error"
-        }`
-      );
-    } finally {
-      setIsLoading(false);
-    }
+    await signInSocial(provider);
+    setIsLoading(false);
   };
 
   const handleEmailAuth = async (e: React.FormEvent) => {
@@ -51,6 +60,8 @@ export default function AuthClientPage() {
           setError("Failed to create account");
         }
         // router.push("/");
+        await signIn(email, password);
+        router.push("/");
       }
     } catch (err) {
       setError(
@@ -162,6 +173,82 @@ export default function AuthClientPage() {
           </div>
 
           {/* Email/Password Form */}
+
+          {/* <div className="flex flex-col w-full">
+            <Card className="max-w-full w-[340px] h-[400px]">
+              <CardBody className="overflow-hidden">
+                <Tabs
+                  fullWidth
+                  aria-label="Tabs form"
+                  selectedKey={isSignIn}
+                  size="md"
+                  onSelectionChange={setIsSignIn(!isSignIn)}
+                >
+                  <Tab key="login" title="Login">
+                    <form className="flex flex-col gap-4">
+                      <Input
+                        isRequired
+                        label="Email"
+                        placeholder="Enter your email"
+                        type="email"
+                      />
+                      <Input
+                        isRequired
+                        label="Password"
+                        placeholder="Enter your password"
+                        type="password"
+                      />
+                      <p className="text-center text-small">
+                        Need to create an account?{" "}
+                        <Link size="sm" onPress={() => setIsSignIn(!isSignIn)}>
+                          Sign up
+                        </Link>
+                      </p>
+                      <div className="flex gap-2 justify-end">
+                        <Button fullWidth color="primary">
+                          Login
+                        </Button>
+                      </div>
+                    </form>
+                  </Tab>
+                  <Tab key="sign-up" title="Sign up">
+                    <form className="flex flex-col gap-4 h-[300px]">
+                      <Input
+                        isRequired
+                        label="Name"
+                        placeholder="Enter your name"
+                        type="password"
+                      />
+                      <Input
+                        isRequired
+                        label="Email"
+                        placeholder="Enter your email"
+                        type="email"
+                      />
+                      <Input
+                        isRequired
+                        label="Password"
+                        placeholder="Enter your password"
+                        type="password"
+                      />
+                      <p className="text-center text-small">
+                        Already have an account?{" "}
+                        <Link size="sm" onPress={() => setIsSignIn(true)}>
+                          Login
+                        </Link>
+                      </p>
+                      <div className="flex gap-2 justify-end">
+                        <Button fullWidth color="primary">
+                          Sign up
+                        </Button>
+                      </div>
+                    </form>
+                  </Tab>
+                </Tabs>
+              </CardBody>
+            </Card>
+          </div> */}
+
           <form onSubmit={handleEmailAuth} className="space-y-4">
             {!isSignIn && (
               <div>
@@ -226,7 +313,7 @@ export default function AuthClientPage() {
             <Button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-linear-to-r from-pink-500 to-yellow-500 dark:from-blue-600 dark:to-purple-600 text-white rounded-3xl shadow hover:scale-105 transition"
+              // className="w-full bg-linear-to-r from-pink-500 to-yellow-500 dark:from-blue-600 dark:to-purple-600 text-white rounded-3xl shadow hover:scale-105 transition"
             >
               {isLoading ? (
                 <div className="flex items-center">

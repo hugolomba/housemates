@@ -96,3 +96,34 @@ export async function createAlert(formData: FormData) {
 
   revalidatePath("/house");
 }
+
+// delete an alert
+export async function deleteAlert(alertId: string) {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  const alertToDelete = await prisma.alert.findUnique({
+    where: { id: alertId },
+  });
+
+  if (!alertToDelete) {
+    throw new Error("Alert not found");
+  }
+
+  await prisma.alert.delete({
+    where: { id: alertId },
+  });
+
+  await logActivity({
+    houseId: alertToDelete.houseId,
+    userId: session?.user.id,
+    type: "UPDATE",
+    entity: "ALERT",
+    entityId: parseInt(alertId),
+    title: `${session?.user.name} deleted an alert`,
+    message: `${session?.user.name} deleted alert ${alertToDelete.title}`,
+  });
+
+  revalidatePath("/house");
+}

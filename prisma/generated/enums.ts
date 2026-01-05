@@ -12,6 +12,7 @@
 export const ActivityType = {
   CREATE: 'CREATE',
   UPDATE: 'UPDATE',
+  DELETE: 'DELETE',
   COMPLETE: 'COMPLETE',
   PAY: 'PAY',
   RESOLVE: 'RESOLVE'
@@ -26,7 +27,8 @@ export const ActivityEntity = {
   TASK: 'TASK',
   BILL: 'BILL',
   SHARE: 'SHARE',
-  ALERT: 'ALERT'
+  ALERT: 'ALERT',
+  CREDENTIAL: 'CREDENTIAL'
 } as const
 
 export type ActivityEntity = (typeof ActivityEntity)[keyof typeof ActivityEntity]

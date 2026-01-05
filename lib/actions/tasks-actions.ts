@@ -48,6 +48,7 @@ export async function toggleTaskStatus(taskId: number) {
   });
 
   revalidatePath("/house");
+  revalidatePath("/house/tasks");
 
   return updatedTask;
 }
