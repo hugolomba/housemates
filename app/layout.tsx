@@ -1,11 +1,17 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { Providers } from "./providers";
 import Navbar from "@/app/_components/navbar";
 import Footer from "@/app/_components/footer";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
+
+const sfPro = localFont({
+  src: [{ path: "../public/fonts/SF-Pro.ttf" }],
+  variable: "--font-sfpro",
+});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,13 +40,13 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${sfPro.variable} antialiased`}
       >
         <Providers>
           <div className="min-h-screen flex flex-col">
             <Navbar session={session} />
 
-            <main className="flex-1">{children}</main>
+            <main className="flex-1 p-2">{children}</main>
 
             <Footer />
           </div>

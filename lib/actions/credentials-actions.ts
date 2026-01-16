@@ -8,6 +8,7 @@ import { log } from "console";
 import { logActivity } from "../activity";
 import { Form } from "lucide-react";
 import { revalidatePath } from "next/cache";
+import { encrypt, decrypt } from "../security/credentials-crypto";
 
 export async function createCredential(FormData: FormData, houseId: number) {
   const session = await auth.api.getSession({
@@ -27,6 +28,7 @@ export async function createCredential(FormData: FormData, houseId: number) {
   const email = FormData.get("email") as string;
   const username = FormData.get("username") as string;
   const password = FormData.get("password") as string;
+  const encryptedPassword = password ? encrypt(password) : null;
   const url = FormData.get("url") as string;
   const notes = FormData.get("notes") as string;
 
@@ -37,7 +39,7 @@ export async function createCredential(FormData: FormData, houseId: number) {
       type: type,
       email: email,
       username: username,
-      password: password,
+      password: encryptedPassword,
       url: url,
       notes: notes,
     },
@@ -85,30 +87,22 @@ export async function deleteCredential(credentialId: number) {
   revalidatePath("/house");
 }
 
-// export async function updateCredential(data: {
-//   id: number;
-//   label?: string;
-//   type?: string;
-//   email?: string;
-//   username?: string;
-//   password?: string;
-//   url?: string;
-//   notes?: string;
-// }) {
-//   const updatedCredential = await prisma.credential.update({
-//     where: {
-//       id: data.id,
-//     },
-//     data: {
-//       label: data.label,
-//       type: data.type,
-//       email: data.email,
-//       username: data.username,
-//       password: data.password,
-//       url: data.url,
-//       notes: data.notes,
-//     },
-//   });
+// Function to reveal (decrypt) the password of a credential
+export async function revealCredentialPassword(credentialId: number) {
+  const session = await auth.api.getSession({ headers: await headers() });
+  if (!session) throw new Error("Unauthorized");
 
-//   return updatedCredential;
-// }
+  const credential = await prisma.houseCredential.findUnique({
+    where: { id: credentialId },
+    select: {
+      password: true,
+      houseId: true,
+    },
+  });
+
+  if (!credential?.password) {
+    throw new Error("Password not found");
+  }
+  revalidatePath("/house");
+  return decrypt(credential.password);
+}

@@ -2,7 +2,6 @@
 import { Form, Input, RadioGroup, Radio, Button } from "@heroui/react";
 import { useState } from "react";
 import { createCredential } from "@/lib/actions/credentials-actions";
-import { th } from "framer-motion/client";
 
 export default function AddCredential({
   setAddCredentialIsOpen,

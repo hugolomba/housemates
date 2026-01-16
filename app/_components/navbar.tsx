@@ -36,11 +36,12 @@ export default function App({ session }: { session: Session | null }) {
       maxWidth="xl"
       isMenuOpen={isMenuOpen}
       onMenuOpenChange={setIsMenuOpen}
+      classNames={{ base: "bg-foreground" }}
     >
       <NavbarBrand>
-        <Link href="/" className="flex items-center gap-2">
+        <Link href="/" className="flex items-center gap-2 text-foreground">
           <p className="font-bold text-2xl text-foreground hover:scale-105 transition bg-clip-text">
-            HO
+            FlatMates
           </p>
         </Link>
       </NavbarBrand>
@@ -72,7 +73,7 @@ export default function App({ session }: { session: Session | null }) {
         <NavbarItem>
           <ThemeSwitcher />
         </NavbarItem>
-        <NavbarItem className="hidden sm:flex">
+        <NavbarItem className="hidden sm:flex text-foreground">
           {session && <NavbarWithSession session={session} />}
         </NavbarItem>
 

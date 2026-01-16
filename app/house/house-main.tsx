@@ -15,6 +15,7 @@ import {
   ModalHeader,
   Input,
   ModalBody,
+  Alert,
 } from "@heroui/react";
 
 import {
@@ -28,6 +29,7 @@ import {
   TriangleAlert,
   Check,
   Copy,
+  Settings,
 } from "lucide-react";
 import Alerts from "./(main-info-components)/alerts";
 import { getHouseById } from "@/lib/actions/house-actions";
@@ -39,6 +41,8 @@ import CreateAlert from "./alerts/(alerts-components)/create-alert";
 import CreateBill from "../house/bills/(bill-components)/create-bill";
 import CreateTask from "./tasks/(task-components)/create-task";
 import AddCredential from "./(main-info-components)/add-credential";
+import Image from "next/image";
+import { div } from "framer-motion/m";
 
 type HouseProps = {
   house: NonNullable<Awaited<ReturnType<typeof getHouseById>>>;
@@ -95,10 +99,27 @@ export default function HouseMain({ house }: HouseProps) {
   };
 
   return (
-    <div className="container p-2 flex flex-col gap-2">
-      <Card fullWidth shadow="md" className="py-2">
+    <div className="container flex flex-col gap-2 ">
+      <Card fullWidth shadow="md" className="py-2 " isFooterBlurred>
+        <CardHeader className="flex flex-row items-center gap-4">
+          <div className="w-full h-36 relative overflow-hidden rounded-lg object-cover">
+            <Image
+              src={house.imageUrl || ""}
+              alt="House Icon"
+              // width={1000}
+              // height={500}
+              fill
+              className="object-cover relative"
+            />
+          </div>
+          {/* <h1 className="text-2xl font-bold absolute top-4 left-4">
+            {house.name}
+          </h1> */}
+
+          {/* <h2 className="text-xl font-bold">Welcome to {house.name}!</h2> */}
+        </CardHeader>
         <CardBody className="flex flex-col items-center justify-center">
-          <HouseIcon />
+          {/* <HouseIcon /> */}
           <h1 className="text-2xl font-bold">{house.name}</h1>
           <p className="text-center text-sm text-muted-foreground">
             {house.address}
@@ -149,8 +170,12 @@ export default function HouseMain({ house }: HouseProps) {
           >
             Credentials
           </Button>
-          <Button size="sm" variant="flat">
-            More Info
+          <Button
+            size="sm"
+            variant="flat"
+            startContent={<Settings size={15} />}
+          >
+            House Settings
           </Button>
         </CardFooter>
       </Card>
@@ -299,18 +324,19 @@ export default function HouseMain({ house }: HouseProps) {
         backdrop="blur"
       >
         <ModalContent className="p- pb-4">
-          <ModalHeader>
-            <Lock /> <span className="ml-2">House Credentials</span>
+          <ModalHeader className="flex- flex-col">
+            <div className="flex flex-row justify-center">
+              <Lock /> <span className="ml-2">House Credentials</span>
+            </div>
+            <Alert
+              description="Passwords are securely encrypted. Only authorized house members can access them."
+              variant="flat"
+              className="mt-2"
+              color="warning"
+              hideIcon
+            />
           </ModalHeader>
 
-          {/* <Button
-          size="sm"
-          variant="flat"
-          className="mb-2 mx-4"
-          onPress={() => setAddCredentialIsOpen(true)}
-        >
-          + Add Credential
-        </Button> */}
           {!addCredentialIsOpen ? (
             <ModalBody>
               <Button

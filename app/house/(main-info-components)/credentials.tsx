@@ -1,6 +1,9 @@
 "use client";
 
-import { deleteCredential } from "@/lib/actions/credentials-actions";
+import {
+  deleteCredential,
+  revealCredentialPassword,
+} from "@/lib/actions/credentials-actions";
 import { Prisma } from "@/prisma/generated/browser";
 import { Accordion, AccordionItem, Button, Chip, Input } from "@heroui/react";
 import {
@@ -29,6 +32,9 @@ export default function Credentials({
     null
   );
   const [isDeleting, setIsDeleting] = useState(false);
+  const [decryptedPasswords, setDecryptedPasswords] = useState<
+    Record<number, string>
+  >({});
 
   const sortedCredentials = [...houseCredentials].sort((a, b) =>
     a.label.localeCompare(b.label)
@@ -42,6 +48,20 @@ export default function Credentials({
     setIsDeleting(true);
     await deleteCredential(credentialId);
     setIsDeleting(false);
+  };
+
+  const handleShowAndDecryptPassword = async (credentialId: number) => {
+    if (!decryptedPasswords[credentialId]) {
+      const password = await revealCredentialPassword(credentialId);
+      setDecryptedPasswords((prev) => ({
+        ...prev,
+        [credentialId]: password,
+      }));
+    }
+
+    setVisiblePasswordId((prev) =>
+      prev === credentialId ? null : credentialId
+    );
   };
 
   // function to decide icon to appliance type
@@ -124,19 +144,20 @@ export default function Credentials({
               <Input
                 label="Password"
                 type={visiblePasswordId === credential.id ? "text" : "password"}
-                value={credential.password}
+                value={
+                  visiblePasswordId === credential.id
+                    ? decryptedPasswords[credential.id] ?? ""
+                    : ""
+                }
                 readOnly
+                placeholder="••••••••"
                 endContent={
                   <div className="flex items-center gap-1">
                     <Button
                       isIconOnly
                       variant="light"
                       onPress={() =>
-                        setVisiblePasswordId(
-                          visiblePasswordId === credential.id
-                            ? null
-                            : credential.id
-                        )
+                        handleShowAndDecryptPassword(credential.id)
                       }
                     >
                       {visiblePasswordId === credential.id ? (
@@ -149,7 +170,9 @@ export default function Credentials({
                     <Button
                       isIconOnly
                       variant="light"
-                      onPress={() => handleCopy(credential.password!)}
+                      onPress={() =>
+                        handleCopy(decryptedPasswords[credential.id] || "")
+                      }
                     >
                       <Copy size={16} />
                     </Button>
