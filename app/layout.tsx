@@ -46,7 +46,7 @@ export default async function RootLayout({
           <div className="min-h-screen flex flex-col">
             <Navbar session={session} />
 
-            <main className="flex-1 p-2">{children}</main>
+            <main className="flex-1">{children}</main>
 
             <Footer />
           </div>

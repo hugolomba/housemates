@@ -209,6 +209,7 @@ export async function getHouseById(houseId: number) {
               },
             },
           },
+          users: true,
         },
       },
     },
@@ -221,7 +222,7 @@ export async function getHouseById(houseId: number) {
   const priorityOrder = ["URGENT", "HIGH", "MEDIUM", "LOW"];
   house.alerts.sort(
     (a, b) =>
-      priorityOrder.indexOf(a.priority) - priorityOrder.indexOf(b.priority)
+      priorityOrder.indexOf(a.priority) - priorityOrder.indexOf(b.priority),
   );
   return house;
 }

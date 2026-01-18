@@ -41,6 +41,7 @@ import CreateAlert from "./alerts/(alerts-components)/create-alert";
 import CreateBill from "../house/bills/(bill-components)/create-bill";
 import CreateTask from "./tasks/(task-components)/create-task";
 import AddCredential from "./(main-info-components)/add-credential";
+import Rooms from "./(main-info-components)/rooms";
 import Image from "next/image";
 import { div } from "framer-motion/m";
 
@@ -99,61 +100,52 @@ export default function HouseMain({ house }: HouseProps) {
   };
 
   return (
-    <div className="container flex flex-col gap-2 ">
-      <Card fullWidth shadow="md" className="py-2 " isFooterBlurred>
-        <CardHeader className="flex flex-row items-center gap-4">
-          <div className="w-full h-36 relative overflow-hidden rounded-lg object-cover">
-            <Image
-              src={house.imageUrl || ""}
-              alt="House Icon"
-              // width={1000}
-              // height={500}
-              fill
-              className="object-cover relative"
-            />
-          </div>
-          {/* <h1 className="text-2xl font-bold absolute top-4 left-4">
-            {house.name}
-          </h1> */}
-
-          {/* <h2 className="text-xl font-bold">Welcome to {house.name}!</h2> */}
+    <div className="container flex flex-col gap-4 p-2">
+      <Card
+        fullWidth
+        className="
+    rounded-4xl
+    bg-gradient-to-br from-blue-500 to-blue-600
+    dark:from-blue-700 dark:to-blue-800
+    text-white
+   
+    shadow-
+    ring-1 ring-white/10
+  "
+      >
+        <CardHeader className="flex flex-row items-center justify-center p-0 mt-4">
+          <HouseIcon size={52} className="opacity-90" />{" "}
         </CardHeader>
-        <CardBody className="flex flex-col items-center justify-center">
-          {/* <HouseIcon /> */}
-          <h1 className="text-2xl font-bold">{house.name}</h1>
-          <p className="text-center text-sm text-muted-foreground">
+        <CardBody className="flex flex-col items-center justify-center p-4 my-4">
+          {/* <HouseIcon size={48} /> */}
+          <h1 className="text-3xl font-bold mt-2">{house.name}</h1>
+          <p className="text-center text-md text-muted-foreground">
             {house.address}
           </p>
           <div className="users-group-div flex flex-col items-center gap-4">
-            <Card shadow="none" onPress={() => setUsersOpen(true)} isPressable>
-              <CardBody>
-                <AvatarGroup
-                  max={3}
-                  total={house.users.length}
-                  renderCount={(count) => (
-                    <p className="text-small text-foreground font-medium ms-2">
-                      +{count - 3} other{count - 3 === 1 ? "" : "s"}
-                    </p>
-                  )}
-                  isBordered
-                  className="mt-4"
-                >
-                  {house.users.map((user) => (
-                    <Avatar
-                      size="sm"
-                      key={user.id}
-                      src={user.image || undefined}
-                    />
-                  ))}
-                </AvatarGroup>
-              </CardBody>
-            </Card>
+            <AvatarGroup
+              onClick={() => setUsersOpen(true)}
+              max={3}
+              total={house.users.length}
+              renderCount={(count) => (
+                <p className="text-small text-foreground font-medium ms-2">
+                  +{count - 3} other{count - 3 === 1 ? "" : "s"}
+                </p>
+              )}
+              isBordered
+              className="mt-4"
+            >
+              {house.users.map((user) => (
+                <Avatar size="sm" key={user.id} src={user.image || undefined} />
+              ))}
+            </AvatarGroup>
           </div>
         </CardBody>
-        <CardFooter className="px-2 flex gap-4 justify-center">
+
+        <CardFooter className="flex gap-4 justify-center py-4">
           <Button
-            size="sm"
-            variant="flat"
+            size="md"
+            className="rounded-full bg-white dark:bg-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700/70"
             onPress={() => {
               setInviteIsOpen(true);
             }}
@@ -162,8 +154,8 @@ export default function HouseMain({ house }: HouseProps) {
           </Button>
           <Button
             startContent={<Lock size={15} />}
-            size="sm"
-            variant="flat"
+            size="md"
+            className="rounded-full bg-white dark:bg-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700/70"
             onPress={() => {
               setCredentialsOpen(true);
             }}
@@ -171,151 +163,167 @@ export default function HouseMain({ house }: HouseProps) {
             Credentials
           </Button>
           <Button
-            size="sm"
-            variant="flat"
+            size="md"
+            // variant="ghost"
             startContent={<Settings size={15} />}
+            className="rounded-full bg-white dark:bg-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700/70"
           >
-            House Settings
+            Settings
           </Button>
         </CardFooter>
       </Card>
 
-      <Card fullWidth shadow="md">
-        <CardBody>
-          <Accordion fullWidth disableIndicatorAnimation>
-            <AccordionItem
-              key="1"
-              aria-label="Alerts"
-              title={
-                <p className="text-foreground/90 font-bold">
-                  Alerts ({activeAlerts.length})
-                </p>
-              }
-              indicator={<TriangleAlert color="#ff0000" />}
-            >
-              <Alerts houseAlerts={house.alerts} />
-            </AccordionItem>
-            <AccordionItem
-              key="2"
-              aria-label="Upcoming bills"
-              title={
-                <p className="text-foreground/90 font-bold">
-                  Upcoming Bills ({house.bills.length})
-                </p>
-              }
-              indicator={<ReceiptEuro color="green" />}
-            >
-              <Bills houseBills={house.bills} />
-            </AccordionItem>
+      {/* quick actions */}
 
-            <AccordionItem
-              key="3"
-              aria-label="Upcoming Tasks"
-              title={
-                <p className="text-foreground/90 font-bold">
-                  Upcoming Tasks ({activeTasks.length})
-                </p>
-              }
-              indicator={<ClipboardList color="#008ee6" />}
-            >
-              {<Tasks houseTasks={house.tasks} />}
-            </AccordionItem>
-          </Accordion>
-        </CardBody>
-      </Card>
+      <section className="p-2">
+        <h2 className="mb-2 text-lg font-semibold text-foreground/70">
+          Quick actions
+        </h2>
 
-      <Card>
-        <CardHeader className="flex flex-row items-center gap-2">
-          <SquarePlus /> <h2 className="font-bold">Quick Actions</h2>
-        </CardHeader>
-
-        <Divider orientation="horizontal" />
-        <CardBody className="flex flex-row gap-2">
+        <div className="grid grid-cols-3 gap-2">
           <Button
-            variant="flat"
-            color="danger"
-            startContent={<TriangleAlert />}
             onPress={() => setCreateAlertIsOpen(true)}
-          >
-            Create Alert
-          </Button>
-          <CreateAlert
-            createAlertIsOpen={createAlertIsOpen}
-            setCreateAlertIsOpen={setCreateAlertIsOpen}
-          />
-
-          <Button
-            variant="flat"
-            color="success"
-            startContent={<Euro />}
-            onPress={() => setAddBillIsOpen(true)}
-          >
-            Add Bill
-          </Button>
-          <CreateBill
-            createBillIsOpen={addBillIsOpen}
-            setCreateBillIsOpen={setAddBillIsOpen}
-            houseUsers={house.users}
-            houseId={house.id}
-          />
-
-          <Button
-            variant="flat"
             color="primary"
-            startContent={<ClipboardList />}
+            className="rounded-full bg-blue-600 dark:bg-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700/70"
+          >
+            New Alert
+          </Button>
+
+          <Button
+            onPress={() => setAddBillIsOpen(true)}
+            color="primary"
+            className="rounded-full bg-blue-600 dark:bg-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700/70"
+          >
+            New Bill
+          </Button>
+          <Button
             onPress={() => setNewTaskIsOpen(true)}
+            color="primary"
+            className="rounded-full bg-blue-600 dark:bg-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700/70"
           >
             New Task
           </Button>
-          <CreateTask
-            createTaskIsOpen={newTaskIsOpen}
-            setCreateTaskIsOpen={setNewTaskIsOpen}
-            users={house.users}
-            rooms={house.rooms}
-            houseId={house.id}
-          />
-        </CardBody>
-      </Card>
+        </div>
+      </section>
 
-      <Card>
-        <CardBody>
-          <Accordion fullWidth disableIndicatorAnimation isCompact>
-            <AccordionItem
-              title={<h2 className="font-bold">Recent activity</h2>}
-              indicator={<Clock />}
+      {/* house overview */}
+      <section className="p-2">
+        <h2 className="mb-2 text-lg font-semibold text-foreground/70">
+          House Overview
+        </h2>
+        <Accordion fullWidth disableIndicatorAnimation>
+          <AccordionItem
+            key="1"
+            aria-label="Alerts"
+            title={
+              <p className="text-foreground/90 font-bold">
+                Alerts ({activeAlerts.length})
+              </p>
+            }
+            indicator={<TriangleAlert color="#ff0000" />}
+          >
+            <Alerts houseAlerts={house.alerts} />
+          </AccordionItem>
+          <AccordionItem
+            key="2"
+            aria-label="Upcoming bills"
+            title={
+              <p className="text-foreground/90 font-bold">
+                Upcoming Bills ({house.bills.length})
+              </p>
+            }
+            indicator={<ReceiptEuro color="green" />}
+          >
+            <Bills houseBills={house.bills} />
+          </AccordionItem>
+
+          <AccordionItem
+            key="3"
+            aria-label="Upcoming Tasks"
+            title={
+              <p className="text-foreground/90 font-bold">
+                Upcoming Tasks ({activeTasks.length})
+              </p>
+            }
+            indicator={
+              <div className="flex flex-row items-center gap-1">
+                ({activeTasks.length}) <ClipboardList color="#008ee6" />
+              </div>
+            }
+          >
+            {<Tasks houseTasks={house.tasks} />}
+          </AccordionItem>
+        </Accordion>
+      </section>
+
+      {/* house rooms */}
+      <section className="p-2">
+        <h2 className="mb-2 text-lg font-semibold text-foreground/70">
+          House Rooms
+        </h2>
+        <Rooms houseRooms={house.rooms} />
+      </section>
+
+      {/* recent activity */}
+      <Accordion fullWidth isCompact defaultExpandedKeys={["1"]}>
+        <AccordionItem
+          key={"1"}
+          title={
+            <h2 className="mb-2 text-lg font-semibold text-foreground/70">
+              Recent activity
+            </h2>
+          }
+          startContent={<Clock />}
+        >
+          {house.activities.length === 0 ? (
+            <p className="text-center text-muted-foreground">
+              No recent activity
+            </p>
+          ) : (
+            <Accordion
+              fullWidth
+              disableIndicatorAnimation
+              isCompact
+              variant="light"
+              itemClasses={{
+                titleWrapper: "flex flex-row justify-between",
+              }}
             >
-              {house.activities.length === 0 ? (
-                <p className="text-center text-muted-foreground">
-                  No recent activity
-                </p>
-              ) : (
-                <Accordion
-                  fullWidth
-                  disableIndicatorAnimation
-                  isCompact
-                  variant="light"
-                  itemClasses={{
-                    titleWrapper: "flex flex-row justify-between",
-                  }}
+              {house.activities.map((activity) => (
+                <AccordionItem
+                  key={activity.id}
+                  aria-label={activity.message}
+                  title={activity.title}
+                  subtitle={timeAgoShort(new Date(activity.createdAt))}
+                  hideIndicator
                 >
-                  {house.activities.map((activity) => (
-                    <AccordionItem
-                      key={activity.id}
-                      aria-label={activity.message}
-                      title={activity.title}
-                      subtitle={timeAgoShort(new Date(activity.createdAt))}
-                      hideIndicator
-                    >
-                      <p className="text-foreground/90">{activity.message}</p>
-                    </AccordionItem>
-                  ))}
-                </Accordion>
-              )}
-            </AccordionItem>
-          </Accordion>
-        </CardBody>
-      </Card>
+                  <p className="text-foreground/90">{activity.message}</p>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          )}
+        </AccordionItem>
+      </Accordion>
 
+      <CreateAlert
+        createAlertIsOpen={createAlertIsOpen}
+        setCreateAlertIsOpen={setCreateAlertIsOpen}
+      />
+
+      <CreateBill
+        createBillIsOpen={addBillIsOpen}
+        setCreateBillIsOpen={setAddBillIsOpen}
+        houseUsers={house.users}
+        houseId={house.id}
+      />
+
+      <CreateTask
+        createTaskIsOpen={newTaskIsOpen}
+        setCreateTaskIsOpen={setNewTaskIsOpen}
+        users={house.users}
+        rooms={house.rooms}
+        houseId={house.id}
+      />
       <Modal
         isOpen={credentialsOpen}
         onClose={() => setCredentialsOpen(false)}

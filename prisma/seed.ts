@@ -2,6 +2,7 @@ import { prisma } from "../lib/prisma";
 
 async function main() {
   // 🧹 Clear existing data (order matters)
+  await prisma.activity.deleteMany();
   await prisma.alert.deleteMany();
   await prisma.share.deleteMany();
   await prisma.bill.deleteMany();
@@ -89,6 +90,9 @@ async function main() {
       name: "Living Room",
       houseId: house.id,
       roomType: "LIVING_ROOM",
+      users: {
+        connect: [{ id: user1.id }, { id: user2.id }, { id: user3.id }],
+      },
     },
   });
 
@@ -97,6 +101,9 @@ async function main() {
       name: "Hugo and Andrea's Room",
       houseId: house.id,
       roomType: "BEDROOM",
+      users: {
+        connect: [{ id: user1.id }, { id: user2.id }],
+      },
     },
   });
 
@@ -105,6 +112,9 @@ async function main() {
       name: "Bathroom",
       houseId: house.id,
       roomType: "BATHROOM",
+      users: {
+        connect: [{ id: user1.id }, { id: user2.id }, { id: user3.id }],
+      },
     },
   });
 
@@ -113,6 +123,9 @@ async function main() {
       name: "Kitchen",
       houseId: house.id,
       roomType: "KITCHEN",
+      users: {
+        connect: [{ id: user1.id }, { id: user2.id }, { id: user3.id }],
+      },
     },
   });
 

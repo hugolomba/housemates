@@ -25,6 +25,7 @@ model User {
   house         House?    @relation("HouseMembers", fields: [houseId], references: [id])
   tasks         Task[]    @relation("TaskAssignees")
   activities    Activity[]
+  rooms         Room[]    @relation("RoomUsers")
 
   @@unique([email])
   @@map("user")
@@ -105,6 +106,7 @@ model Room {
   house   House  @relation(fields: [houseId], references: [id])
   roomType RoomType
   tasks   Task[]
+  users User[] @relation("RoomUsers")
 }
 
 model Task {

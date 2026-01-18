@@ -32,11 +32,12 @@ export default function App({ session }: { session: Session | null }) {
   return (
     <Navbar
       // isBordered
+      isBlurred
       shouldHideOnScroll
       maxWidth="xl"
       isMenuOpen={isMenuOpen}
       onMenuOpenChange={setIsMenuOpen}
-      classNames={{ base: "bg-foreground" }}
+      classNames={{ base: "bg-foreground rounded-b-2xl " }}
     >
       <NavbarBrand>
         <Link href="/" className="flex items-center gap-2 text-foreground">

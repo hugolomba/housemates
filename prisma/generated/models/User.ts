@@ -249,6 +249,7 @@ export type UserWhereInput = {
   house?: Prisma.XOR<Prisma.HouseNullableScalarRelationFilter, Prisma.HouseWhereInput> | null
   tasks?: Prisma.TaskListRelationFilter
   activities?: Prisma.ActivityListRelationFilter
+  rooms?: Prisma.RoomListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -269,6 +270,7 @@ export type UserOrderByWithRelationInput = {
   house?: Prisma.HouseOrderByWithRelationInput
   tasks?: Prisma.TaskOrderByRelationAggregateInput
   activities?: Prisma.ActivityOrderByRelationAggregateInput
+  rooms?: Prisma.RoomOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -292,6 +294,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   house?: Prisma.XOR<Prisma.HouseNullableScalarRelationFilter, Prisma.HouseWhereInput> | null
   tasks?: Prisma.TaskListRelationFilter
   activities?: Prisma.ActivityListRelationFilter
+  rooms?: Prisma.RoomListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -341,6 +344,7 @@ export type UserCreateInput = {
   house?: Prisma.HouseCreateNestedOneWithoutUsersInput
   tasks?: Prisma.TaskCreateNestedManyWithoutAssignedInput
   activities?: Prisma.ActivityCreateNestedManyWithoutUserInput
+  rooms?: Prisma.RoomCreateNestedManyWithoutUsersInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -360,6 +364,7 @@ export type UserUncheckedCreateInput = {
   shares?: Prisma.ShareUncheckedCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssignedInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutUserInput
+  rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutUsersInput
 }
 
 export type UserUpdateInput = {
@@ -379,6 +384,7 @@ export type UserUpdateInput = {
   house?: Prisma.HouseUpdateOneWithoutUsersNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutAssignedNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutUserNestedInput
+  rooms?: Prisma.RoomUpdateManyWithoutUsersNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -398,6 +404,7 @@ export type UserUncheckedUpdateInput = {
   shares?: Prisma.ShareUncheckedUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutAssignedNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutUserNestedInput
+  rooms?: Prisma.RoomUncheckedUpdateManyWithoutUsersNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -601,6 +608,44 @@ export type UserUncheckedUpdateManyWithoutHouseNestedInput = {
   deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
 }
 
+export type UserCreateNestedManyWithoutRoomsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRoomsInput, Prisma.UserUncheckedCreateWithoutRoomsInput> | Prisma.UserCreateWithoutRoomsInput[] | Prisma.UserUncheckedCreateWithoutRoomsInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRoomsInput | Prisma.UserCreateOrConnectWithoutRoomsInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserUncheckedCreateNestedManyWithoutRoomsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRoomsInput, Prisma.UserUncheckedCreateWithoutRoomsInput> | Prisma.UserCreateWithoutRoomsInput[] | Prisma.UserUncheckedCreateWithoutRoomsInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRoomsInput | Prisma.UserCreateOrConnectWithoutRoomsInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserUpdateManyWithoutRoomsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRoomsInput, Prisma.UserUncheckedCreateWithoutRoomsInput> | Prisma.UserCreateWithoutRoomsInput[] | Prisma.UserUncheckedCreateWithoutRoomsInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRoomsInput | Prisma.UserCreateOrConnectWithoutRoomsInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutRoomsInput | Prisma.UserUpsertWithWhereUniqueWithoutRoomsInput[]
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutRoomsInput | Prisma.UserUpdateWithWhereUniqueWithoutRoomsInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutRoomsInput | Prisma.UserUpdateManyWithWhereWithoutRoomsInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
+export type UserUncheckedUpdateManyWithoutRoomsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRoomsInput, Prisma.UserUncheckedCreateWithoutRoomsInput> | Prisma.UserCreateWithoutRoomsInput[] | Prisma.UserUncheckedCreateWithoutRoomsInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRoomsInput | Prisma.UserCreateOrConnectWithoutRoomsInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutRoomsInput | Prisma.UserUpsertWithWhereUniqueWithoutRoomsInput[]
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutRoomsInput | Prisma.UserUpdateWithWhereUniqueWithoutRoomsInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutRoomsInput | Prisma.UserUpdateManyWithWhereWithoutRoomsInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
 export type UserCreateNestedManyWithoutTasksInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutTasksInput, Prisma.UserUncheckedCreateWithoutTasksInput> | Prisma.UserCreateWithoutTasksInput[] | Prisma.UserUncheckedCreateWithoutTasksInput[]
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutTasksInput | Prisma.UserCreateOrConnectWithoutTasksInput[]
@@ -713,6 +758,7 @@ export type UserCreateWithoutSessionsInput = {
   house?: Prisma.HouseCreateNestedOneWithoutUsersInput
   tasks?: Prisma.TaskCreateNestedManyWithoutAssignedInput
   activities?: Prisma.ActivityCreateNestedManyWithoutUserInput
+  rooms?: Prisma.RoomCreateNestedManyWithoutUsersInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -731,6 +777,7 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   shares?: Prisma.ShareUncheckedCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssignedInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutUserInput
+  rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutUsersInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -765,6 +812,7 @@ export type UserUpdateWithoutSessionsInput = {
   house?: Prisma.HouseUpdateOneWithoutUsersNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutAssignedNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutUserNestedInput
+  rooms?: Prisma.RoomUpdateManyWithoutUsersNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -783,6 +831,7 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   shares?: Prisma.ShareUncheckedUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutAssignedNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutUserNestedInput
+  rooms?: Prisma.RoomUncheckedUpdateManyWithoutUsersNestedInput
 }
 
 export type UserCreateWithoutAccountsInput = {
@@ -801,6 +850,7 @@ export type UserCreateWithoutAccountsInput = {
   house?: Prisma.HouseCreateNestedOneWithoutUsersInput
   tasks?: Prisma.TaskCreateNestedManyWithoutAssignedInput
   activities?: Prisma.ActivityCreateNestedManyWithoutUserInput
+  rooms?: Prisma.RoomCreateNestedManyWithoutUsersInput
 }
 
 export type UserUncheckedCreateWithoutAccountsInput = {
@@ -819,6 +869,7 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   shares?: Prisma.ShareUncheckedCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssignedInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutUserInput
+  rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutUsersInput
 }
 
 export type UserCreateOrConnectWithoutAccountsInput = {
@@ -853,6 +904,7 @@ export type UserUpdateWithoutAccountsInput = {
   house?: Prisma.HouseUpdateOneWithoutUsersNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutAssignedNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutUserNestedInput
+  rooms?: Prisma.RoomUpdateManyWithoutUsersNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -871,6 +923,7 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   shares?: Prisma.ShareUncheckedUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutAssignedNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutUserNestedInput
+  rooms?: Prisma.RoomUncheckedUpdateManyWithoutUsersNestedInput
 }
 
 export type UserCreateWithoutHousesCreatedInput = {
@@ -889,6 +942,7 @@ export type UserCreateWithoutHousesCreatedInput = {
   house?: Prisma.HouseCreateNestedOneWithoutUsersInput
   tasks?: Prisma.TaskCreateNestedManyWithoutAssignedInput
   activities?: Prisma.ActivityCreateNestedManyWithoutUserInput
+  rooms?: Prisma.RoomCreateNestedManyWithoutUsersInput
 }
 
 export type UserUncheckedCreateWithoutHousesCreatedInput = {
@@ -907,6 +961,7 @@ export type UserUncheckedCreateWithoutHousesCreatedInput = {
   shares?: Prisma.ShareUncheckedCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssignedInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutUserInput
+  rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutUsersInput
 }
 
 export type UserCreateOrConnectWithoutHousesCreatedInput = {
@@ -930,6 +985,7 @@ export type UserCreateWithoutHouseInput = {
   shares?: Prisma.ShareCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskCreateNestedManyWithoutAssignedInput
   activities?: Prisma.ActivityCreateNestedManyWithoutUserInput
+  rooms?: Prisma.RoomCreateNestedManyWithoutUsersInput
 }
 
 export type UserUncheckedCreateWithoutHouseInput = {
@@ -948,6 +1004,7 @@ export type UserUncheckedCreateWithoutHouseInput = {
   shares?: Prisma.ShareUncheckedCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssignedInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutUserInput
+  rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutUsersInput
 }
 
 export type UserCreateOrConnectWithoutHouseInput = {
@@ -987,6 +1044,7 @@ export type UserUpdateWithoutHousesCreatedInput = {
   house?: Prisma.HouseUpdateOneWithoutUsersNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutAssignedNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutUserNestedInput
+  rooms?: Prisma.RoomUpdateManyWithoutUsersNestedInput
 }
 
 export type UserUncheckedUpdateWithoutHousesCreatedInput = {
@@ -1005,6 +1063,7 @@ export type UserUncheckedUpdateWithoutHousesCreatedInput = {
   shares?: Prisma.ShareUncheckedUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutAssignedNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutUserNestedInput
+  rooms?: Prisma.RoomUncheckedUpdateManyWithoutUsersNestedInput
 }
 
 export type UserUpsertWithWhereUniqueWithoutHouseInput = {
@@ -1037,6 +1096,65 @@ export type UserScalarWhereInput = {
   houseId?: Prisma.IntNullableFilter<"User"> | number | null
 }
 
+export type UserCreateWithoutRoomsInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  alertsCreated?: Prisma.AlertCreateNestedManyWithoutCreatedByInput
+  bills?: Prisma.BillCreateNestedManyWithoutResponsibleInput
+  housesCreated?: Prisma.HouseCreateNestedManyWithoutCreatedByInput
+  shares?: Prisma.ShareCreateNestedManyWithoutUserInput
+  house?: Prisma.HouseCreateNestedOneWithoutUsersInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutAssignedInput
+  activities?: Prisma.ActivityCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutRoomsInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  houseId?: number | null
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  alertsCreated?: Prisma.AlertUncheckedCreateNestedManyWithoutCreatedByInput
+  bills?: Prisma.BillUncheckedCreateNestedManyWithoutResponsibleInput
+  housesCreated?: Prisma.HouseUncheckedCreateNestedManyWithoutCreatedByInput
+  shares?: Prisma.ShareUncheckedCreateNestedManyWithoutUserInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssignedInput
+  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutRoomsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutRoomsInput, Prisma.UserUncheckedCreateWithoutRoomsInput>
+}
+
+export type UserUpsertWithWhereUniqueWithoutRoomsInput = {
+  where: Prisma.UserWhereUniqueInput
+  update: Prisma.XOR<Prisma.UserUpdateWithoutRoomsInput, Prisma.UserUncheckedUpdateWithoutRoomsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutRoomsInput, Prisma.UserUncheckedCreateWithoutRoomsInput>
+}
+
+export type UserUpdateWithWhereUniqueWithoutRoomsInput = {
+  where: Prisma.UserWhereUniqueInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutRoomsInput, Prisma.UserUncheckedUpdateWithoutRoomsInput>
+}
+
+export type UserUpdateManyWithWhereWithoutRoomsInput = {
+  where: Prisma.UserScalarWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateManyMutationInput, Prisma.UserUncheckedUpdateManyWithoutRoomsInput>
+}
+
 export type UserCreateWithoutTasksInput = {
   id: string
   name: string
@@ -1053,6 +1171,7 @@ export type UserCreateWithoutTasksInput = {
   shares?: Prisma.ShareCreateNestedManyWithoutUserInput
   house?: Prisma.HouseCreateNestedOneWithoutUsersInput
   activities?: Prisma.ActivityCreateNestedManyWithoutUserInput
+  rooms?: Prisma.RoomCreateNestedManyWithoutUsersInput
 }
 
 export type UserUncheckedCreateWithoutTasksInput = {
@@ -1071,6 +1190,7 @@ export type UserUncheckedCreateWithoutTasksInput = {
   housesCreated?: Prisma.HouseUncheckedCreateNestedManyWithoutCreatedByInput
   shares?: Prisma.ShareUncheckedCreateNestedManyWithoutUserInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutUserInput
+  rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutUsersInput
 }
 
 export type UserCreateOrConnectWithoutTasksInput = {
@@ -1110,6 +1230,7 @@ export type UserCreateWithoutBillsInput = {
   house?: Prisma.HouseCreateNestedOneWithoutUsersInput
   tasks?: Prisma.TaskCreateNestedManyWithoutAssignedInput
   activities?: Prisma.ActivityCreateNestedManyWithoutUserInput
+  rooms?: Prisma.RoomCreateNestedManyWithoutUsersInput
 }
 
 export type UserUncheckedCreateWithoutBillsInput = {
@@ -1128,6 +1249,7 @@ export type UserUncheckedCreateWithoutBillsInput = {
   shares?: Prisma.ShareUncheckedCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssignedInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutUserInput
+  rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutUsersInput
 }
 
 export type UserCreateOrConnectWithoutBillsInput = {
@@ -1162,6 +1284,7 @@ export type UserUpdateWithoutBillsInput = {
   house?: Prisma.HouseUpdateOneWithoutUsersNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutAssignedNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutUserNestedInput
+  rooms?: Prisma.RoomUpdateManyWithoutUsersNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBillsInput = {
@@ -1180,6 +1303,7 @@ export type UserUncheckedUpdateWithoutBillsInput = {
   shares?: Prisma.ShareUncheckedUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutAssignedNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutUserNestedInput
+  rooms?: Prisma.RoomUncheckedUpdateManyWithoutUsersNestedInput
 }
 
 export type UserCreateWithoutSharesInput = {
@@ -1198,6 +1322,7 @@ export type UserCreateWithoutSharesInput = {
   house?: Prisma.HouseCreateNestedOneWithoutUsersInput
   tasks?: Prisma.TaskCreateNestedManyWithoutAssignedInput
   activities?: Prisma.ActivityCreateNestedManyWithoutUserInput
+  rooms?: Prisma.RoomCreateNestedManyWithoutUsersInput
 }
 
 export type UserUncheckedCreateWithoutSharesInput = {
@@ -1216,6 +1341,7 @@ export type UserUncheckedCreateWithoutSharesInput = {
   housesCreated?: Prisma.HouseUncheckedCreateNestedManyWithoutCreatedByInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssignedInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutUserInput
+  rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutUsersInput
 }
 
 export type UserCreateOrConnectWithoutSharesInput = {
@@ -1250,6 +1376,7 @@ export type UserUpdateWithoutSharesInput = {
   house?: Prisma.HouseUpdateOneWithoutUsersNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutAssignedNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutUserNestedInput
+  rooms?: Prisma.RoomUpdateManyWithoutUsersNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSharesInput = {
@@ -1268,6 +1395,7 @@ export type UserUncheckedUpdateWithoutSharesInput = {
   housesCreated?: Prisma.HouseUncheckedUpdateManyWithoutCreatedByNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutAssignedNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutUserNestedInput
+  rooms?: Prisma.RoomUncheckedUpdateManyWithoutUsersNestedInput
 }
 
 export type UserCreateWithoutAlertsCreatedInput = {
@@ -1286,6 +1414,7 @@ export type UserCreateWithoutAlertsCreatedInput = {
   house?: Prisma.HouseCreateNestedOneWithoutUsersInput
   tasks?: Prisma.TaskCreateNestedManyWithoutAssignedInput
   activities?: Prisma.ActivityCreateNestedManyWithoutUserInput
+  rooms?: Prisma.RoomCreateNestedManyWithoutUsersInput
 }
 
 export type UserUncheckedCreateWithoutAlertsCreatedInput = {
@@ -1304,6 +1433,7 @@ export type UserUncheckedCreateWithoutAlertsCreatedInput = {
   shares?: Prisma.ShareUncheckedCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssignedInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutUserInput
+  rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutUsersInput
 }
 
 export type UserCreateOrConnectWithoutAlertsCreatedInput = {
@@ -1338,6 +1468,7 @@ export type UserUpdateWithoutAlertsCreatedInput = {
   house?: Prisma.HouseUpdateOneWithoutUsersNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutAssignedNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutUserNestedInput
+  rooms?: Prisma.RoomUpdateManyWithoutUsersNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAlertsCreatedInput = {
@@ -1356,6 +1487,7 @@ export type UserUncheckedUpdateWithoutAlertsCreatedInput = {
   shares?: Prisma.ShareUncheckedUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutAssignedNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutUserNestedInput
+  rooms?: Prisma.RoomUncheckedUpdateManyWithoutUsersNestedInput
 }
 
 export type UserCreateWithoutActivitiesInput = {
@@ -1374,6 +1506,7 @@ export type UserCreateWithoutActivitiesInput = {
   shares?: Prisma.ShareCreateNestedManyWithoutUserInput
   house?: Prisma.HouseCreateNestedOneWithoutUsersInput
   tasks?: Prisma.TaskCreateNestedManyWithoutAssignedInput
+  rooms?: Prisma.RoomCreateNestedManyWithoutUsersInput
 }
 
 export type UserUncheckedCreateWithoutActivitiesInput = {
@@ -1392,6 +1525,7 @@ export type UserUncheckedCreateWithoutActivitiesInput = {
   housesCreated?: Prisma.HouseUncheckedCreateNestedManyWithoutCreatedByInput
   shares?: Prisma.ShareUncheckedCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssignedInput
+  rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutUsersInput
 }
 
 export type UserCreateOrConnectWithoutActivitiesInput = {
@@ -1426,6 +1560,7 @@ export type UserUpdateWithoutActivitiesInput = {
   shares?: Prisma.ShareUpdateManyWithoutUserNestedInput
   house?: Prisma.HouseUpdateOneWithoutUsersNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutAssignedNestedInput
+  rooms?: Prisma.RoomUpdateManyWithoutUsersNestedInput
 }
 
 export type UserUncheckedUpdateWithoutActivitiesInput = {
@@ -1444,6 +1579,7 @@ export type UserUncheckedUpdateWithoutActivitiesInput = {
   housesCreated?: Prisma.HouseUncheckedUpdateManyWithoutCreatedByNestedInput
   shares?: Prisma.ShareUncheckedUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutAssignedNestedInput
+  rooms?: Prisma.RoomUncheckedUpdateManyWithoutUsersNestedInput
 }
 
 export type UserCreateManyHouseInput = {
@@ -1472,6 +1608,7 @@ export type UserUpdateWithoutHouseInput = {
   shares?: Prisma.ShareUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutAssignedNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutUserNestedInput
+  rooms?: Prisma.RoomUpdateManyWithoutUsersNestedInput
 }
 
 export type UserUncheckedUpdateWithoutHouseInput = {
@@ -1490,6 +1627,7 @@ export type UserUncheckedUpdateWithoutHouseInput = {
   shares?: Prisma.ShareUncheckedUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutAssignedNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutUserNestedInput
+  rooms?: Prisma.RoomUncheckedUpdateManyWithoutUsersNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutHouseInput = {
@@ -1500,6 +1638,55 @@ export type UserUncheckedUpdateManyWithoutHouseInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type UserUpdateWithoutRoomsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  alertsCreated?: Prisma.AlertUpdateManyWithoutCreatedByNestedInput
+  bills?: Prisma.BillUpdateManyWithoutResponsibleNestedInput
+  housesCreated?: Prisma.HouseUpdateManyWithoutCreatedByNestedInput
+  shares?: Prisma.ShareUpdateManyWithoutUserNestedInput
+  house?: Prisma.HouseUpdateOneWithoutUsersNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutAssignedNestedInput
+  activities?: Prisma.ActivityUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutRoomsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  houseId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  alertsCreated?: Prisma.AlertUncheckedUpdateManyWithoutCreatedByNestedInput
+  bills?: Prisma.BillUncheckedUpdateManyWithoutResponsibleNestedInput
+  housesCreated?: Prisma.HouseUncheckedUpdateManyWithoutCreatedByNestedInput
+  shares?: Prisma.ShareUncheckedUpdateManyWithoutUserNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutAssignedNestedInput
+  activities?: Prisma.ActivityUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateManyWithoutRoomsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  houseId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type UserUpdateWithoutTasksInput = {
@@ -1518,6 +1705,7 @@ export type UserUpdateWithoutTasksInput = {
   shares?: Prisma.ShareUpdateManyWithoutUserNestedInput
   house?: Prisma.HouseUpdateOneWithoutUsersNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutUserNestedInput
+  rooms?: Prisma.RoomUpdateManyWithoutUsersNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTasksInput = {
@@ -1536,6 +1724,7 @@ export type UserUncheckedUpdateWithoutTasksInput = {
   housesCreated?: Prisma.HouseUncheckedUpdateManyWithoutCreatedByNestedInput
   shares?: Prisma.ShareUncheckedUpdateManyWithoutUserNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutUserNestedInput
+  rooms?: Prisma.RoomUncheckedUpdateManyWithoutUsersNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutTasksInput = {
@@ -1563,6 +1752,7 @@ export type UserCountOutputType = {
   shares: number
   tasks: number
   activities: number
+  rooms: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1574,6 +1764,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   shares?: boolean | UserCountOutputTypeCountSharesArgs
   tasks?: boolean | UserCountOutputTypeCountTasksArgs
   activities?: boolean | UserCountOutputTypeCountActivitiesArgs
+  rooms?: boolean | UserCountOutputTypeCountRoomsArgs
 }
 
 /**
@@ -1642,6 +1833,13 @@ export type UserCountOutputTypeCountActivitiesArgs<ExtArgs extends runtime.Types
   where?: Prisma.ActivityWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountRoomsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RoomWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1661,6 +1859,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   house?: boolean | Prisma.User$houseArgs<ExtArgs>
   tasks?: boolean | Prisma.User$tasksArgs<ExtArgs>
   activities?: boolean | Prisma.User$activitiesArgs<ExtArgs>
+  rooms?: boolean | Prisma.User$roomsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1710,6 +1909,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   house?: boolean | Prisma.User$houseArgs<ExtArgs>
   tasks?: boolean | Prisma.User$tasksArgs<ExtArgs>
   activities?: boolean | Prisma.User$activitiesArgs<ExtArgs>
+  rooms?: boolean | Prisma.User$roomsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1731,6 +1931,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     house: Prisma.$HousePayload<ExtArgs> | null
     tasks: Prisma.$TaskPayload<ExtArgs>[]
     activities: Prisma.$ActivityPayload<ExtArgs>[]
+    rooms: Prisma.$RoomPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2144,6 +2345,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   house<T extends Prisma.User$houseArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$houseArgs<ExtArgs>>): Prisma.Prisma__HouseClient<runtime.Types.Result.GetResult<Prisma.$HousePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   tasks<T extends Prisma.User$tasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$tasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   activities<T extends Prisma.User$activitiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$activitiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ActivityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  rooms<T extends Prisma.User$roomsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$roomsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RoomPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2785,6 +2987,30 @@ export type User$activitiesArgs<ExtArgs extends runtime.Types.Extensions.Interna
   take?: number
   skip?: number
   distinct?: Prisma.ActivityScalarFieldEnum | Prisma.ActivityScalarFieldEnum[]
+}
+
+/**
+ * User.rooms
+ */
+export type User$roomsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Room
+   */
+  select?: Prisma.RoomSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Room
+   */
+  omit?: Prisma.RoomOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RoomInclude<ExtArgs> | null
+  where?: Prisma.RoomWhereInput
+  orderBy?: Prisma.RoomOrderByWithRelationInput | Prisma.RoomOrderByWithRelationInput[]
+  cursor?: Prisma.RoomWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RoomScalarFieldEnum | Prisma.RoomScalarFieldEnum[]
 }
 
 /**

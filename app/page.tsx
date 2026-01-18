@@ -13,5 +13,13 @@ export default async function Home() {
     redirect("/house");
   }
 
-  return <h1>This is gonna be a landing/inicial page</h1>;
+  return (
+    <section>
+      <div className="h-8 px-2.5 py-[5px] bg-zinc-900 rounded-md inline-flex justify-center items-center gap-1">
+        <div className="text-center justify-start text-white text-base font-normal font-['Patrick_Hand'] tracking-tight">
+          Button
+        </div>
+      </div>
+    </section>
+  );
 }

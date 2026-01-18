@@ -214,6 +214,7 @@ export type RoomWhereInput = {
   roomType?: Prisma.EnumRoomTypeFilter<"Room"> | $Enums.RoomType
   house?: Prisma.XOR<Prisma.HouseScalarRelationFilter, Prisma.HouseWhereInput>
   tasks?: Prisma.TaskListRelationFilter
+  users?: Prisma.UserListRelationFilter
 }
 
 export type RoomOrderByWithRelationInput = {
@@ -223,6 +224,7 @@ export type RoomOrderByWithRelationInput = {
   roomType?: Prisma.SortOrder
   house?: Prisma.HouseOrderByWithRelationInput
   tasks?: Prisma.TaskOrderByRelationAggregateInput
+  users?: Prisma.UserOrderByRelationAggregateInput
 }
 
 export type RoomWhereUniqueInput = Prisma.AtLeast<{
@@ -235,6 +237,7 @@ export type RoomWhereUniqueInput = Prisma.AtLeast<{
   roomType?: Prisma.EnumRoomTypeFilter<"Room"> | $Enums.RoomType
   house?: Prisma.XOR<Prisma.HouseScalarRelationFilter, Prisma.HouseWhereInput>
   tasks?: Prisma.TaskListRelationFilter
+  users?: Prisma.UserListRelationFilter
 }, "id">
 
 export type RoomOrderByWithAggregationInput = {
@@ -264,6 +267,7 @@ export type RoomCreateInput = {
   roomType: $Enums.RoomType
   house: Prisma.HouseCreateNestedOneWithoutRoomsInput
   tasks?: Prisma.TaskCreateNestedManyWithoutRoomInput
+  users?: Prisma.UserCreateNestedManyWithoutRoomsInput
 }
 
 export type RoomUncheckedCreateInput = {
@@ -272,6 +276,7 @@ export type RoomUncheckedCreateInput = {
   houseId: number
   roomType: $Enums.RoomType
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutRoomInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutRoomsInput
 }
 
 export type RoomUpdateInput = {
@@ -279,6 +284,7 @@ export type RoomUpdateInput = {
   roomType?: Prisma.EnumRoomTypeFieldUpdateOperationsInput | $Enums.RoomType
   house?: Prisma.HouseUpdateOneRequiredWithoutRoomsNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutRoomNestedInput
+  users?: Prisma.UserUpdateManyWithoutRoomsNestedInput
 }
 
 export type RoomUncheckedUpdateInput = {
@@ -287,6 +293,7 @@ export type RoomUncheckedUpdateInput = {
   houseId?: Prisma.IntFieldUpdateOperationsInput | number
   roomType?: Prisma.EnumRoomTypeFieldUpdateOperationsInput | $Enums.RoomType
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutRoomNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutRoomsNestedInput
 }
 
 export type RoomCreateManyInput = {
@@ -354,6 +361,44 @@ export type RoomScalarRelationFilter = {
   isNot?: Prisma.RoomWhereInput
 }
 
+export type RoomCreateNestedManyWithoutUsersInput = {
+  create?: Prisma.XOR<Prisma.RoomCreateWithoutUsersInput, Prisma.RoomUncheckedCreateWithoutUsersInput> | Prisma.RoomCreateWithoutUsersInput[] | Prisma.RoomUncheckedCreateWithoutUsersInput[]
+  connectOrCreate?: Prisma.RoomCreateOrConnectWithoutUsersInput | Prisma.RoomCreateOrConnectWithoutUsersInput[]
+  connect?: Prisma.RoomWhereUniqueInput | Prisma.RoomWhereUniqueInput[]
+}
+
+export type RoomUncheckedCreateNestedManyWithoutUsersInput = {
+  create?: Prisma.XOR<Prisma.RoomCreateWithoutUsersInput, Prisma.RoomUncheckedCreateWithoutUsersInput> | Prisma.RoomCreateWithoutUsersInput[] | Prisma.RoomUncheckedCreateWithoutUsersInput[]
+  connectOrCreate?: Prisma.RoomCreateOrConnectWithoutUsersInput | Prisma.RoomCreateOrConnectWithoutUsersInput[]
+  connect?: Prisma.RoomWhereUniqueInput | Prisma.RoomWhereUniqueInput[]
+}
+
+export type RoomUpdateManyWithoutUsersNestedInput = {
+  create?: Prisma.XOR<Prisma.RoomCreateWithoutUsersInput, Prisma.RoomUncheckedCreateWithoutUsersInput> | Prisma.RoomCreateWithoutUsersInput[] | Prisma.RoomUncheckedCreateWithoutUsersInput[]
+  connectOrCreate?: Prisma.RoomCreateOrConnectWithoutUsersInput | Prisma.RoomCreateOrConnectWithoutUsersInput[]
+  upsert?: Prisma.RoomUpsertWithWhereUniqueWithoutUsersInput | Prisma.RoomUpsertWithWhereUniqueWithoutUsersInput[]
+  set?: Prisma.RoomWhereUniqueInput | Prisma.RoomWhereUniqueInput[]
+  disconnect?: Prisma.RoomWhereUniqueInput | Prisma.RoomWhereUniqueInput[]
+  delete?: Prisma.RoomWhereUniqueInput | Prisma.RoomWhereUniqueInput[]
+  connect?: Prisma.RoomWhereUniqueInput | Prisma.RoomWhereUniqueInput[]
+  update?: Prisma.RoomUpdateWithWhereUniqueWithoutUsersInput | Prisma.RoomUpdateWithWhereUniqueWithoutUsersInput[]
+  updateMany?: Prisma.RoomUpdateManyWithWhereWithoutUsersInput | Prisma.RoomUpdateManyWithWhereWithoutUsersInput[]
+  deleteMany?: Prisma.RoomScalarWhereInput | Prisma.RoomScalarWhereInput[]
+}
+
+export type RoomUncheckedUpdateManyWithoutUsersNestedInput = {
+  create?: Prisma.XOR<Prisma.RoomCreateWithoutUsersInput, Prisma.RoomUncheckedCreateWithoutUsersInput> | Prisma.RoomCreateWithoutUsersInput[] | Prisma.RoomUncheckedCreateWithoutUsersInput[]
+  connectOrCreate?: Prisma.RoomCreateOrConnectWithoutUsersInput | Prisma.RoomCreateOrConnectWithoutUsersInput[]
+  upsert?: Prisma.RoomUpsertWithWhereUniqueWithoutUsersInput | Prisma.RoomUpsertWithWhereUniqueWithoutUsersInput[]
+  set?: Prisma.RoomWhereUniqueInput | Prisma.RoomWhereUniqueInput[]
+  disconnect?: Prisma.RoomWhereUniqueInput | Prisma.RoomWhereUniqueInput[]
+  delete?: Prisma.RoomWhereUniqueInput | Prisma.RoomWhereUniqueInput[]
+  connect?: Prisma.RoomWhereUniqueInput | Prisma.RoomWhereUniqueInput[]
+  update?: Prisma.RoomUpdateWithWhereUniqueWithoutUsersInput | Prisma.RoomUpdateWithWhereUniqueWithoutUsersInput[]
+  updateMany?: Prisma.RoomUpdateManyWithWhereWithoutUsersInput | Prisma.RoomUpdateManyWithWhereWithoutUsersInput[]
+  deleteMany?: Prisma.RoomScalarWhereInput | Prisma.RoomScalarWhereInput[]
+}
+
 export type RoomCreateNestedManyWithoutHouseInput = {
   create?: Prisma.XOR<Prisma.RoomCreateWithoutHouseInput, Prisma.RoomUncheckedCreateWithoutHouseInput> | Prisma.RoomCreateWithoutHouseInput[] | Prisma.RoomUncheckedCreateWithoutHouseInput[]
   connectOrCreate?: Prisma.RoomCreateOrConnectWithoutHouseInput | Prisma.RoomCreateOrConnectWithoutHouseInput[]
@@ -414,10 +459,57 @@ export type RoomUpdateOneRequiredWithoutTasksNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.RoomUpdateToOneWithWhereWithoutTasksInput, Prisma.RoomUpdateWithoutTasksInput>, Prisma.RoomUncheckedUpdateWithoutTasksInput>
 }
 
+export type RoomCreateWithoutUsersInput = {
+  name: string
+  roomType: $Enums.RoomType
+  house: Prisma.HouseCreateNestedOneWithoutRoomsInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutRoomInput
+}
+
+export type RoomUncheckedCreateWithoutUsersInput = {
+  id?: number
+  name: string
+  houseId: number
+  roomType: $Enums.RoomType
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutRoomInput
+}
+
+export type RoomCreateOrConnectWithoutUsersInput = {
+  where: Prisma.RoomWhereUniqueInput
+  create: Prisma.XOR<Prisma.RoomCreateWithoutUsersInput, Prisma.RoomUncheckedCreateWithoutUsersInput>
+}
+
+export type RoomUpsertWithWhereUniqueWithoutUsersInput = {
+  where: Prisma.RoomWhereUniqueInput
+  update: Prisma.XOR<Prisma.RoomUpdateWithoutUsersInput, Prisma.RoomUncheckedUpdateWithoutUsersInput>
+  create: Prisma.XOR<Prisma.RoomCreateWithoutUsersInput, Prisma.RoomUncheckedCreateWithoutUsersInput>
+}
+
+export type RoomUpdateWithWhereUniqueWithoutUsersInput = {
+  where: Prisma.RoomWhereUniqueInput
+  data: Prisma.XOR<Prisma.RoomUpdateWithoutUsersInput, Prisma.RoomUncheckedUpdateWithoutUsersInput>
+}
+
+export type RoomUpdateManyWithWhereWithoutUsersInput = {
+  where: Prisma.RoomScalarWhereInput
+  data: Prisma.XOR<Prisma.RoomUpdateManyMutationInput, Prisma.RoomUncheckedUpdateManyWithoutUsersInput>
+}
+
+export type RoomScalarWhereInput = {
+  AND?: Prisma.RoomScalarWhereInput | Prisma.RoomScalarWhereInput[]
+  OR?: Prisma.RoomScalarWhereInput[]
+  NOT?: Prisma.RoomScalarWhereInput | Prisma.RoomScalarWhereInput[]
+  id?: Prisma.IntFilter<"Room"> | number
+  name?: Prisma.StringFilter<"Room"> | string
+  houseId?: Prisma.IntFilter<"Room"> | number
+  roomType?: Prisma.EnumRoomTypeFilter<"Room"> | $Enums.RoomType
+}
+
 export type RoomCreateWithoutHouseInput = {
   name: string
   roomType: $Enums.RoomType
   tasks?: Prisma.TaskCreateNestedManyWithoutRoomInput
+  users?: Prisma.UserCreateNestedManyWithoutRoomsInput
 }
 
 export type RoomUncheckedCreateWithoutHouseInput = {
@@ -425,6 +517,7 @@ export type RoomUncheckedCreateWithoutHouseInput = {
   name: string
   roomType: $Enums.RoomType
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutRoomInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutRoomsInput
 }
 
 export type RoomCreateOrConnectWithoutHouseInput = {
@@ -453,20 +546,11 @@ export type RoomUpdateManyWithWhereWithoutHouseInput = {
   data: Prisma.XOR<Prisma.RoomUpdateManyMutationInput, Prisma.RoomUncheckedUpdateManyWithoutHouseInput>
 }
 
-export type RoomScalarWhereInput = {
-  AND?: Prisma.RoomScalarWhereInput | Prisma.RoomScalarWhereInput[]
-  OR?: Prisma.RoomScalarWhereInput[]
-  NOT?: Prisma.RoomScalarWhereInput | Prisma.RoomScalarWhereInput[]
-  id?: Prisma.IntFilter<"Room"> | number
-  name?: Prisma.StringFilter<"Room"> | string
-  houseId?: Prisma.IntFilter<"Room"> | number
-  roomType?: Prisma.EnumRoomTypeFilter<"Room"> | $Enums.RoomType
-}
-
 export type RoomCreateWithoutTasksInput = {
   name: string
   roomType: $Enums.RoomType
   house: Prisma.HouseCreateNestedOneWithoutRoomsInput
+  users?: Prisma.UserCreateNestedManyWithoutRoomsInput
 }
 
 export type RoomUncheckedCreateWithoutTasksInput = {
@@ -474,6 +558,7 @@ export type RoomUncheckedCreateWithoutTasksInput = {
   name: string
   houseId: number
   roomType: $Enums.RoomType
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutRoomsInput
 }
 
 export type RoomCreateOrConnectWithoutTasksInput = {
@@ -496,9 +581,33 @@ export type RoomUpdateWithoutTasksInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   roomType?: Prisma.EnumRoomTypeFieldUpdateOperationsInput | $Enums.RoomType
   house?: Prisma.HouseUpdateOneRequiredWithoutRoomsNestedInput
+  users?: Prisma.UserUpdateManyWithoutRoomsNestedInput
 }
 
 export type RoomUncheckedUpdateWithoutTasksInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  houseId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomType?: Prisma.EnumRoomTypeFieldUpdateOperationsInput | $Enums.RoomType
+  users?: Prisma.UserUncheckedUpdateManyWithoutRoomsNestedInput
+}
+
+export type RoomUpdateWithoutUsersInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  roomType?: Prisma.EnumRoomTypeFieldUpdateOperationsInput | $Enums.RoomType
+  house?: Prisma.HouseUpdateOneRequiredWithoutRoomsNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutRoomNestedInput
+}
+
+export type RoomUncheckedUpdateWithoutUsersInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  houseId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomType?: Prisma.EnumRoomTypeFieldUpdateOperationsInput | $Enums.RoomType
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutRoomNestedInput
+}
+
+export type RoomUncheckedUpdateManyWithoutUsersInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   houseId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -515,6 +624,7 @@ export type RoomUpdateWithoutHouseInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   roomType?: Prisma.EnumRoomTypeFieldUpdateOperationsInput | $Enums.RoomType
   tasks?: Prisma.TaskUpdateManyWithoutRoomNestedInput
+  users?: Prisma.UserUpdateManyWithoutRoomsNestedInput
 }
 
 export type RoomUncheckedUpdateWithoutHouseInput = {
@@ -522,6 +632,7 @@ export type RoomUncheckedUpdateWithoutHouseInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   roomType?: Prisma.EnumRoomTypeFieldUpdateOperationsInput | $Enums.RoomType
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutRoomNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutRoomsNestedInput
 }
 
 export type RoomUncheckedUpdateManyWithoutHouseInput = {
@@ -537,10 +648,12 @@ export type RoomUncheckedUpdateManyWithoutHouseInput = {
 
 export type RoomCountOutputType = {
   tasks: number
+  users: number
 }
 
 export type RoomCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tasks?: boolean | RoomCountOutputTypeCountTasksArgs
+  users?: boolean | RoomCountOutputTypeCountUsersArgs
 }
 
 /**
@@ -560,6 +673,13 @@ export type RoomCountOutputTypeCountTasksArgs<ExtArgs extends runtime.Types.Exte
   where?: Prisma.TaskWhereInput
 }
 
+/**
+ * RoomCountOutputType without action
+ */
+export type RoomCountOutputTypeCountUsersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserWhereInput
+}
+
 
 export type RoomSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -568,6 +688,7 @@ export type RoomSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   roomType?: boolean
   house?: boolean | Prisma.HouseDefaultArgs<ExtArgs>
   tasks?: boolean | Prisma.Room$tasksArgs<ExtArgs>
+  users?: boolean | Prisma.Room$usersArgs<ExtArgs>
   _count?: boolean | Prisma.RoomCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["room"]>
 
@@ -598,6 +719,7 @@ export type RoomOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = run
 export type RoomInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   house?: boolean | Prisma.HouseDefaultArgs<ExtArgs>
   tasks?: boolean | Prisma.Room$tasksArgs<ExtArgs>
+  users?: boolean | Prisma.Room$usersArgs<ExtArgs>
   _count?: boolean | Prisma.RoomCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type RoomIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -612,6 +734,7 @@ export type $RoomPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   objects: {
     house: Prisma.$HousePayload<ExtArgs>
     tasks: Prisma.$TaskPayload<ExtArgs>[]
+    users: Prisma.$UserPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1014,6 +1137,7 @@ export interface Prisma__RoomClient<T, Null = never, ExtArgs extends runtime.Typ
   readonly [Symbol.toStringTag]: "PrismaPromise"
   house<T extends Prisma.HouseDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.HouseDefaultArgs<ExtArgs>>): Prisma.Prisma__HouseClient<runtime.Types.Result.GetResult<Prisma.$HousePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   tasks<T extends Prisma.Room$tasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Room$tasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  users<T extends Prisma.Room$usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Room$usersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1464,6 +1588,30 @@ export type Room$tasksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
   take?: number
   skip?: number
   distinct?: Prisma.TaskScalarFieldEnum | Prisma.TaskScalarFieldEnum[]
+}
+
+/**
+ * Room.users
+ */
+export type Room$usersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
+  orderBy?: Prisma.UserOrderByWithRelationInput | Prisma.UserOrderByWithRelationInput[]
+  cursor?: Prisma.UserWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserScalarFieldEnum | Prisma.UserScalarFieldEnum[]
 }
 
 /**
