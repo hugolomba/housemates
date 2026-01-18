@@ -18,7 +18,6 @@ import {
   NavbarMenuItem,
   NavbarMenu,
   Divider,
-  Chip,
 } from "@heroui/react";
 
 import { signOut } from "@/lib/actions/auth-actions";
@@ -31,7 +30,7 @@ export default function App({ session }: { session: Session | null }) {
 
   return (
     <Navbar
-      // isBordered
+      isBordered
       isBlurred
       shouldHideOnScroll
       maxWidth="xl"
@@ -96,7 +95,7 @@ export default function App({ session }: { session: Session | null }) {
         )}
       </NavbarContent>
 
-      <NavbarMenu className="flex flex-col items-center">
+      <NavbarMenu className="flex flex-col items-center bg-white dark:bg-gray-900 pt-4">
         <NavbarMenuItem>
           <Avatar
             isBordered
@@ -125,7 +124,7 @@ export default function App({ session }: { session: Session | null }) {
           </Link>
         </NavbarMenuItem>
         <NavbarMenuItem key="rooms">
-          <Link isDisabled href="/house/rooms" color="primary" size="lg">
+          <Link href="/house/rooms" color="primary" size="lg">
             Rooms
           </Link>
         </NavbarMenuItem>

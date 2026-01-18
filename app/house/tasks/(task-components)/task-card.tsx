@@ -4,7 +4,6 @@ import { Checkbox, Chip, Button, Link, Spinner } from "@heroui/react";
 import { Prisma } from "@/prisma/generated/browser";
 import { toggleTaskStatus } from "@/lib/actions/tasks-actions";
 import { useState } from "react";
-import { set } from "better-auth";
 
 type TaskCardProps = {
   task: Prisma.TaskGetPayload<{
@@ -27,13 +26,10 @@ type TaskCardProps = {
 export default function TaskCard({ task }: { task: TaskCardProps["task"] }) {
   const [isLoading, setIsLoading] = useState(false);
 
-  console.log("TASK IN TASK CARD:", task);
-
   const toggleTaskStatusHandler = async (taskId: number) => {
     try {
       setIsLoading(true);
-      const result = await toggleTaskStatus(taskId);
-      console.log("Toggle task status result:", result);
+      await toggleTaskStatus(taskId);
     } catch (error) {
     } finally {
       setTimeout(() => {
@@ -55,7 +51,6 @@ export default function TaskCard({ task }: { task: TaskCardProps["task"] }) {
           color={task.status ? "success" : "default"}
           onChange={() => toggleTaskStatusHandler(task.id)}
           classNames={{
-            //   base: "w-full justify-between max-w-none",
             label: "w-full max-w-none flex justify-between",
           }}
         >

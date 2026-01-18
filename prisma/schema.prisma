@@ -100,13 +100,15 @@ model House {
 }
 
 model Room {
-  id      Int    @id @default(autoincrement())
-  name    String
-  houseId Int
-  house   House  @relation(fields: [houseId], references: [id])
-  roomType RoomType
-  tasks   Task[]
-  users User[] @relation("RoomUsers")
+  id        Int      @id @default(autoincrement())
+  name      String
+  houseId   Int
+  house     House    @relation(fields: [houseId], references: [id])
+  roomType  RoomType
+  isCommon  Boolean  @default(false)
+  tasks     Task[]
+  users     User[]   @relation("RoomUsers")
+  
 }
 
 model Task {

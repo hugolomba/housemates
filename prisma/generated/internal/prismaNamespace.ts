@@ -1492,7 +1492,8 @@ export const RoomScalarFieldEnum = {
   id: 'id',
   name: 'name',
   houseId: 'houseId',
-  roomType: 'roomType'
+  roomType: 'roomType',
+  isCommon: 'isCommon'
 } as const
 
 export type RoomScalarFieldEnum = (typeof RoomScalarFieldEnum)[keyof typeof RoomScalarFieldEnum]

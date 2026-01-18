@@ -116,7 +116,7 @@ export default function HouseMain({ house }: HouseProps) {
         <CardHeader className="flex flex-row items-center justify-center p-0 mt-4">
           <HouseIcon size={52} className="opacity-90" />{" "}
         </CardHeader>
-        <CardBody className="flex flex-col items-center justify-center p-4 my-4">
+        <CardBody className="flex flex-col items-center justify-center p-4">
           {/* <HouseIcon size={48} /> */}
           <h1 className="text-3xl font-bold mt-2">{house.name}</h1>
           <p className="text-center text-md text-muted-foreground">
@@ -211,7 +211,12 @@ export default function HouseMain({ house }: HouseProps) {
         <h2 className="mb-2 text-lg font-semibold text-foreground/70">
           House Overview
         </h2>
-        <Accordion fullWidth disableIndicatorAnimation>
+        <Accordion
+          fullWidth
+          disableIndicatorAnimation
+          variant="splitted"
+          className="p-0"
+        >
           <AccordionItem
             key="1"
             aria-label="Alerts"

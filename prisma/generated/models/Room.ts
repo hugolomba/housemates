@@ -41,6 +41,7 @@ export type RoomMinAggregateOutputType = {
   name: string | null
   houseId: number | null
   roomType: $Enums.RoomType | null
+  isCommon: boolean | null
 }
 
 export type RoomMaxAggregateOutputType = {
@@ -48,6 +49,7 @@ export type RoomMaxAggregateOutputType = {
   name: string | null
   houseId: number | null
   roomType: $Enums.RoomType | null
+  isCommon: boolean | null
 }
 
 export type RoomCountAggregateOutputType = {
@@ -55,6 +57,7 @@ export type RoomCountAggregateOutputType = {
   name: number
   houseId: number
   roomType: number
+  isCommon: number
   _all: number
 }
 
@@ -74,6 +77,7 @@ export type RoomMinAggregateInputType = {
   name?: true
   houseId?: true
   roomType?: true
+  isCommon?: true
 }
 
 export type RoomMaxAggregateInputType = {
@@ -81,6 +85,7 @@ export type RoomMaxAggregateInputType = {
   name?: true
   houseId?: true
   roomType?: true
+  isCommon?: true
 }
 
 export type RoomCountAggregateInputType = {
@@ -88,6 +93,7 @@ export type RoomCountAggregateInputType = {
   name?: true
   houseId?: true
   roomType?: true
+  isCommon?: true
   _all?: true
 }
 
@@ -182,6 +188,7 @@ export type RoomGroupByOutputType = {
   name: string
   houseId: number
   roomType: $Enums.RoomType
+  isCommon: boolean
   _count: RoomCountAggregateOutputType | null
   _avg: RoomAvgAggregateOutputType | null
   _sum: RoomSumAggregateOutputType | null
@@ -212,6 +219,7 @@ export type RoomWhereInput = {
   name?: Prisma.StringFilter<"Room"> | string
   houseId?: Prisma.IntFilter<"Room"> | number
   roomType?: Prisma.EnumRoomTypeFilter<"Room"> | $Enums.RoomType
+  isCommon?: Prisma.BoolFilter<"Room"> | boolean
   house?: Prisma.XOR<Prisma.HouseScalarRelationFilter, Prisma.HouseWhereInput>
   tasks?: Prisma.TaskListRelationFilter
   users?: Prisma.UserListRelationFilter
@@ -222,6 +230,7 @@ export type RoomOrderByWithRelationInput = {
   name?: Prisma.SortOrder
   houseId?: Prisma.SortOrder
   roomType?: Prisma.SortOrder
+  isCommon?: Prisma.SortOrder
   house?: Prisma.HouseOrderByWithRelationInput
   tasks?: Prisma.TaskOrderByRelationAggregateInput
   users?: Prisma.UserOrderByRelationAggregateInput
@@ -235,6 +244,7 @@ export type RoomWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"Room"> | string
   houseId?: Prisma.IntFilter<"Room"> | number
   roomType?: Prisma.EnumRoomTypeFilter<"Room"> | $Enums.RoomType
+  isCommon?: Prisma.BoolFilter<"Room"> | boolean
   house?: Prisma.XOR<Prisma.HouseScalarRelationFilter, Prisma.HouseWhereInput>
   tasks?: Prisma.TaskListRelationFilter
   users?: Prisma.UserListRelationFilter
@@ -245,6 +255,7 @@ export type RoomOrderByWithAggregationInput = {
   name?: Prisma.SortOrder
   houseId?: Prisma.SortOrder
   roomType?: Prisma.SortOrder
+  isCommon?: Prisma.SortOrder
   _count?: Prisma.RoomCountOrderByAggregateInput
   _avg?: Prisma.RoomAvgOrderByAggregateInput
   _max?: Prisma.RoomMaxOrderByAggregateInput
@@ -260,11 +271,13 @@ export type RoomScalarWhereWithAggregatesInput = {
   name?: Prisma.StringWithAggregatesFilter<"Room"> | string
   houseId?: Prisma.IntWithAggregatesFilter<"Room"> | number
   roomType?: Prisma.EnumRoomTypeWithAggregatesFilter<"Room"> | $Enums.RoomType
+  isCommon?: Prisma.BoolWithAggregatesFilter<"Room"> | boolean
 }
 
 export type RoomCreateInput = {
   name: string
   roomType: $Enums.RoomType
+  isCommon?: boolean
   house: Prisma.HouseCreateNestedOneWithoutRoomsInput
   tasks?: Prisma.TaskCreateNestedManyWithoutRoomInput
   users?: Prisma.UserCreateNestedManyWithoutRoomsInput
@@ -275,6 +288,7 @@ export type RoomUncheckedCreateInput = {
   name: string
   houseId: number
   roomType: $Enums.RoomType
+  isCommon?: boolean
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutRoomInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutRoomsInput
 }
@@ -282,6 +296,7 @@ export type RoomUncheckedCreateInput = {
 export type RoomUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   roomType?: Prisma.EnumRoomTypeFieldUpdateOperationsInput | $Enums.RoomType
+  isCommon?: Prisma.BoolFieldUpdateOperationsInput | boolean
   house?: Prisma.HouseUpdateOneRequiredWithoutRoomsNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutRoomNestedInput
   users?: Prisma.UserUpdateManyWithoutRoomsNestedInput
@@ -292,6 +307,7 @@ export type RoomUncheckedUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   houseId?: Prisma.IntFieldUpdateOperationsInput | number
   roomType?: Prisma.EnumRoomTypeFieldUpdateOperationsInput | $Enums.RoomType
+  isCommon?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutRoomNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutRoomsNestedInput
 }
@@ -301,11 +317,13 @@ export type RoomCreateManyInput = {
   name: string
   houseId: number
   roomType: $Enums.RoomType
+  isCommon?: boolean
 }
 
 export type RoomUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   roomType?: Prisma.EnumRoomTypeFieldUpdateOperationsInput | $Enums.RoomType
+  isCommon?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type RoomUncheckedUpdateManyInput = {
@@ -313,6 +331,7 @@ export type RoomUncheckedUpdateManyInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   houseId?: Prisma.IntFieldUpdateOperationsInput | number
   roomType?: Prisma.EnumRoomTypeFieldUpdateOperationsInput | $Enums.RoomType
+  isCommon?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type RoomListRelationFilter = {
@@ -330,6 +349,7 @@ export type RoomCountOrderByAggregateInput = {
   name?: Prisma.SortOrder
   houseId?: Prisma.SortOrder
   roomType?: Prisma.SortOrder
+  isCommon?: Prisma.SortOrder
 }
 
 export type RoomAvgOrderByAggregateInput = {
@@ -342,6 +362,7 @@ export type RoomMaxOrderByAggregateInput = {
   name?: Prisma.SortOrder
   houseId?: Prisma.SortOrder
   roomType?: Prisma.SortOrder
+  isCommon?: Prisma.SortOrder
 }
 
 export type RoomMinOrderByAggregateInput = {
@@ -349,6 +370,7 @@ export type RoomMinOrderByAggregateInput = {
   name?: Prisma.SortOrder
   houseId?: Prisma.SortOrder
   roomType?: Prisma.SortOrder
+  isCommon?: Prisma.SortOrder
 }
 
 export type RoomSumOrderByAggregateInput = {
@@ -462,6 +484,7 @@ export type RoomUpdateOneRequiredWithoutTasksNestedInput = {
 export type RoomCreateWithoutUsersInput = {
   name: string
   roomType: $Enums.RoomType
+  isCommon?: boolean
   house: Prisma.HouseCreateNestedOneWithoutRoomsInput
   tasks?: Prisma.TaskCreateNestedManyWithoutRoomInput
 }
@@ -471,6 +494,7 @@ export type RoomUncheckedCreateWithoutUsersInput = {
   name: string
   houseId: number
   roomType: $Enums.RoomType
+  isCommon?: boolean
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutRoomInput
 }
 
@@ -503,11 +527,13 @@ export type RoomScalarWhereInput = {
   name?: Prisma.StringFilter<"Room"> | string
   houseId?: Prisma.IntFilter<"Room"> | number
   roomType?: Prisma.EnumRoomTypeFilter<"Room"> | $Enums.RoomType
+  isCommon?: Prisma.BoolFilter<"Room"> | boolean
 }
 
 export type RoomCreateWithoutHouseInput = {
   name: string
   roomType: $Enums.RoomType
+  isCommon?: boolean
   tasks?: Prisma.TaskCreateNestedManyWithoutRoomInput
   users?: Prisma.UserCreateNestedManyWithoutRoomsInput
 }
@@ -516,6 +542,7 @@ export type RoomUncheckedCreateWithoutHouseInput = {
   id?: number
   name: string
   roomType: $Enums.RoomType
+  isCommon?: boolean
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutRoomInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutRoomsInput
 }
@@ -549,6 +576,7 @@ export type RoomUpdateManyWithWhereWithoutHouseInput = {
 export type RoomCreateWithoutTasksInput = {
   name: string
   roomType: $Enums.RoomType
+  isCommon?: boolean
   house: Prisma.HouseCreateNestedOneWithoutRoomsInput
   users?: Prisma.UserCreateNestedManyWithoutRoomsInput
 }
@@ -558,6 +586,7 @@ export type RoomUncheckedCreateWithoutTasksInput = {
   name: string
   houseId: number
   roomType: $Enums.RoomType
+  isCommon?: boolean
   users?: Prisma.UserUncheckedCreateNestedManyWithoutRoomsInput
 }
 
@@ -580,6 +609,7 @@ export type RoomUpdateToOneWithWhereWithoutTasksInput = {
 export type RoomUpdateWithoutTasksInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   roomType?: Prisma.EnumRoomTypeFieldUpdateOperationsInput | $Enums.RoomType
+  isCommon?: Prisma.BoolFieldUpdateOperationsInput | boolean
   house?: Prisma.HouseUpdateOneRequiredWithoutRoomsNestedInput
   users?: Prisma.UserUpdateManyWithoutRoomsNestedInput
 }
@@ -589,12 +619,14 @@ export type RoomUncheckedUpdateWithoutTasksInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   houseId?: Prisma.IntFieldUpdateOperationsInput | number
   roomType?: Prisma.EnumRoomTypeFieldUpdateOperationsInput | $Enums.RoomType
+  isCommon?: Prisma.BoolFieldUpdateOperationsInput | boolean
   users?: Prisma.UserUncheckedUpdateManyWithoutRoomsNestedInput
 }
 
 export type RoomUpdateWithoutUsersInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   roomType?: Prisma.EnumRoomTypeFieldUpdateOperationsInput | $Enums.RoomType
+  isCommon?: Prisma.BoolFieldUpdateOperationsInput | boolean
   house?: Prisma.HouseUpdateOneRequiredWithoutRoomsNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutRoomNestedInput
 }
@@ -604,6 +636,7 @@ export type RoomUncheckedUpdateWithoutUsersInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   houseId?: Prisma.IntFieldUpdateOperationsInput | number
   roomType?: Prisma.EnumRoomTypeFieldUpdateOperationsInput | $Enums.RoomType
+  isCommon?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutRoomNestedInput
 }
 
@@ -612,17 +645,20 @@ export type RoomUncheckedUpdateManyWithoutUsersInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   houseId?: Prisma.IntFieldUpdateOperationsInput | number
   roomType?: Prisma.EnumRoomTypeFieldUpdateOperationsInput | $Enums.RoomType
+  isCommon?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type RoomCreateManyHouseInput = {
   id?: number
   name: string
   roomType: $Enums.RoomType
+  isCommon?: boolean
 }
 
 export type RoomUpdateWithoutHouseInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   roomType?: Prisma.EnumRoomTypeFieldUpdateOperationsInput | $Enums.RoomType
+  isCommon?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tasks?: Prisma.TaskUpdateManyWithoutRoomNestedInput
   users?: Prisma.UserUpdateManyWithoutRoomsNestedInput
 }
@@ -631,6 +667,7 @@ export type RoomUncheckedUpdateWithoutHouseInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   roomType?: Prisma.EnumRoomTypeFieldUpdateOperationsInput | $Enums.RoomType
+  isCommon?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutRoomNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutRoomsNestedInput
 }
@@ -639,6 +676,7 @@ export type RoomUncheckedUpdateManyWithoutHouseInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   roomType?: Prisma.EnumRoomTypeFieldUpdateOperationsInput | $Enums.RoomType
+  isCommon?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 
@@ -686,6 +724,7 @@ export type RoomSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   name?: boolean
   houseId?: boolean
   roomType?: boolean
+  isCommon?: boolean
   house?: boolean | Prisma.HouseDefaultArgs<ExtArgs>
   tasks?: boolean | Prisma.Room$tasksArgs<ExtArgs>
   users?: boolean | Prisma.Room$usersArgs<ExtArgs>
@@ -697,6 +736,7 @@ export type RoomSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   name?: boolean
   houseId?: boolean
   roomType?: boolean
+  isCommon?: boolean
   house?: boolean | Prisma.HouseDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["room"]>
 
@@ -705,6 +745,7 @@ export type RoomSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   name?: boolean
   houseId?: boolean
   roomType?: boolean
+  isCommon?: boolean
   house?: boolean | Prisma.HouseDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["room"]>
 
@@ -713,9 +754,10 @@ export type RoomSelectScalar = {
   name?: boolean
   houseId?: boolean
   roomType?: boolean
+  isCommon?: boolean
 }
 
-export type RoomOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "houseId" | "roomType", ExtArgs["result"]["room"]>
+export type RoomOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "houseId" | "roomType" | "isCommon", ExtArgs["result"]["room"]>
 export type RoomInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   house?: boolean | Prisma.HouseDefaultArgs<ExtArgs>
   tasks?: boolean | Prisma.Room$tasksArgs<ExtArgs>
@@ -741,6 +783,7 @@ export type $RoomPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     name: string
     houseId: number
     roomType: $Enums.RoomType
+    isCommon: boolean
   }, ExtArgs["result"]["room"]>
   composites: {}
 }
@@ -1171,6 +1214,7 @@ export interface RoomFieldRefs {
   readonly name: Prisma.FieldRef<"Room", 'String'>
   readonly houseId: Prisma.FieldRef<"Room", 'Int'>
   readonly roomType: Prisma.FieldRef<"Room", 'RoomType'>
+  readonly isCommon: Prisma.FieldRef<"Room", 'Boolean'>
 }
     
 
