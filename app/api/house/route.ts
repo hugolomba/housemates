@@ -3,12 +3,25 @@ import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  const userHouse = await prisma.house.findMany({
-    where: {
-      createdById: "user1", // Replace with the actual house ID you want to query
-    },
+  const houseId = 1; // demo house
+  const house = await prisma.house.findMany({
     include: {
-      alerts: true,
+      users: true,
+      tasks: {
+        include: {
+          room: {
+            select: {
+              name: true,
+              roomType: true,
+            },
+          },
+          assigned: {
+            select: {
+              name: true,
+            },
+          },
+        },
+      },
       bills: {
         include: {
           shares: {
@@ -18,29 +31,25 @@ export async function GET() {
           },
           responsible: true,
         },
-      },
-      credentials: true,
-      createdBy: true,
-      tasks: {
-        include: {
-          assigned: {
-            select: {
-              name: true,
-            },
-          },
-          room: {
-            select: {
-              name: true,
-              roomType: true,
-            },
-          },
-        },
+        orderBy: { dueDate: "desc" },
       },
       infos: true,
+      alerts: true,
+      credentials: true,
+      activities: {
+        orderBy: { createdAt: "desc" },
+        take: 5,
+      },
       rooms: {
         include: {
           tasks: {
             include: {
+              room: {
+                select: {
+                  name: true,
+                  roomType: true,
+                },
+              },
               assigned: {
                 select: {
                   name: true,
@@ -48,15 +57,15 @@ export async function GET() {
               },
             },
           },
+          users: true,
         },
       },
-      users: true,
     },
   });
 
-  if (!userHouse) {
+  if (!house) {
     return NextResponse.json({ message: "House not found" }, { status: 404 });
   }
 
-  return NextResponse.json(userHouse);
+  return NextResponse.json(house);
 }

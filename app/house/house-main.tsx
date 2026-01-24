@@ -50,17 +50,20 @@ type HouseProps = {
 };
 
 export default function HouseMain({ house }: HouseProps) {
-  const [credentialsOpen, setCredentialsOpen] = useState(false);
-  const [usersOpen, setUsersOpen] = useState(false);
-  const [inviteIsOpen, setInviteIsOpen] = useState(false);
-  const [copied, setCopied] = useState(false);
-  // quick actions
-  const [createAlertIsOpen, setCreateAlertIsOpen] = useState(false);
-  const [addBillIsOpen, setAddBillIsOpen] = useState(false);
-  const [newTaskIsOpen, setNewTaskIsOpen] = useState(false);
-  const [addCredentialIsOpen, setAddCredentialIsOpen] = useState(false);
+  type ModalType =
+    | null
+    | "users"
+    | "invite"
+    | "credentials"
+    | "createAlert"
+    | "createBill"
+    | "createTask"
+    | "addCredential";
 
-  console.log(" users modal open:", usersOpen);
+  const [openModal, setOpenModal] = useState<ModalType>(null);
+  const [copied, setCopied] = useState(false);
+
+  console.log(" users modal open:", openModal === "users");
 
   const activeAlerts = house.alerts.filter((alert) => !alert.isResolved);
   const activeTasks = house.tasks.filter((task) => !task.status);
@@ -124,7 +127,7 @@ export default function HouseMain({ house }: HouseProps) {
           </p>
           <div className="users-group-div flex flex-col items-center gap-4">
             <AvatarGroup
-              onClick={() => setUsersOpen(true)}
+              onClick={() => setOpenModal("users")}
               max={3}
               total={house.users.length}
               renderCount={(count) => (
@@ -146,9 +149,7 @@ export default function HouseMain({ house }: HouseProps) {
           <Button
             size="md"
             className="rounded-full bg-white dark:bg-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700/70"
-            onPress={() => {
-              setInviteIsOpen(true);
-            }}
+            onPress={() => setOpenModal("invite")}
           >
             Invite
           </Button>
@@ -156,9 +157,7 @@ export default function HouseMain({ house }: HouseProps) {
             startContent={<Lock size={15} />}
             size="md"
             className="rounded-full bg-white dark:bg-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700/70"
-            onPress={() => {
-              setCredentialsOpen(true);
-            }}
+            onPress={() => setOpenModal("credentials")}
           >
             Credentials
           </Button>
@@ -182,7 +181,7 @@ export default function HouseMain({ house }: HouseProps) {
 
         <div className="grid grid-cols-3 gap-2">
           <Button
-            onPress={() => setCreateAlertIsOpen(true)}
+            onPress={() => setOpenModal("createAlert")}
             color="primary"
             className="rounded-full bg-blue-600 dark:bg-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700/70"
           >
@@ -190,14 +189,14 @@ export default function HouseMain({ house }: HouseProps) {
           </Button>
 
           <Button
-            onPress={() => setAddBillIsOpen(true)}
+            onPress={() => setOpenModal("createBill")}
             color="primary"
             className="rounded-full bg-blue-600 dark:bg-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700/70"
           >
             New Bill
           </Button>
           <Button
-            onPress={() => setNewTaskIsOpen(true)}
+            onPress={() => setOpenModal("createTask")}
             color="primary"
             className="rounded-full bg-blue-600 dark:bg-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700/70"
           >
@@ -311,27 +310,33 @@ export default function HouseMain({ house }: HouseProps) {
       </Accordion>
 
       <CreateAlert
-        createAlertIsOpen={createAlertIsOpen}
-        setCreateAlertIsOpen={setCreateAlertIsOpen}
+        createAlertIsOpen={openModal === "createAlert"}
+        setCreateAlertIsOpen={(value) =>
+          setOpenModal(value ? "createAlert" : null)
+        }
       />
 
       <CreateBill
-        createBillIsOpen={addBillIsOpen}
-        setCreateBillIsOpen={setAddBillIsOpen}
+        createBillIsOpen={openModal === "createBill"}
+        setCreateBillIsOpen={(value) =>
+          setOpenModal(value ? "createBill" : null)
+        }
         houseUsers={house.users}
         houseId={house.id}
       />
 
       <CreateTask
-        createTaskIsOpen={newTaskIsOpen}
-        setCreateTaskIsOpen={setNewTaskIsOpen}
+        createTaskIsOpen={openModal === "createTask"}
+        setCreateTaskIsOpen={(value) =>
+          setOpenModal(value ? "createTask" : null)
+        }
         users={house.users}
         rooms={house.rooms}
         houseId={house.id}
       />
       <Modal
-        isOpen={credentialsOpen}
-        onClose={() => setCredentialsOpen(false)}
+        isOpen={openModal === "credentials"}
+        onClose={() => setOpenModal(null)}
         title="House Credentials"
         placement="center"
         backdrop="blur"
@@ -350,13 +355,13 @@ export default function HouseMain({ house }: HouseProps) {
             />
           </ModalHeader>
 
-          {!addCredentialIsOpen ? (
+          {openModal !== "addCredential" ? (
             <ModalBody>
               <Button
                 size="sm"
                 variant="flat"
                 className="mb-2 mx-4"
-                onPress={() => setAddCredentialIsOpen(true)}
+                onPress={() => setOpenModal("addCredential")}
               >
                 + Add Credential
               </Button>
@@ -364,7 +369,9 @@ export default function HouseMain({ house }: HouseProps) {
             </ModalBody>
           ) : (
             <AddCredential
-              setAddCredentialIsOpen={setAddCredentialIsOpen}
+              setAddCredentialIsOpen={(value) =>
+                setOpenModal(value ? "addCredential" : "credentials")
+              }
               houseId={house.id}
             />
           )}
@@ -372,8 +379,8 @@ export default function HouseMain({ house }: HouseProps) {
       </Modal>
 
       <Modal
-        isOpen={usersOpen}
-        onClose={() => setUsersOpen(false)}
+        isOpen={openModal === "users"}
+        onClose={() => setOpenModal(null)}
         title="House Users"
         placement="center"
         backdrop="blur"
@@ -400,8 +407,8 @@ export default function HouseMain({ house }: HouseProps) {
 
       {/* // Invite Modal */}
       <Modal
-        isOpen={inviteIsOpen}
-        onClose={() => setInviteIsOpen(false)}
+        isOpen={openModal === "invite"}
+        onClose={() => setOpenModal(null)}
         placement="center"
         backdrop="blur"
       >

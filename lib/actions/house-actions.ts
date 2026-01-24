@@ -243,3 +243,67 @@ export async function getHouseById(houseId: number) {
   );
   return house;
 }
+
+// get demo house
+export async function getDemoHouse() {
+  const house = await prisma.house.findUnique({
+    where: { id: 3 }, // demo house
+    include: {
+      users: true,
+      tasks: {
+        include: {
+          room: {
+            select: {
+              name: true,
+              roomType: true,
+            },
+          },
+          assigned: {
+            select: {
+              name: true,
+            },
+          },
+        },
+      },
+      bills: {
+        include: {
+          shares: {
+            include: {
+              user: true,
+            },
+          },
+          responsible: true,
+        },
+        orderBy: { dueDate: "desc" },
+      },
+      infos: true,
+      alerts: true,
+      credentials: true,
+      activities: {
+        orderBy: { createdAt: "desc" },
+        take: 5,
+      },
+      rooms: {
+        include: {
+          tasks: {
+            include: {
+              room: {
+                select: {
+                  name: true,
+                  roomType: true,
+                },
+              },
+              assigned: {
+                select: {
+                  name: true,
+                },
+              },
+            },
+          },
+          users: true,
+        },
+      },
+    },
+  });
+  return house;
+}

@@ -97,7 +97,7 @@ export default function HouseMain({ houseRooms }: { houseRooms: HouseRooms }) {
                 <Divider />
 
                 <p className="font-semibold">Tasks</p>
-                {selectedRoom.tasks.length === 0 ? (
+                {selectedRoom?.tasks.length === 0 ? (
                   <p className="text-default-500">No tasks.</p>
                 ) : (
                   selectedRoom.tasks.map((task) => (
