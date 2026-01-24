@@ -41,7 +41,7 @@ export default function App({ session }: { session: Session | null }) {
       <NavbarBrand>
         <Link href="/" className="flex items-center gap-2 text-foreground">
           <p className="font-bold text-2xl text-foreground hover:scale-105 transition bg-clip-text">
-            FlatMates
+            HouseMates
           </p>
         </Link>
       </NavbarBrand>
@@ -87,7 +87,13 @@ export default function App({ session }: { session: Session | null }) {
           // </NavbarItem>
           <NavbarItem>
             <div className="flex items-center gap-3">
-              <Button as={Link} color="default" href="/auth" variant="solid">
+              <Button
+                as={Link}
+                color="default"
+                href="/auth"
+                variant="solid"
+                className="bg-blue-500 hover:bg-blue-600 px-6 py-3 rounded-full text-white font-semibold"
+              >
                 Sign Up / Login
               </Button>
             </div>

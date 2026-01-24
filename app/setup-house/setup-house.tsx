@@ -43,7 +43,7 @@ export default function SetupHouse() {
               startContent={<CirclePlus />}
               className=""
             >
-              Join An House
+              Join a house
             </Button>
           </div>
         </>

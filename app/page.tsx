@@ -1,8 +1,12 @@
 import { auth } from "@/lib/auth";
 import { redirect } from "next/dist/client/components/navigation";
 import { headers } from "next/dist/server/request/headers";
+import Image from "next/image";
+import { Home, CreditCard, CheckSquare, Bell, Key } from "lucide-react";
+import { motion } from "framer-motion";
+import LandingClient from "./_components/landing";
 
-export default async function Home() {
+export default async function HomePage() {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
@@ -14,12 +18,9 @@ export default async function Home() {
   }
 
   return (
-    <section>
-      <div className="h-8 px-2.5 py-[5px] bg-zinc-900 rounded-md inline-flex justify-center items-center gap-1">
-        <div className="text-center justify-start text-white text-base font-normal font-['Patrick_Hand'] tracking-tight">
-          Button
-        </div>
-      </div>
-    </section>
+    <>
+      {/* HERO */}
+      <LandingClient />
+    </>
   );
 }

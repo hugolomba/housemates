@@ -19,6 +19,10 @@ export async function createCredential(FormData: FormData, houseId: number) {
     throw new Error("Not authenticated");
   }
 
+  if (session.user.houseId !== houseId) {
+    throw new Error("Not authorized in this house");
+  }
+
   const title = FormData.get("label") as string;
   const type = FormData.get("type") as
     | "WIFI"
@@ -68,6 +72,15 @@ export async function deleteCredential(credentialId: number) {
     throw new Error("Not authenticated");
   }
 
+  const credential = await prisma.houseCredential.findUnique({
+    where: { id: credentialId },
+    select: { houseId: true },
+  });
+
+  if (credential?.houseId !== session.user.houseId) {
+    throw new Error("Not authorized");
+  }
+
   await prisma.houseCredential.delete({
     where: {
       id: credentialId,
@@ -99,6 +112,10 @@ export async function revealCredentialPassword(credentialId: number) {
       houseId: true,
     },
   });
+
+  if (credential?.houseId !== session.user.houseId) {
+    throw new Error("Not authorized in this house");
+  }
 
   if (!credential?.password) {
     throw new Error("Password not found");
