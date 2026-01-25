@@ -11,6 +11,7 @@ import {
   DropdownMenu,
   DropdownItem,
 } from "@heroui/react";
+import MainButton from "@/app/_components/main-button";
 
 type HouseProps = {
   house: Prisma.HouseGetPayload<{
@@ -82,13 +83,9 @@ export default function Bills({ house }: HouseProps) {
   return (
     <>
       <div className="flex items-center">
-        <Button
-          color="default"
-          size="sm"
-          onPress={() => setCreateAlertIsOpen(true)}
-        >
+        <MainButton onClick={() => setCreateAlertIsOpen(true)}>
           + New Alert
-        </Button>
+        </MainButton>
 
         <CreateAlert
           createAlertIsOpen={createAlertIsOpen}
@@ -104,7 +101,7 @@ export default function Bills({ house }: HouseProps) {
             color={solvedOrUnsolved === "solved" ? "success" : "danger"}
             onPress={() =>
               setSolvedOrUnsolved((prev) =>
-                prev === "solved" ? "unsolved" : "solved"
+                prev === "solved" ? "unsolved" : "solved",
               )
             }
           >
@@ -126,14 +123,14 @@ export default function Bills({ house }: HouseProps) {
                 {filter === "all"
                   ? "All Alerts"
                   : filter === "low"
-                  ? "Low Priority"
-                  : filter === "medium"
-                  ? "Medium Priority"
-                  : filter === "high"
-                  ? "High Priority"
-                  : filter === "urgent"
-                  ? "Urgent Priority"
-                  : "All Alerts"}
+                    ? "Low Priority"
+                    : filter === "medium"
+                      ? "Medium Priority"
+                      : filter === "high"
+                        ? "High Priority"
+                        : filter === "urgent"
+                          ? "Urgent Priority"
+                          : "All Alerts"}
               </Button>
             </DropdownTrigger>
 

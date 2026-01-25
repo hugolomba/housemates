@@ -1,5 +1,6 @@
 "use client";
 
+import MainButton from "@/app/_components/main-button";
 import { createTask } from "@/lib/actions/tasks-actions";
 import {
   Modal,
@@ -7,7 +8,6 @@ import {
   ModalHeader,
   Form,
   Input,
-  Button,
   Select,
   SelectItem,
   ModalFooter,
@@ -17,8 +17,8 @@ import { useState } from "react";
 interface CreateTaskProps {
   createTaskIsOpen: boolean;
   setCreateTaskIsOpen: (open: boolean) => void;
-  rooms: { id: number; name: string }[]; // Lista de salas disponíveis
-  users: { id: string; name: string }[]; // Lista de usuários possíveis para assign
+  rooms: { id: number; name: string }[];
+  users: { id: string; name: string }[];
   houseId: number;
 }
 
@@ -92,24 +92,23 @@ export default function CreateTask({
 
             {error && <p className="text-red-500 text-sm">{error}</p>}
 
-            <Button type="submit" variant="bordered" isLoading={isSubmitting}>
+            <MainButton type="submit" isLoading={isSubmitting}>
               {isSubmitting ? "Submitting..." : "Create Task"}
-            </Button>
+            </MainButton>
           </Form>
         ) : (
           <ModalFooter className="mt-4 flex gap-2">
-            <Button
-              variant="flat"
-              onPress={() => {
+            <MainButton
+              onClick={() => {
                 setSubmitted(false);
                 setCreateTaskIsOpen(false);
               }}
             >
               Close
-            </Button>
-            <Button variant="flat" onPress={() => setSubmitted(false)}>
+            </MainButton>
+            <MainButton onClick={() => setSubmitted(false)}>
               Create Another Task
-            </Button>
+            </MainButton>
           </ModalFooter>
         )}
       </ModalContent>

@@ -1,5 +1,6 @@
 "use client";
 
+import MainButton from "@/app/_components/main-button";
 import { createAlert } from "@/lib/actions/alerts-actions";
 import {
   Modal,
@@ -92,13 +93,13 @@ export default function CreateAlert({
 
             {error && <div className="text-small text-red-500">{error}</div>}
 
-            <Button
+            <MainButton
               type="submit"
               className="rounded-full bg-blue-600 dark:bg-gray-800 text-white hover:bg-gray-100 dark:hover:bg-gray-700/70"
               isLoading={isSubmitting}
             >
               {isSubmitting ? "Submitting..." : "Create Alert"}
-            </Button>
+            </MainButton>
             {submitted && (
               <div className="text-small text-default-500">
                 You submitted: <code>{JSON.stringify(submitted)}</code>
@@ -107,9 +108,9 @@ export default function CreateAlert({
           </Form>
         ) : (
           <ModalFooter className="mt-4 flex gap-2">
-            <Button
+            <MainButton
               className="rounded-full bg-blue-600 dark:bg-gray-800 text-white hover:bg-gray-100 dark:hover:bg-gray-700/70"
-              onPress={() => {
+              onClick={() => {
                 setSubmitted(false);
                 setSuccess(false);
                 setError(null);
@@ -117,17 +118,17 @@ export default function CreateAlert({
               }}
             >
               Close
-            </Button>
-            <Button
+            </MainButton>
+            <MainButton
               className="rounded-full bg-blue-600 dark:bg-gray-800 text-white hover:bg-gray-100 dark:hover:bg-gray-700/70"
-              onPress={() => {
+              onClick={() => {
                 setSubmitted(false);
                 setSuccess(false);
                 setError(null);
               }}
             >
               Create Another Alert
-            </Button>
+            </MainButton>
           </ModalFooter>
         )}
       </ModalContent>

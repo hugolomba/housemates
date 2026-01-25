@@ -11,6 +11,7 @@ import BillCard from "./bill-card";
 import { Prisma } from "@/prisma/generated/browser";
 import { useState } from "react";
 import CreateBill from "./create-bill";
+import MainButton from "@/app/_components/main-button";
 
 type HouseProps = {
   house: Prisma.HouseGetPayload<{
@@ -82,13 +83,9 @@ export default function Bills({ house }: HouseProps) {
   return (
     <>
       <div className="flex items-center">
-        <Button
-          color="default"
-          size="sm"
-          onPress={() => setAddBillIsOpen(true)}
-        >
+        <MainButton onClick={() => setAddBillIsOpen(true)}>
           + New Bill
-        </Button>
+        </MainButton>
 
         <CreateBill
           createBillIsOpen={addBillIsOpen}
@@ -123,10 +120,10 @@ export default function Bills({ house }: HouseProps) {
                 {filter === "all"
                   ? "All Bills"
                   : filter === "overdue"
-                  ? "Overdue Bills"
-                  : filter === "paid"
-                  ? "Paid Bills"
-                  : "Due This Month"}
+                    ? "Overdue Bills"
+                    : filter === "paid"
+                      ? "Paid Bills"
+                      : "Due This Month"}
               </Button>
             </DropdownTrigger>
 

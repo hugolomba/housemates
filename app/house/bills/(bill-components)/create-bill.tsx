@@ -6,7 +6,6 @@ import {
   ModalHeader,
   Form,
   Input,
-  Button,
   DatePicker,
   Select,
   SelectItem,
@@ -18,6 +17,7 @@ import {
 } from "@heroui/react";
 import { useState } from "react";
 import { createBill } from "@/lib/actions/bills-actions";
+import MainButton from "@/app/_components/main-button";
 
 export default function CreateBill({
   createBillIsOpen,
@@ -139,34 +139,27 @@ export default function CreateBill({
               ))}
             </CheckboxGroup>
 
-            <Button type="submit" variant="bordered" isLoading={isSubmitting}>
+            <MainButton type="submit" isLoading={isSubmitting}>
               {isSubmitting ? "Submitting..." : "Create Bill"}
-            </Button>
-            {submitted && (
-              <div className="text-small text-default-500">
-                You submitted: <code>{JSON.stringify(submitted)}</code>
-              </div>
-            )}
+            </MainButton>
           </Form>
         ) : (
           <ModalFooter className="mt-4 flex gap-2">
-            <Button
-              variant="flat"
-              onPress={() => {
+            <MainButton
+              onClick={() => {
                 setSubmitted(false);
                 setCreateBillIsOpen(false);
               }}
             >
               Close
-            </Button>
-            <Button
-              variant="flat"
-              onPress={() => {
+            </MainButton>
+            <MainButton
+              onClick={() => {
                 setSubmitted(false);
               }}
             >
-              Create Another Alert
-            </Button>
+              Create Another Bill
+            </MainButton>
           </ModalFooter>
         )}
       </ModalContent>

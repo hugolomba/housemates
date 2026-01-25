@@ -378,9 +378,9 @@ export type RoomSumOrderByAggregateInput = {
   houseId?: Prisma.SortOrder
 }
 
-export type RoomScalarRelationFilter = {
-  is?: Prisma.RoomWhereInput
-  isNot?: Prisma.RoomWhereInput
+export type RoomNullableScalarRelationFilter = {
+  is?: Prisma.RoomWhereInput | null
+  isNot?: Prisma.RoomWhereInput | null
 }
 
 export type RoomCreateNestedManyWithoutUsersInput = {
@@ -473,10 +473,12 @@ export type RoomCreateNestedOneWithoutTasksInput = {
   connect?: Prisma.RoomWhereUniqueInput
 }
 
-export type RoomUpdateOneRequiredWithoutTasksNestedInput = {
+export type RoomUpdateOneWithoutTasksNestedInput = {
   create?: Prisma.XOR<Prisma.RoomCreateWithoutTasksInput, Prisma.RoomUncheckedCreateWithoutTasksInput>
   connectOrCreate?: Prisma.RoomCreateOrConnectWithoutTasksInput
   upsert?: Prisma.RoomUpsertWithoutTasksInput
+  disconnect?: Prisma.RoomWhereInput | boolean
+  delete?: Prisma.RoomWhereInput | boolean
   connect?: Prisma.RoomWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.RoomUpdateToOneWithWhereWithoutTasksInput, Prisma.RoomUpdateWithoutTasksInput>, Prisma.RoomUncheckedUpdateWithoutTasksInput>
 }

@@ -22,6 +22,7 @@ import {
 
 import { signOut } from "@/lib/actions/auth-actions";
 import { ThemeSwitcher } from "./theme-switcher";
+import MainButton from "./main-button";
 
 type Session = typeof auth.$Infer.Session;
 
@@ -87,15 +88,7 @@ export default function App({ session }: { session: Session | null }) {
           // </NavbarItem>
           <NavbarItem>
             <div className="flex items-center gap-3">
-              <Button
-                as={Link}
-                color="default"
-                href="/auth"
-                variant="solid"
-                className="bg-blue-500 hover:bg-blue-600 px-6 py-3 rounded-full text-white font-semibold"
-              >
-                Sign Up / Login
-              </Button>
+              <MainButton href="/auth">Sign Up / Login</MainButton>
             </div>
           </NavbarItem>
         )}

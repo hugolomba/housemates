@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 import TaskCard from "./task-card";
 import CreateTask from "./create-task";
+import MainButton from "@/app/_components/main-button";
 
 type HouseProps = {
   house: Prisma.HouseGetPayload<{
@@ -87,13 +88,9 @@ export default function Tasks({ house }: HouseProps) {
   return (
     <>
       <div className="flex items-center">
-        <Button
-          color="default"
-          size="sm"
-          onPress={() => setAddTaskIsOpen(true)}
-        >
+        <MainButton onClick={() => setAddTaskIsOpen(true)}>
           + New Task
-        </Button>
+        </MainButton>
 
         <CreateTask
           createTaskIsOpen={addTaskIsOpen}
@@ -104,7 +101,7 @@ export default function Tasks({ house }: HouseProps) {
         />
       </div>
 
-      <div className="container flex flex-col gap-4 flex-wrap">
+      <div className="container flex flex-col gap-4 flex-wrap items-end">
         <Dropdown>
           <DropdownTrigger>
             <Button variant="flat" size="sm">

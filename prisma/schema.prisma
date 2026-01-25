@@ -120,8 +120,8 @@ model Task {
   houseId Int
   house   House @relation(fields: [houseId], references: [id])
 
-  roomId Int
-  room   Room  @relation(fields: [roomId], references: [id])
+  roomId Int?
+  room   Room?  @relation(fields: [roomId], references: [id])
 
   assigned User[] @relation("TaskAssignees")
 }

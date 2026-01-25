@@ -10,7 +10,7 @@ type TasksProps = {
     include: {
       tasks: {
         include: {
-          room: {
+          room?: {
             select: {
               name: true;
               roomType: true;
@@ -63,9 +63,11 @@ export default function Tasks({ houseTasks }: TasksProps) {
           >
             {task.title}{" "}
             <div className="flex items-center">
-              <Chip key={task.room.name} size="sm" className="ml-2">
-                {defineRoomIcon(task.room.roomType)}
-              </Chip>
+              {task.room && (
+                <Chip key={task.room.name} size="sm" className="ml-2">
+                  {defineRoomIcon(task.room.roomType)}
+                </Chip>
+              )}
               {task.assigned.map((user) => (
                 <Chip key={user.name} size="sm" className="ml-2">
                   {user.name}
@@ -73,7 +75,7 @@ export default function Tasks({ houseTasks }: TasksProps) {
               ))}
             </div>
           </Checkbox>
-        ) : null
+        ) : null,
       )}
       <Button as={Link} href="/house/tasks" variant="flat">
         Go to All Tasks

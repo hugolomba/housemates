@@ -22,7 +22,7 @@ export default function AlertCard({ alert }: { alert: HouseAlerts[number] }) {
 
   const [resolvingAlertId, setResolvingAlertId] = useState<string | null>(null);
   const [resolvedAlertIds, setResolvedAlertIds] = useState<Set<string>>(
-    new Set()
+    new Set(),
   );
 
   const defineAlertColor = (alertId: string, priority: string) => {
@@ -102,7 +102,6 @@ export default function AlertCard({ alert }: { alert: HouseAlerts[number] }) {
 
   const handleDeleteAlert = async (alertId: string) => {
     await deleteAlert(alertId);
-    // router.refresh();
   };
 
   return (

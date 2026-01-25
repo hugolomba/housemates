@@ -1,21 +1,48 @@
+import Link from "next/link";
+
 export default function MainButton({
   children,
   onClick,
   type = "button",
   className = "",
+  href,
+  isLoading = false,
 }: {
   children: React.ReactNode;
   onClick?: () => void;
   type?: "button" | "submit" | "reset";
   className?: string;
+  href?: string;
+  isLoading?: boolean;
 }) {
+  const baseClass =
+    "bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed";
+
+  const content = (
+    <>
+      {isLoading ? (
+        <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
+      ) : null}
+      <span className={isLoading ? "ml-2" : ""}>{children}</span>
+    </>
+  );
+
+  if (href) {
+    return (
+      <Link href={href} className={`${baseClass} ${className}`}>
+        {content}
+      </Link>
+    );
+  }
+
   return (
     <button
       type={type}
       onClick={onClick}
-      className={`bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition ${className}`}
+      disabled={isLoading}
+      className={`${baseClass} ${className}`}
     >
-      {children}
+      {content}
     </button>
   );
 }

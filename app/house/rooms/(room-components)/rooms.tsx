@@ -15,6 +15,7 @@ import {
 import RoomCard from "./room-card";
 import CreateRoom from "./create-room";
 import { deleteRoom } from "@/lib/actions/rooms-actions";
+import MainButton from "@/app/_components/main-button";
 
 type HouseProps = {
   house: Prisma.HouseGetPayload<{
@@ -89,13 +90,9 @@ export default function HouseRooms({ house }: HouseProps) {
   return (
     <>
       <div className="flex items-center">
-        <Button
-          color="default"
-          size="sm"
-          onPress={() => setAddRoomIsOpen(true)}
-        >
+        <MainButton onClick={() => setAddRoomIsOpen(true)}>
           + New Room
-        </Button>
+        </MainButton>
 
         <CreateRoom
           createRoomIsOpen={addRoomIsOpen}
@@ -195,23 +192,22 @@ export default function HouseRooms({ house }: HouseProps) {
             <ModalBody>
               Are you sure you want to delete the room &quot;
               {selectedRoom?.name}&quot;? This action cannot be undone.
+              <span className="block mt-2 text-sm text-default-500">
+                All tasks associated with this room will also be deleted.
+              </span>
             </ModalBody>
             <ModalFooter>
-              <Button
-                variant="flat"
-                onPress={() => setDeleteModalIsOpen(false)}
-              >
+              <MainButton onClick={() => setDeleteModalIsOpen(false)}>
                 Cancel
-              </Button>
-              <Button
-                color="danger"
-                onPress={() => {
+              </MainButton>
+              <MainButton
+                className="bg-red-600 hover:bg-red-700"
+                onClick={() => {
                   handleDeleteRoom(selectedRoom!.id);
                 }}
-                disabled={isDeleting}
               >
                 {isDeleting ? "Deleting..." : "Delete"}
-              </Button>
+              </MainButton>
             </ModalFooter>
           </ModalContent>
         </Modal>

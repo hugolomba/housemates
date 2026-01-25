@@ -44,6 +44,7 @@ import AddCredential from "./(main-info-components)/add-credential";
 import Rooms from "./(main-info-components)/rooms";
 import Image from "next/image";
 import { div } from "framer-motion/m";
+import MainButton from "../_components/main-button";
 
 type HouseProps = {
   house: NonNullable<Awaited<ReturnType<typeof getHouseById>>>;
@@ -191,28 +192,16 @@ export default function HouseMain({ house }: HouseProps) {
         </h2>
 
         <div className="grid grid-cols-3 gap-2">
-          <Button
-            onPress={() => setOpenModal("createAlert")}
-            color="primary"
-            className="rounded-full bg-blue-600 dark:bg-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700/70"
-          >
+          <MainButton onClick={() => setOpenModal("createAlert")}>
             New Alert
-          </Button>
+          </MainButton>
 
-          <Button
-            onPress={() => setOpenModal("createBill")}
-            color="primary"
-            className="rounded-full bg-blue-600 dark:bg-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700/70"
-          >
+          <MainButton onClick={() => setOpenModal("createBill")}>
             New Bill
-          </Button>
-          <Button
-            onPress={() => setOpenModal("createTask")}
-            color="primary"
-            className="rounded-full bg-blue-600 dark:bg-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700/70"
-          >
+          </MainButton>
+          <MainButton onClick={() => setOpenModal("createTask")}>
             New Task
-          </Button>
+          </MainButton>
         </div>
       </section>
 

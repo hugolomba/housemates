@@ -73,6 +73,11 @@ export async function deleteRoom(roomId: number) {
     return;
   }
 
+  // first delete all tasks associated with the room
+  await prisma.task.deleteMany({
+    where: { roomId },
+  });
+
   const room = await prisma.room.delete({
     where: { id: roomId },
   });

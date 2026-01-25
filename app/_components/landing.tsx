@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Home, CreditCard, CheckSquare, Bell, Key } from "lucide-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import MainButton from "./main-button";
 
 export default function LandingClient() {
   return (
@@ -27,18 +28,10 @@ export default function LandingClient() {
                 information in a single shared space.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 sm:justify-start justify-center">
-                <Link
-                  href="/auth"
-                  className="bg-blue-500 hover:bg-blue-600 px-6 py-3 rounded-full text-white font-semibold"
-                >
+                <MainButton href="/auth" className="font-semibold">
                   Create or join a house
-                </Link>
-                <Link
-                  href="/how-it-works"
-                  className="border border-gray-300 dark:border-neutral-700 px-6 py-3 rounded-full font-semibold"
-                >
-                  How it works
-                </Link>
+                </MainButton>
+                <MainButton href="/how-it-works">How it works</MainButton>
               </div>
             </motion.div>
 
