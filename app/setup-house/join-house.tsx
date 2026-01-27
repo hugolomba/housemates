@@ -20,6 +20,7 @@ import {
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import MainButton from "../_components/main-button";
 
 export default function SetupHouse() {
   const router = useRouter();
@@ -79,7 +80,7 @@ export default function SetupHouse() {
           description={errorMessage}
         />
       )}
-      <h1 className="text-2xl font-bold">Join in an existing house</h1>
+      <h1 className="text-3xl font-bold">Join in an existing house</h1>
       {!houseToJoin && (
         <h2 className="text-center">
           To join in an existing house, please ask the house admin for the
@@ -113,7 +114,7 @@ export default function SetupHouse() {
               type="submit"
               size="lg"
               variant="solid"
-              className="bg-blue-500 hover:bg-blue-600 px-6 py-3 rounded-full text-white font-semibold mt-4"
+              className="bg-blue-500 hover:bg-blue-600 px-6 py-3 rounded-full text-white font-semibold mt-4 bg-gradient-to-r from-blue-500 to-green-500"
             >
               Validate Invite Code{" "}
             </Button>
@@ -144,19 +145,22 @@ export default function SetupHouse() {
             </CardBody>
             <CardFooter className="flex flex-col items-center">
               {isJoining && !hasJoined && (
-                <Button
+                <MainButton
                   isLoading
                   type="button"
-                  className=""
-                  size="lg"
-                  variant="solid"
+                  className="bg-blue-500 hover:bg-blue-600 px-6 py-3 rounded-full text-white font-semibold mt-4 bg-gradient-to-r from-blue-500 to-green-500"
                 >
                   Joining House
-                </Button>
+                </MainButton>
               )}
 
               {!isJoining && !hasJoined && (
-                <Button onPress={joinHouse}>Join House</Button>
+                <MainButton
+                  onClick={joinHouse}
+                  className="bg-blue-500 hover:bg-blue-600 px-6 py-3 rounded-full text-white font-semibold mt-4 bg-gradient-to-r from-blue-500 to-green-500"
+                >
+                  Join House
+                </MainButton>
               )}
               {hasJoined && (
                 <>

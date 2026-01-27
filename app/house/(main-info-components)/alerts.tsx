@@ -12,7 +12,7 @@ type HouseAlerts = Prisma.HouseGetPayload<{
 
 export default function Alerts({ houseAlerts }: { houseAlerts: HouseAlerts }) {
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-6 ">
       {houseAlerts.filter((alert) => !alert.isResolved).length === 0 && (
         <p className="text-md text-default-500">No active alerts.</p>
       )}

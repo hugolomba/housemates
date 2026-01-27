@@ -80,7 +80,7 @@ export default function CreateHouseForm() {
           <HousePlus size={64} />
 
           <Form
-            className="w-full flex flex-col gap-4 items-center"
+            className="w-full flex flex-col gap-4 items-center font-bold "
             onSubmit={handleSubmit}
           >
             <Input
@@ -104,7 +104,7 @@ export default function CreateHouseForm() {
                 type="submit"
                 size="lg"
                 variant="solid"
-                className="bg-blue-500 hover:bg-blue-600 px-6 py-3 rounded-full text-white font-semibold mt-4"
+                className="hover:bg-blue-600 px-6 py-3 rounded-full text-white font-semibold mt-4 bg-gradient-to-r from-blue-500 to-green-500"
               >
                 Creating House
               </Button>
@@ -113,7 +113,7 @@ export default function CreateHouseForm() {
                 type="submit"
                 size="lg"
                 variant="solid"
-                className="bg-blue-500 hover:bg-blue-600 px-6 py-3 rounded-full text-white font-semibold mt-4"
+                className=" hover:bg-blue-600 px-6 py-3 rounded-full text-white font-semibold mt-4 bg-gradient-to-r from-blue-500 to-green-500"
               >
                 Create House
               </Button>
@@ -149,7 +149,7 @@ export default function CreateHouseForm() {
                 </div>
                 <Button
                   size="sm"
-                  className="bg-blue-500 hover:bg-blue-600 px-6 py-3 rounded-full text-white font-semibold"
+                  className="bg-blue-500 hover:bg-blue-600 px-6 py-3 rounded-full text-white font-semibold bg-gradient-to-r from-blue-500 to-green-500"
                   variant="solid"
                   onPress={handleCopyInvite}
                   startContent={copied ? <CopyCheck /> : <Copy />}
@@ -164,7 +164,7 @@ export default function CreateHouseForm() {
                 href="/house"
                 variant="solid"
                 size="lg"
-                className="bg-blue-500 hover:bg-blue-600 px-6 py-3 rounded-full text-white font-semibold"
+                className="bg-blue-500 hover:bg-blue-600 px-6 py-3 rounded-full text-white font-semibold bg-gradient-to-r from-blue-500 to-green-500"
               >
                 Go to my House
               </Button>

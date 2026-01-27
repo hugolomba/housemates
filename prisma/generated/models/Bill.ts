@@ -206,7 +206,7 @@ export type BillGroupByOutputType = {
   totalValue: number
   dueDate: Date
   houseId: number
-  responsibleId: string
+  responsibleId: string | null
   _count: BillCountAggregateOutputType | null
   _avg: BillAvgAggregateOutputType | null
   _sum: BillSumAggregateOutputType | null
@@ -239,9 +239,9 @@ export type BillWhereInput = {
   totalValue?: Prisma.FloatFilter<"Bill"> | number
   dueDate?: Prisma.DateTimeFilter<"Bill"> | Date | string
   houseId?: Prisma.IntFilter<"Bill"> | number
-  responsibleId?: Prisma.StringFilter<"Bill"> | string
+  responsibleId?: Prisma.StringNullableFilter<"Bill"> | string | null
   house?: Prisma.XOR<Prisma.HouseScalarRelationFilter, Prisma.HouseWhereInput>
-  responsible?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  responsible?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   shares?: Prisma.ShareListRelationFilter
 }
 
@@ -252,7 +252,7 @@ export type BillOrderByWithRelationInput = {
   totalValue?: Prisma.SortOrder
   dueDate?: Prisma.SortOrder
   houseId?: Prisma.SortOrder
-  responsibleId?: Prisma.SortOrder
+  responsibleId?: Prisma.SortOrderInput | Prisma.SortOrder
   house?: Prisma.HouseOrderByWithRelationInput
   responsible?: Prisma.UserOrderByWithRelationInput
   shares?: Prisma.ShareOrderByRelationAggregateInput
@@ -268,9 +268,9 @@ export type BillWhereUniqueInput = Prisma.AtLeast<{
   totalValue?: Prisma.FloatFilter<"Bill"> | number
   dueDate?: Prisma.DateTimeFilter<"Bill"> | Date | string
   houseId?: Prisma.IntFilter<"Bill"> | number
-  responsibleId?: Prisma.StringFilter<"Bill"> | string
+  responsibleId?: Prisma.StringNullableFilter<"Bill"> | string | null
   house?: Prisma.XOR<Prisma.HouseScalarRelationFilter, Prisma.HouseWhereInput>
-  responsible?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  responsible?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   shares?: Prisma.ShareListRelationFilter
 }, "id">
 
@@ -281,7 +281,7 @@ export type BillOrderByWithAggregationInput = {
   totalValue?: Prisma.SortOrder
   dueDate?: Prisma.SortOrder
   houseId?: Prisma.SortOrder
-  responsibleId?: Prisma.SortOrder
+  responsibleId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.BillCountOrderByAggregateInput
   _avg?: Prisma.BillAvgOrderByAggregateInput
   _max?: Prisma.BillMaxOrderByAggregateInput
@@ -299,7 +299,7 @@ export type BillScalarWhereWithAggregatesInput = {
   totalValue?: Prisma.FloatWithAggregatesFilter<"Bill"> | number
   dueDate?: Prisma.DateTimeWithAggregatesFilter<"Bill"> | Date | string
   houseId?: Prisma.IntWithAggregatesFilter<"Bill"> | number
-  responsibleId?: Prisma.StringWithAggregatesFilter<"Bill"> | string
+  responsibleId?: Prisma.StringNullableWithAggregatesFilter<"Bill"> | string | null
 }
 
 export type BillCreateInput = {
@@ -308,7 +308,7 @@ export type BillCreateInput = {
   totalValue: number
   dueDate: Date | string
   house: Prisma.HouseCreateNestedOneWithoutBillsInput
-  responsible: Prisma.UserCreateNestedOneWithoutBillsInput
+  responsible?: Prisma.UserCreateNestedOneWithoutBillsInput
   shares?: Prisma.ShareCreateNestedManyWithoutBillInput
 }
 
@@ -319,7 +319,7 @@ export type BillUncheckedCreateInput = {
   totalValue: number
   dueDate: Date | string
   houseId: number
-  responsibleId: string
+  responsibleId?: string | null
   shares?: Prisma.ShareUncheckedCreateNestedManyWithoutBillInput
 }
 
@@ -329,7 +329,7 @@ export type BillUpdateInput = {
   totalValue?: Prisma.FloatFieldUpdateOperationsInput | number
   dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   house?: Prisma.HouseUpdateOneRequiredWithoutBillsNestedInput
-  responsible?: Prisma.UserUpdateOneRequiredWithoutBillsNestedInput
+  responsible?: Prisma.UserUpdateOneWithoutBillsNestedInput
   shares?: Prisma.ShareUpdateManyWithoutBillNestedInput
 }
 
@@ -340,7 +340,7 @@ export type BillUncheckedUpdateInput = {
   totalValue?: Prisma.FloatFieldUpdateOperationsInput | number
   dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   houseId?: Prisma.IntFieldUpdateOperationsInput | number
-  responsibleId?: Prisma.StringFieldUpdateOperationsInput | string
+  responsibleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shares?: Prisma.ShareUncheckedUpdateManyWithoutBillNestedInput
 }
 
@@ -351,7 +351,7 @@ export type BillCreateManyInput = {
   totalValue: number
   dueDate: Date | string
   houseId: number
-  responsibleId: string
+  responsibleId?: string | null
 }
 
 export type BillUpdateManyMutationInput = {
@@ -368,7 +368,7 @@ export type BillUncheckedUpdateManyInput = {
   totalValue?: Prisma.FloatFieldUpdateOperationsInput | number
   dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   houseId?: Prisma.IntFieldUpdateOperationsInput | number
-  responsibleId?: Prisma.StringFieldUpdateOperationsInput | string
+  responsibleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type BillListRelationFilter = {
@@ -589,7 +589,7 @@ export type BillScalarWhereInput = {
   totalValue?: Prisma.FloatFilter<"Bill"> | number
   dueDate?: Prisma.DateTimeFilter<"Bill"> | Date | string
   houseId?: Prisma.IntFilter<"Bill"> | number
-  responsibleId?: Prisma.StringFilter<"Bill"> | string
+  responsibleId?: Prisma.StringNullableFilter<"Bill"> | string | null
 }
 
 export type BillCreateWithoutHouseInput = {
@@ -597,7 +597,7 @@ export type BillCreateWithoutHouseInput = {
   description?: string | null
   totalValue: number
   dueDate: Date | string
-  responsible: Prisma.UserCreateNestedOneWithoutBillsInput
+  responsible?: Prisma.UserCreateNestedOneWithoutBillsInput
   shares?: Prisma.ShareCreateNestedManyWithoutBillInput
 }
 
@@ -607,7 +607,7 @@ export type BillUncheckedCreateWithoutHouseInput = {
   description?: string | null
   totalValue: number
   dueDate: Date | string
-  responsibleId: string
+  responsibleId?: string | null
   shares?: Prisma.ShareUncheckedCreateNestedManyWithoutBillInput
 }
 
@@ -643,7 +643,7 @@ export type BillCreateWithoutSharesInput = {
   totalValue: number
   dueDate: Date | string
   house: Prisma.HouseCreateNestedOneWithoutBillsInput
-  responsible: Prisma.UserCreateNestedOneWithoutBillsInput
+  responsible?: Prisma.UserCreateNestedOneWithoutBillsInput
 }
 
 export type BillUncheckedCreateWithoutSharesInput = {
@@ -653,7 +653,7 @@ export type BillUncheckedCreateWithoutSharesInput = {
   totalValue: number
   dueDate: Date | string
   houseId: number
-  responsibleId: string
+  responsibleId?: string | null
 }
 
 export type BillCreateOrConnectWithoutSharesInput = {
@@ -678,7 +678,7 @@ export type BillUpdateWithoutSharesInput = {
   totalValue?: Prisma.FloatFieldUpdateOperationsInput | number
   dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   house?: Prisma.HouseUpdateOneRequiredWithoutBillsNestedInput
-  responsible?: Prisma.UserUpdateOneRequiredWithoutBillsNestedInput
+  responsible?: Prisma.UserUpdateOneWithoutBillsNestedInput
 }
 
 export type BillUncheckedUpdateWithoutSharesInput = {
@@ -688,7 +688,7 @@ export type BillUncheckedUpdateWithoutSharesInput = {
   totalValue?: Prisma.FloatFieldUpdateOperationsInput | number
   dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   houseId?: Prisma.IntFieldUpdateOperationsInput | number
-  responsibleId?: Prisma.StringFieldUpdateOperationsInput | string
+  responsibleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type BillCreateManyResponsibleInput = {
@@ -734,7 +734,7 @@ export type BillCreateManyHouseInput = {
   description?: string | null
   totalValue: number
   dueDate: Date | string
-  responsibleId: string
+  responsibleId?: string | null
 }
 
 export type BillUpdateWithoutHouseInput = {
@@ -742,7 +742,7 @@ export type BillUpdateWithoutHouseInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalValue?: Prisma.FloatFieldUpdateOperationsInput | number
   dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  responsible?: Prisma.UserUpdateOneRequiredWithoutBillsNestedInput
+  responsible?: Prisma.UserUpdateOneWithoutBillsNestedInput
   shares?: Prisma.ShareUpdateManyWithoutBillNestedInput
 }
 
@@ -752,7 +752,7 @@ export type BillUncheckedUpdateWithoutHouseInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalValue?: Prisma.FloatFieldUpdateOperationsInput | number
   dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  responsibleId?: Prisma.StringFieldUpdateOperationsInput | string
+  responsibleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shares?: Prisma.ShareUncheckedUpdateManyWithoutBillNestedInput
 }
 
@@ -762,7 +762,7 @@ export type BillUncheckedUpdateManyWithoutHouseInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalValue?: Prisma.FloatFieldUpdateOperationsInput | number
   dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  responsibleId?: Prisma.StringFieldUpdateOperationsInput | string
+  responsibleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -805,7 +805,7 @@ export type BillSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   houseId?: boolean
   responsibleId?: boolean
   house?: boolean | Prisma.HouseDefaultArgs<ExtArgs>
-  responsible?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  responsible?: boolean | Prisma.Bill$responsibleArgs<ExtArgs>
   shares?: boolean | Prisma.Bill$sharesArgs<ExtArgs>
   _count?: boolean | Prisma.BillCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["bill"]>
@@ -819,7 +819,7 @@ export type BillSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   houseId?: boolean
   responsibleId?: boolean
   house?: boolean | Prisma.HouseDefaultArgs<ExtArgs>
-  responsible?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  responsible?: boolean | Prisma.Bill$responsibleArgs<ExtArgs>
 }, ExtArgs["result"]["bill"]>
 
 export type BillSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -831,7 +831,7 @@ export type BillSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   houseId?: boolean
   responsibleId?: boolean
   house?: boolean | Prisma.HouseDefaultArgs<ExtArgs>
-  responsible?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  responsible?: boolean | Prisma.Bill$responsibleArgs<ExtArgs>
 }, ExtArgs["result"]["bill"]>
 
 export type BillSelectScalar = {
@@ -847,24 +847,24 @@ export type BillSelectScalar = {
 export type BillOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "totalValue" | "dueDate" | "houseId" | "responsibleId", ExtArgs["result"]["bill"]>
 export type BillInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   house?: boolean | Prisma.HouseDefaultArgs<ExtArgs>
-  responsible?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  responsible?: boolean | Prisma.Bill$responsibleArgs<ExtArgs>
   shares?: boolean | Prisma.Bill$sharesArgs<ExtArgs>
   _count?: boolean | Prisma.BillCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type BillIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   house?: boolean | Prisma.HouseDefaultArgs<ExtArgs>
-  responsible?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  responsible?: boolean | Prisma.Bill$responsibleArgs<ExtArgs>
 }
 export type BillIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   house?: boolean | Prisma.HouseDefaultArgs<ExtArgs>
-  responsible?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  responsible?: boolean | Prisma.Bill$responsibleArgs<ExtArgs>
 }
 
 export type $BillPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Bill"
   objects: {
     house: Prisma.$HousePayload<ExtArgs>
-    responsible: Prisma.$UserPayload<ExtArgs>
+    responsible: Prisma.$UserPayload<ExtArgs> | null
     shares: Prisma.$SharePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -874,7 +874,7 @@ export type $BillPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     totalValue: number
     dueDate: Date
     houseId: number
-    responsibleId: string
+    responsibleId: string | null
   }, ExtArgs["result"]["bill"]>
   composites: {}
 }
@@ -1270,7 +1270,7 @@ readonly fields: BillFieldRefs;
 export interface Prisma__BillClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   house<T extends Prisma.HouseDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.HouseDefaultArgs<ExtArgs>>): Prisma.Prisma__HouseClient<runtime.Types.Result.GetResult<Prisma.$HousePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  responsible<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  responsible<T extends Prisma.Bill$responsibleArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Bill$responsibleArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   shares<T extends Prisma.Bill$sharesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Bill$sharesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SharePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1701,6 +1701,25 @@ export type BillDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Limit how many Bills to delete.
    */
   limit?: number
+}
+
+/**
+ * Bill.responsible
+ */
+export type Bill$responsibleArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
 }
 
 /**

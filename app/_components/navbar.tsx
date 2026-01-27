@@ -23,6 +23,7 @@ import {
 import { signOut } from "@/lib/actions/auth-actions";
 import { ThemeSwitcher } from "./theme-switcher";
 import MainButton from "./main-button";
+import Image from "next/image";
 
 type Session = typeof auth.$Infer.Session;
 
@@ -41,9 +42,21 @@ export default function App({ session }: { session: Session | null }) {
     >
       <NavbarBrand>
         <Link href="/" className="flex items-center gap-2 text-foreground">
-          <p className="font-bold text-2xl text-foreground hover:scale-105 transition bg-clip-text">
+          <Image
+            src="/images/logo2.png"
+            alt="HouseMates Logo"
+            width={40}
+            height={40}
+            className="hover:scale-105 transition"
+          />
+          {/* <p className="font-bold text-2xl hover:scale-105 transition bg-clip-text text-transparent"> */}
+          {/* <span className="bg-gradient-to-r from-blue-500 to-blue-500 bg-clip-text text-transparent">
+            House
+          </span> */}
+          <span className="font-bold text-2xl bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text text-transparent">
             HouseMates
-          </p>
+          </span>
+          {/* </p> */}
         </Link>
       </NavbarBrand>
 

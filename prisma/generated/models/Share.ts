@@ -190,7 +190,7 @@ export type ShareGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
 export type ShareGroupByOutputType = {
   id: number
   billId: number
-  userId: string
+  userId: string | null
   value: number
   paid: boolean
   _count: ShareCountAggregateOutputType | null
@@ -221,17 +221,17 @@ export type ShareWhereInput = {
   NOT?: Prisma.ShareWhereInput | Prisma.ShareWhereInput[]
   id?: Prisma.IntFilter<"Share"> | number
   billId?: Prisma.IntFilter<"Share"> | number
-  userId?: Prisma.StringFilter<"Share"> | string
+  userId?: Prisma.StringNullableFilter<"Share"> | string | null
   value?: Prisma.FloatFilter<"Share"> | number
   paid?: Prisma.BoolFilter<"Share"> | boolean
   bill?: Prisma.XOR<Prisma.BillScalarRelationFilter, Prisma.BillWhereInput>
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }
 
 export type ShareOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   billId?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
+  userId?: Prisma.SortOrderInput | Prisma.SortOrder
   value?: Prisma.SortOrder
   paid?: Prisma.SortOrder
   bill?: Prisma.BillOrderByWithRelationInput
@@ -244,17 +244,17 @@ export type ShareWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.ShareWhereInput[]
   NOT?: Prisma.ShareWhereInput | Prisma.ShareWhereInput[]
   billId?: Prisma.IntFilter<"Share"> | number
-  userId?: Prisma.StringFilter<"Share"> | string
+  userId?: Prisma.StringNullableFilter<"Share"> | string | null
   value?: Prisma.FloatFilter<"Share"> | number
   paid?: Prisma.BoolFilter<"Share"> | boolean
   bill?: Prisma.XOR<Prisma.BillScalarRelationFilter, Prisma.BillWhereInput>
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }, "id">
 
 export type ShareOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   billId?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
+  userId?: Prisma.SortOrderInput | Prisma.SortOrder
   value?: Prisma.SortOrder
   paid?: Prisma.SortOrder
   _count?: Prisma.ShareCountOrderByAggregateInput
@@ -270,7 +270,7 @@ export type ShareScalarWhereWithAggregatesInput = {
   NOT?: Prisma.ShareScalarWhereWithAggregatesInput | Prisma.ShareScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"Share"> | number
   billId?: Prisma.IntWithAggregatesFilter<"Share"> | number
-  userId?: Prisma.StringWithAggregatesFilter<"Share"> | string
+  userId?: Prisma.StringNullableWithAggregatesFilter<"Share"> | string | null
   value?: Prisma.FloatWithAggregatesFilter<"Share"> | number
   paid?: Prisma.BoolWithAggregatesFilter<"Share"> | boolean
 }
@@ -279,13 +279,13 @@ export type ShareCreateInput = {
   value: number
   paid?: boolean
   bill: Prisma.BillCreateNestedOneWithoutSharesInput
-  user: Prisma.UserCreateNestedOneWithoutSharesInput
+  user?: Prisma.UserCreateNestedOneWithoutSharesInput
 }
 
 export type ShareUncheckedCreateInput = {
   id?: number
   billId: number
-  userId: string
+  userId?: string | null
   value: number
   paid?: boolean
 }
@@ -294,13 +294,13 @@ export type ShareUpdateInput = {
   value?: Prisma.FloatFieldUpdateOperationsInput | number
   paid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bill?: Prisma.BillUpdateOneRequiredWithoutSharesNestedInput
-  user?: Prisma.UserUpdateOneRequiredWithoutSharesNestedInput
+  user?: Prisma.UserUpdateOneWithoutSharesNestedInput
 }
 
 export type ShareUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   billId?: Prisma.IntFieldUpdateOperationsInput | number
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   value?: Prisma.FloatFieldUpdateOperationsInput | number
   paid?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
@@ -308,7 +308,7 @@ export type ShareUncheckedUpdateInput = {
 export type ShareCreateManyInput = {
   id?: number
   billId: number
-  userId: string
+  userId?: string | null
   value: number
   paid?: boolean
 }
@@ -321,7 +321,7 @@ export type ShareUpdateManyMutationInput = {
 export type ShareUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   billId?: Prisma.IntFieldUpdateOperationsInput | number
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   value?: Prisma.FloatFieldUpdateOperationsInput | number
   paid?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
@@ -501,7 +501,7 @@ export type ShareScalarWhereInput = {
   NOT?: Prisma.ShareScalarWhereInput | Prisma.ShareScalarWhereInput[]
   id?: Prisma.IntFilter<"Share"> | number
   billId?: Prisma.IntFilter<"Share"> | number
-  userId?: Prisma.StringFilter<"Share"> | string
+  userId?: Prisma.StringNullableFilter<"Share"> | string | null
   value?: Prisma.FloatFilter<"Share"> | number
   paid?: Prisma.BoolFilter<"Share"> | boolean
 }
@@ -509,12 +509,12 @@ export type ShareScalarWhereInput = {
 export type ShareCreateWithoutBillInput = {
   value: number
   paid?: boolean
-  user: Prisma.UserCreateNestedOneWithoutSharesInput
+  user?: Prisma.UserCreateNestedOneWithoutSharesInput
 }
 
 export type ShareUncheckedCreateWithoutBillInput = {
   id?: number
-  userId: string
+  userId?: string | null
   value: number
   paid?: boolean
 }
@@ -574,7 +574,7 @@ export type ShareUncheckedUpdateManyWithoutUserInput = {
 
 export type ShareCreateManyBillInput = {
   id?: number
-  userId: string
+  userId?: string | null
   value: number
   paid?: boolean
 }
@@ -582,19 +582,19 @@ export type ShareCreateManyBillInput = {
 export type ShareUpdateWithoutBillInput = {
   value?: Prisma.FloatFieldUpdateOperationsInput | number
   paid?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  user?: Prisma.UserUpdateOneRequiredWithoutSharesNestedInput
+  user?: Prisma.UserUpdateOneWithoutSharesNestedInput
 }
 
 export type ShareUncheckedUpdateWithoutBillInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   value?: Prisma.FloatFieldUpdateOperationsInput | number
   paid?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type ShareUncheckedUpdateManyWithoutBillInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   value?: Prisma.FloatFieldUpdateOperationsInput | number
   paid?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
@@ -608,7 +608,7 @@ export type ShareSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   value?: boolean
   paid?: boolean
   bill?: boolean | Prisma.BillDefaultArgs<ExtArgs>
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.Share$userArgs<ExtArgs>
 }, ExtArgs["result"]["share"]>
 
 export type ShareSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -618,7 +618,7 @@ export type ShareSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   value?: boolean
   paid?: boolean
   bill?: boolean | Prisma.BillDefaultArgs<ExtArgs>
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.Share$userArgs<ExtArgs>
 }, ExtArgs["result"]["share"]>
 
 export type ShareSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -628,7 +628,7 @@ export type ShareSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   value?: boolean
   paid?: boolean
   bill?: boolean | Prisma.BillDefaultArgs<ExtArgs>
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.Share$userArgs<ExtArgs>
 }, ExtArgs["result"]["share"]>
 
 export type ShareSelectScalar = {
@@ -642,27 +642,27 @@ export type ShareSelectScalar = {
 export type ShareOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "billId" | "userId" | "value" | "paid", ExtArgs["result"]["share"]>
 export type ShareInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   bill?: boolean | Prisma.BillDefaultArgs<ExtArgs>
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.Share$userArgs<ExtArgs>
 }
 export type ShareIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   bill?: boolean | Prisma.BillDefaultArgs<ExtArgs>
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.Share$userArgs<ExtArgs>
 }
 export type ShareIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   bill?: boolean | Prisma.BillDefaultArgs<ExtArgs>
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.Share$userArgs<ExtArgs>
 }
 
 export type $SharePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Share"
   objects: {
     bill: Prisma.$BillPayload<ExtArgs>
-    user: Prisma.$UserPayload<ExtArgs>
+    user: Prisma.$UserPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     billId: number
-    userId: string
+    userId: string | null
     value: number
     paid: boolean
   }, ExtArgs["result"]["share"]>
@@ -1060,7 +1060,7 @@ readonly fields: ShareFieldRefs;
 export interface Prisma__ShareClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   bill<T extends Prisma.BillDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BillDefaultArgs<ExtArgs>>): Prisma.Prisma__BillClient<runtime.Types.Result.GetResult<Prisma.$BillPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  user<T extends Prisma.Share$userArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Share$userArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1488,6 +1488,25 @@ export type ShareDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Limit how many Shares to delete.
    */
   limit?: number
+}
+
+/**
+ * Share.user
+ */
+export type Share$userArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
 }
 
 /**

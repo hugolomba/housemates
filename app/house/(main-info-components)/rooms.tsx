@@ -74,12 +74,6 @@ export default function HouseMain({ houseRooms }: { houseRooms: HouseRooms }) {
           <ModalBody>
             {selectedRoom && (
               <div className="flex flex-col gap-3">
-                <p>
-                  <strong>Type:</strong> {selectedRoom.roomType}
-                </p>
-
-                <Divider />
-
                 <p className="font-semibold">Users</p>
                 {selectedRoom.isCommon ? (
                   <p className="text-default-500">

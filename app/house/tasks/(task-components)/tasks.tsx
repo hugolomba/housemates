@@ -144,7 +144,7 @@ export default function Tasks({ house }: HouseProps) {
             ))}
           </Accordion>
         ) : (
-          <div>
+          <div className="flex flex-col gap-2">
             {house.tasks.map((task) => (
               <TaskCard key={task.id} task={task} />
             ))}

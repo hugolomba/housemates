@@ -213,7 +213,7 @@ export type ActivityGroupByArgs<ExtArgs extends runtime.Types.Extensions.Interna
 
 export type ActivityGroupByOutputType = {
   id: number
-  houseId: number
+  houseId: number | null
   userId: string | null
   type: $Enums.ActivityType
   entity: $Enums.ActivityEntity
@@ -248,7 +248,7 @@ export type ActivityWhereInput = {
   OR?: Prisma.ActivityWhereInput[]
   NOT?: Prisma.ActivityWhereInput | Prisma.ActivityWhereInput[]
   id?: Prisma.IntFilter<"Activity"> | number
-  houseId?: Prisma.IntFilter<"Activity"> | number
+  houseId?: Prisma.IntNullableFilter<"Activity"> | number | null
   userId?: Prisma.StringNullableFilter<"Activity"> | string | null
   type?: Prisma.EnumActivityTypeFilter<"Activity"> | $Enums.ActivityType
   entity?: Prisma.EnumActivityEntityFilter<"Activity"> | $Enums.ActivityEntity
@@ -256,13 +256,13 @@ export type ActivityWhereInput = {
   title?: Prisma.StringFilter<"Activity"> | string
   message?: Prisma.StringFilter<"Activity"> | string
   createdAt?: Prisma.DateTimeFilter<"Activity"> | Date | string
-  house?: Prisma.XOR<Prisma.HouseScalarRelationFilter, Prisma.HouseWhereInput>
+  house?: Prisma.XOR<Prisma.HouseNullableScalarRelationFilter, Prisma.HouseWhereInput> | null
   user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }
 
 export type ActivityOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  houseId?: Prisma.SortOrder
+  houseId?: Prisma.SortOrderInput | Prisma.SortOrder
   userId?: Prisma.SortOrderInput | Prisma.SortOrder
   type?: Prisma.SortOrder
   entity?: Prisma.SortOrder
@@ -279,7 +279,7 @@ export type ActivityWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.ActivityWhereInput | Prisma.ActivityWhereInput[]
   OR?: Prisma.ActivityWhereInput[]
   NOT?: Prisma.ActivityWhereInput | Prisma.ActivityWhereInput[]
-  houseId?: Prisma.IntFilter<"Activity"> | number
+  houseId?: Prisma.IntNullableFilter<"Activity"> | number | null
   userId?: Prisma.StringNullableFilter<"Activity"> | string | null
   type?: Prisma.EnumActivityTypeFilter<"Activity"> | $Enums.ActivityType
   entity?: Prisma.EnumActivityEntityFilter<"Activity"> | $Enums.ActivityEntity
@@ -287,13 +287,13 @@ export type ActivityWhereUniqueInput = Prisma.AtLeast<{
   title?: Prisma.StringFilter<"Activity"> | string
   message?: Prisma.StringFilter<"Activity"> | string
   createdAt?: Prisma.DateTimeFilter<"Activity"> | Date | string
-  house?: Prisma.XOR<Prisma.HouseScalarRelationFilter, Prisma.HouseWhereInput>
+  house?: Prisma.XOR<Prisma.HouseNullableScalarRelationFilter, Prisma.HouseWhereInput> | null
   user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }, "id">
 
 export type ActivityOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  houseId?: Prisma.SortOrder
+  houseId?: Prisma.SortOrderInput | Prisma.SortOrder
   userId?: Prisma.SortOrderInput | Prisma.SortOrder
   type?: Prisma.SortOrder
   entity?: Prisma.SortOrder
@@ -313,7 +313,7 @@ export type ActivityScalarWhereWithAggregatesInput = {
   OR?: Prisma.ActivityScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ActivityScalarWhereWithAggregatesInput | Prisma.ActivityScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"Activity"> | number
-  houseId?: Prisma.IntWithAggregatesFilter<"Activity"> | number
+  houseId?: Prisma.IntNullableWithAggregatesFilter<"Activity"> | number | null
   userId?: Prisma.StringNullableWithAggregatesFilter<"Activity"> | string | null
   type?: Prisma.EnumActivityTypeWithAggregatesFilter<"Activity"> | $Enums.ActivityType
   entity?: Prisma.EnumActivityEntityWithAggregatesFilter<"Activity"> | $Enums.ActivityEntity
@@ -330,13 +330,13 @@ export type ActivityCreateInput = {
   title: string
   message: string
   createdAt?: Date | string
-  house: Prisma.HouseCreateNestedOneWithoutActivitiesInput
+  house?: Prisma.HouseCreateNestedOneWithoutActivitiesInput
   user?: Prisma.UserCreateNestedOneWithoutActivitiesInput
 }
 
 export type ActivityUncheckedCreateInput = {
   id?: number
-  houseId: number
+  houseId?: number | null
   userId?: string | null
   type: $Enums.ActivityType
   entity: $Enums.ActivityEntity
@@ -353,13 +353,13 @@ export type ActivityUpdateInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  house?: Prisma.HouseUpdateOneRequiredWithoutActivitiesNestedInput
+  house?: Prisma.HouseUpdateOneWithoutActivitiesNestedInput
   user?: Prisma.UserUpdateOneWithoutActivitiesNestedInput
 }
 
 export type ActivityUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  houseId?: Prisma.IntFieldUpdateOperationsInput | number
+  houseId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumActivityTypeFieldUpdateOperationsInput | $Enums.ActivityType
   entity?: Prisma.EnumActivityEntityFieldUpdateOperationsInput | $Enums.ActivityEntity
@@ -371,7 +371,7 @@ export type ActivityUncheckedUpdateInput = {
 
 export type ActivityCreateManyInput = {
   id?: number
-  houseId: number
+  houseId?: number | null
   userId?: string | null
   type: $Enums.ActivityType
   entity: $Enums.ActivityEntity
@@ -392,7 +392,7 @@ export type ActivityUpdateManyMutationInput = {
 
 export type ActivityUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  houseId?: Prisma.IntFieldUpdateOperationsInput | number
+  houseId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumActivityTypeFieldUpdateOperationsInput | $Enums.ActivityType
   entity?: Prisma.EnumActivityEntityFieldUpdateOperationsInput | $Enums.ActivityEntity
@@ -559,12 +559,12 @@ export type ActivityCreateWithoutUserInput = {
   title: string
   message: string
   createdAt?: Date | string
-  house: Prisma.HouseCreateNestedOneWithoutActivitiesInput
+  house?: Prisma.HouseCreateNestedOneWithoutActivitiesInput
 }
 
 export type ActivityUncheckedCreateWithoutUserInput = {
   id?: number
-  houseId: number
+  houseId?: number | null
   type: $Enums.ActivityType
   entity: $Enums.ActivityEntity
   entityId?: number | null
@@ -604,7 +604,7 @@ export type ActivityScalarWhereInput = {
   OR?: Prisma.ActivityScalarWhereInput[]
   NOT?: Prisma.ActivityScalarWhereInput | Prisma.ActivityScalarWhereInput[]
   id?: Prisma.IntFilter<"Activity"> | number
-  houseId?: Prisma.IntFilter<"Activity"> | number
+  houseId?: Prisma.IntNullableFilter<"Activity"> | number | null
   userId?: Prisma.StringNullableFilter<"Activity"> | string | null
   type?: Prisma.EnumActivityTypeFilter<"Activity"> | $Enums.ActivityType
   entity?: Prisma.EnumActivityEntityFilter<"Activity"> | $Enums.ActivityEntity
@@ -663,7 +663,7 @@ export type ActivityUpdateManyWithWhereWithoutHouseInput = {
 
 export type ActivityCreateManyUserInput = {
   id?: number
-  houseId: number
+  houseId?: number | null
   type: $Enums.ActivityType
   entity: $Enums.ActivityEntity
   entityId?: number | null
@@ -679,12 +679,12 @@ export type ActivityUpdateWithoutUserInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  house?: Prisma.HouseUpdateOneRequiredWithoutActivitiesNestedInput
+  house?: Prisma.HouseUpdateOneWithoutActivitiesNestedInput
 }
 
 export type ActivityUncheckedUpdateWithoutUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  houseId?: Prisma.IntFieldUpdateOperationsInput | number
+  houseId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   type?: Prisma.EnumActivityTypeFieldUpdateOperationsInput | $Enums.ActivityType
   entity?: Prisma.EnumActivityEntityFieldUpdateOperationsInput | $Enums.ActivityEntity
   entityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -695,7 +695,7 @@ export type ActivityUncheckedUpdateWithoutUserInput = {
 
 export type ActivityUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  houseId?: Prisma.IntFieldUpdateOperationsInput | number
+  houseId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   type?: Prisma.EnumActivityTypeFieldUpdateOperationsInput | $Enums.ActivityType
   entity?: Prisma.EnumActivityEntityFieldUpdateOperationsInput | $Enums.ActivityEntity
   entityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -759,7 +759,7 @@ export type ActivitySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   title?: boolean
   message?: boolean
   createdAt?: boolean
-  house?: boolean | Prisma.HouseDefaultArgs<ExtArgs>
+  house?: boolean | Prisma.Activity$houseArgs<ExtArgs>
   user?: boolean | Prisma.Activity$userArgs<ExtArgs>
 }, ExtArgs["result"]["activity"]>
 
@@ -773,7 +773,7 @@ export type ActivitySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   title?: boolean
   message?: boolean
   createdAt?: boolean
-  house?: boolean | Prisma.HouseDefaultArgs<ExtArgs>
+  house?: boolean | Prisma.Activity$houseArgs<ExtArgs>
   user?: boolean | Prisma.Activity$userArgs<ExtArgs>
 }, ExtArgs["result"]["activity"]>
 
@@ -787,7 +787,7 @@ export type ActivitySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   title?: boolean
   message?: boolean
   createdAt?: boolean
-  house?: boolean | Prisma.HouseDefaultArgs<ExtArgs>
+  house?: boolean | Prisma.Activity$houseArgs<ExtArgs>
   user?: boolean | Prisma.Activity$userArgs<ExtArgs>
 }, ExtArgs["result"]["activity"]>
 
@@ -805,27 +805,27 @@ export type ActivitySelectScalar = {
 
 export type ActivityOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "houseId" | "userId" | "type" | "entity" | "entityId" | "title" | "message" | "createdAt", ExtArgs["result"]["activity"]>
 export type ActivityInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  house?: boolean | Prisma.HouseDefaultArgs<ExtArgs>
+  house?: boolean | Prisma.Activity$houseArgs<ExtArgs>
   user?: boolean | Prisma.Activity$userArgs<ExtArgs>
 }
 export type ActivityIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  house?: boolean | Prisma.HouseDefaultArgs<ExtArgs>
+  house?: boolean | Prisma.Activity$houseArgs<ExtArgs>
   user?: boolean | Prisma.Activity$userArgs<ExtArgs>
 }
 export type ActivityIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  house?: boolean | Prisma.HouseDefaultArgs<ExtArgs>
+  house?: boolean | Prisma.Activity$houseArgs<ExtArgs>
   user?: boolean | Prisma.Activity$userArgs<ExtArgs>
 }
 
 export type $ActivityPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Activity"
   objects: {
-    house: Prisma.$HousePayload<ExtArgs>
+    house: Prisma.$HousePayload<ExtArgs> | null
     user: Prisma.$UserPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
-    houseId: number
+    houseId: number | null
     userId: string | null
     type: $Enums.ActivityType
     entity: $Enums.ActivityEntity
@@ -1227,7 +1227,7 @@ readonly fields: ActivityFieldRefs;
  */
 export interface Prisma__ActivityClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  house<T extends Prisma.HouseDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.HouseDefaultArgs<ExtArgs>>): Prisma.Prisma__HouseClient<runtime.Types.Result.GetResult<Prisma.$HousePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  house<T extends Prisma.Activity$houseArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Activity$houseArgs<ExtArgs>>): Prisma.Prisma__HouseClient<runtime.Types.Result.GetResult<Prisma.$HousePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   user<T extends Prisma.Activity$userArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Activity$userArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1660,6 +1660,25 @@ export type ActivityDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * Limit how many Activities to delete.
    */
   limit?: number
+}
+
+/**
+ * Activity.house
+ */
+export type Activity$houseArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the House
+   */
+  select?: Prisma.HouseSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the House
+   */
+  omit?: Prisma.HouseOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.HouseInclude<ExtArgs> | null
+  where?: Prisma.HouseWhereInput
 }
 
 /**

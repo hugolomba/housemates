@@ -485,6 +485,11 @@ export type UserScalarRelationFilter = {
   isNot?: Prisma.UserWhereInput
 }
 
+export type UserNullableScalarRelationFilter = {
+  is?: Prisma.UserWhereInput | null
+  isNot?: Prisma.UserWhereInput | null
+}
+
 export type UserListRelationFilter = {
   every?: Prisma.UserWhereInput
   some?: Prisma.UserWhereInput
@@ -493,11 +498,6 @@ export type UserListRelationFilter = {
 
 export type UserOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
-}
-
-export type UserNullableScalarRelationFilter = {
-  is?: Prisma.UserWhereInput | null
-  isNot?: Prisma.UserWhereInput | null
 }
 
 export type StringFieldUpdateOperationsInput = {
@@ -572,10 +572,12 @@ export type UserUncheckedCreateNestedManyWithoutHouseInput = {
   connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
 }
 
-export type UserUpdateOneRequiredWithoutHousesCreatedNestedInput = {
+export type UserUpdateOneWithoutHousesCreatedNestedInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutHousesCreatedInput, Prisma.UserUncheckedCreateWithoutHousesCreatedInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutHousesCreatedInput
   upsert?: Prisma.UserUpsertWithoutHousesCreatedInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
   connect?: Prisma.UserWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutHousesCreatedInput, Prisma.UserUpdateWithoutHousesCreatedInput>, Prisma.UserUncheckedUpdateWithoutHousesCreatedInput>
 }
@@ -690,10 +692,12 @@ export type UserCreateNestedOneWithoutBillsInput = {
   connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUpdateOneRequiredWithoutBillsNestedInput = {
+export type UserUpdateOneWithoutBillsNestedInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutBillsInput, Prisma.UserUncheckedCreateWithoutBillsInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutBillsInput
   upsert?: Prisma.UserUpsertWithoutBillsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
   connect?: Prisma.UserWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutBillsInput, Prisma.UserUpdateWithoutBillsInput>, Prisma.UserUncheckedUpdateWithoutBillsInput>
 }
@@ -704,10 +708,12 @@ export type UserCreateNestedOneWithoutSharesInput = {
   connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUpdateOneRequiredWithoutSharesNestedInput = {
+export type UserUpdateOneWithoutSharesNestedInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutSharesInput, Prisma.UserUncheckedCreateWithoutSharesInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutSharesInput
   upsert?: Prisma.UserUpsertWithoutSharesInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
   connect?: Prisma.UserWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSharesInput, Prisma.UserUpdateWithoutSharesInput>, Prisma.UserUncheckedUpdateWithoutSharesInput>
 }
@@ -718,10 +724,12 @@ export type UserCreateNestedOneWithoutAlertsCreatedInput = {
   connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUpdateOneRequiredWithoutAlertsCreatedNestedInput = {
+export type UserUpdateOneWithoutAlertsCreatedNestedInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutAlertsCreatedInput, Prisma.UserUncheckedCreateWithoutAlertsCreatedInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutAlertsCreatedInput
   upsert?: Prisma.UserUpsertWithoutAlertsCreatedInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
   connect?: Prisma.UserWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAlertsCreatedInput, Prisma.UserUpdateWithoutAlertsCreatedInput>, Prisma.UserUncheckedUpdateWithoutAlertsCreatedInput>
 }

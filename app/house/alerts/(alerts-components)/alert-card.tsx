@@ -112,7 +112,10 @@ export default function AlertCard({ alert }: { alert: HouseAlerts[number] }) {
       color={defineAlertColor(alert.id, alert.priority)}
       variant={defineAlertVariant(alert.priority)}
       classNames={{
-        title: "break-words line-clamp-4 break-all overflow-hidden",
+        base: "flex flex-col gap-2 p-2",
+        title:
+          "break-words line-clamp-4 break-all overflow-hidden font-bold text-lg text-center",
+        description: "text-center",
       }}
       endContent={
         !alert.isResolved ? (
@@ -123,8 +126,9 @@ export default function AlertCard({ alert }: { alert: HouseAlerts[number] }) {
           ) : (
             <Button
               size="sm"
-              variant="flat"
-              className="shrink-0 whitespace-nowrap min-w-80px"
+              // variant="solid"
+              // color="primary"
+              className="shrink-0 whitespace-nowrap min-w-80px rounded-full"
               disabled={resolvedAlertIds.has(alert.id)}
               onPress={() => handleResolveAlert(alert.id, alert.title)}
             >

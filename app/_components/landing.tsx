@@ -1,10 +1,12 @@
 "use client";
 
+import React from "react";
 import Image from "next/image";
 import { Home, CreditCard, CheckSquare, Bell, Key } from "lucide-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import MainButton from "./main-button";
+import { title } from "process";
 
 export default function LandingClient() {
   return (
@@ -19,19 +21,32 @@ export default function LandingClient() {
               transition={{ duration: 0.5 }}
               className="text-center md:text-left"
             >
-              <h1 className="text-4xl md:text-5xl font-bold mb-6">
-                Everything your household needs, in one place
+              <div className="flex flex-row items-center gap-2">
+                {/* <Image
+                  src="/images/logo2.png"
+                  alt="Illustration of people managing a shared household"
+                  width={200}
+                  height={200}
+                  className="mx-auto md:mx-0 mb-6 w-24 h-auto"
+                /> */}
+              </div>
+
+              <h1 className="text-5xl md:text-5xl font-bold mb-6">
+                <span className="bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text text-transparent text-6xl">
+                  HouseMates
+                </span>{" "}
+                is everything your household needs, in one place
               </h1>
               <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
-                HouseMates helps people who share a house stay organised. Manage
-                bills, tasks, alerts, credentials, and all your household
-                information in a single shared space.
+                It helps people who share a house stay organised. Manage bills,
+                tasks, alerts, credentials, and all your household information
+                in a single shared space.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 sm:justify-start justify-center">
                 <MainButton href="/auth" className="font-semibold">
                   Create or join a house
                 </MainButton>
-                <MainButton href="/how-it-works">How it works</MainButton>
+                {/* <MainButton href="/how-it-works">How it works</MainButton> */}
               </div>
             </motion.div>
 
@@ -93,92 +108,132 @@ export default function LandingClient() {
       </section>
 
       {/* HOW IT WORKS */}
-      <section className="w-full bg-white dark:bg-black">
-        <div className="max-w-7xl mx-auto px-4 py-20">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+      <section className="w-full bg-gradient-to-b from-gray-50 to-white dark:from-neutral-900 dark:to-black">
+        <div className="max-w-7xl mx-auto px-4 py-24">
+          <div className="text-center mb-20">
+            <span className="inline-block mb-4 rounded-full bg-blue-100 dark:bg-blue-900/30 px-4 py-1 text-sm font-semibold text-white bg-gradient-to-r from-blue-500 to-green-500">
+              Simple & intuitive
+            </span>
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">
               How it works
             </h2>
-            <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              Get started in minutes and keep your shared home organised from
-              day one.
+            <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto text-lg">
+              Three simple steps to keep everyone aligned and your home running
+              smoothly.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            {/* STEP 1 */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: 0.1 }}
-              className="text-center"
+              transition={{ duration: 0.5 }}
+              className="relative rounded-2xl bg-white dark:bg-neutral-900 p-8 shadow-sm hover:shadow-lg transition-shadow"
             >
-              <div className="w-14 h-14 mx-auto mb-6 flex items-center justify-center rounded-full bg-blue-500 text-white text-xl font-bold">
-                <Home className="w-6 h-6" />
+              <div className="absolute -top-6 left-6 w-12 h-12 flex items-center justify-center rounded-xl bg-blue-500 text-white text-lg font-bold bg-gradient-to-r from-blue-500 to-green-500">
+                1
               </div>
-              <div className="relative w-full h-[160px] mb-4">
+
+              {/* <Home className="w-10 h-10 text-blue-500 mb-6 mt-4" /> */}
+
+              <h3 className="text-xl font-semibold mb-3">
+                Create or join a house
+              </h3>
+              <p className="text-gray-600 dark:text-gray-300 mb-6">
+                Set up a new house in seconds or join an existing one using an
+                invite link.
+              </p>
+
+              {/* <div className="relative w-full h-[160px]">
                 <Image
-                  src="/images/how-create-house.png"
+                  src="/images/22.png"
                   alt="Create or join a house"
                   fill
                   className="object-contain"
                 />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Create your house</h3>
-              <p className="text-gray-600 dark:text-gray-300">
-                Create a new house or join one using an invite link.
-              </p>
+              </div> */}
             </motion.div>
 
+            {/* STEP 2 */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: 0.1 }}
-              className="text-center"
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="relative rounded-2xl bg-white dark:bg-neutral-900 p-8 shadow-sm hover:shadow-lg transition-shadow"
             >
-              <div className="w-14 h-14 mx-auto mb-6 flex items-center justify-center rounded-full bg-blue-500 text-white text-xl font-bold">
-                <Bell className="w-6 h-6" />
+              <div className="absolute -top-6 left-6 w-12 h-12 flex items-center justify-center rounded-xl bg-blue-500 text-white text-lg font-bold bg-gradient-to-r from-blue-500 to-green-500">
+                2
               </div>
-              <div className="relative w-full h-[160px] mb-4">
+
+              {/* <Bell className="w-10 h-10 text-blue-500 mb-6 mt-4" /> */}
+
+              <h3 className="text-xl font-semibold mb-3">
+                Add everything you share
+              </h3>
+              <p className="text-gray-600 dark:text-gray-300 mb-6">
+                Register bills, chores, alerts, rooms, and shared credentials in
+                one central place.
+              </p>
+
+              {/* <div className="relative w-full h-[160px]">
                 <Image
                   src="/images/how-add-info.png"
                   alt="Add bills, tasks and alerts"
                   fill
                   className="object-contain"
                 />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Add information</h3>
-              <p className="text-gray-600 dark:text-gray-300">
-                Register bills, tasks, alerts, rooms, and shared credentials.
-              </p>
+              </div> */}
             </motion.div>
 
+            {/* STEP 3 */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: 0.1 }}
-              className="text-center"
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="relative rounded-2xl bg-white dark:bg-neutral-900 p-8 shadow-sm hover:shadow-lg transition-shadow"
             >
-              <div className="w-14 h-14 mx-auto mb-6 flex items-center justify-center rounded-full bg-blue-500 text-white text-xl font-bold">
-                <CheckSquare className="w-6 h-6" />
+              <div className="absolute -top-6 left-6 w-12 h-12 flex items-center justify-center rounded-xl bg-blue-500 text-white text-lg font-bold bg-gradient-to-r from-blue-500 to-green-500">
+                3
               </div>
-              <div className="relative w-full h-[160px] mb-4">
+
+              {/* <CheckSquare className="w-10 h-10 text-blue-500 mb-6 mt-4" /> */}
+
+              <h3 className="text-xl font-semibold mb-3">
+                Stay organised together
+              </h3>
+              <p className="text-gray-600 dark:text-gray-300 mb-6">
+                Everyone knows what to pay, what to do, and what needs
+                attention.
+              </p>
+              {/* 
+              <div className="relative w-full h-[160px]">
                 <Image
                   src="/images/how-stay-organised.png"
                   alt="Stay organised with housemates"
                   fill
                   className="object-contain"
                 />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Stay organised</h3>
-              <p className="text-gray-600 dark:text-gray-300">
-                Everyone stays aligned, knows what to pay, and what needs
-                attention.
-              </p>
+              </div> */}
             </motion.div>
           </div>
+        </div>
+      </section>
+
+      {/* APP SCREENSHOTS (CAROUSEL) */}
+      <section className="w-full bg-white dark:bg-black">
+        <div className="max-w-7xl mx-auto px-4 py-20">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Features</h2>
+            <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+              A quick look at the main screens in HouseMates.
+            </p>
+          </div>
+
+          <Carousel />
         </div>
       </section>
 
@@ -312,7 +367,7 @@ export default function LandingClient() {
         </div>
       </section>
       {/* FINAL CTA */}
-      <section className="w-full bg-blue-500">
+      <section className="w-full bg-blue-500  bg-gradient-to-r from-blue-500 to-green-500">
         <div className="max-w-7xl mx-auto px-4 py-20 text-center text-white">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
             Make shared living simple
@@ -330,5 +385,97 @@ export default function LandingClient() {
         </div>
       </section>
     </>
+  );
+}
+
+function Carousel() {
+  const slides = [
+    {
+      title: "Bills",
+      description: "Split costs and track payments.",
+      image: "/images/bills.png",
+      alt: "Bills screen",
+    },
+    {
+      title: "Tasks",
+      description: "Assign chores and keep everyone aligned.",
+      image: "/images/tasks.png",
+      alt: "Tasks screen",
+    },
+    {
+      title: "Alerts",
+      description: "Reminders for bills, tasks, and house events.",
+      image: "/images/alerts.png",
+      alt: "Alerts screen",
+    },
+    {
+      title: "Credentials",
+      description: "Store shared passwords and access codes securely.",
+      image: "/images/credentials.png",
+      alt: "Credentials screen",
+    },
+  ];
+
+  const [index, setIndex] = React.useState(0);
+
+  const prev = () => setIndex((i) => (i === 0 ? slides.length - 1 : i - 1));
+  const next = () => setIndex((i) => (i === slides.length - 1 ? 0 : i + 1));
+
+  return (
+    <div className="relative">
+      <div className="overflow-hidden rounded-xl border border-gray-100 dark:border-neutral-800">
+        <div
+          className="flex transition-transform duration-500"
+          style={{ transform: `translateX(-${index * 100}%)` }}
+        >
+          {slides.map((slide) => (
+            <div key={slide.title} className="w-full flex-shrink-0">
+              <div className="relative w-full h-[320px] md:h-[420px]">
+                <Image
+                  src={slide.image}
+                  alt={slide.alt}
+                  fill
+                  className="object-contain"
+                />
+              </div>
+              <div className="p-6 bg-white dark:bg-black">
+                <h3 className="text-xl font-semibold mb-2">{slide.title}</h3>
+                <p className="text-gray-600 dark:text-gray-300">
+                  {slide.description}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <button
+        onClick={prev}
+        className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-white/80 dark:bg-black/80 border border-gray-200 dark:border-neutral-800 p-2 shadow-sm"
+        aria-label="Previous slide"
+      >
+        ‹
+      </button>
+      <button
+        onClick={next}
+        className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-white/80 dark:bg-black/80 border border-gray-200 dark:border-neutral-800 p-2 shadow-sm"
+        aria-label="Next slide"
+      >
+        ›
+      </button>
+
+      <div className="flex justify-center gap-2 mt-6">
+        {slides.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setIndex(i)}
+            className={`h-2 w-8 rounded-full transition-all duration-200 ${
+              i === index ? "bg-blue-500" : "bg-gray-300 dark:bg-neutral-700"
+            }`}
+            aria-label={`Go to slide ${i + 1}`}
+          />
+        ))}
+      </div>
+    </div>
   );
 }

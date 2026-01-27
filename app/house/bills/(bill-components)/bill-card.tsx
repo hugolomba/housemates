@@ -189,7 +189,7 @@ export default function BillCard({ bill }: BillCardProps) {
                   src={share.user?.image || ""}
                   isBordered
                   color={share.paid ? "success" : "danger"}
-                  title={share.user.name}
+                  title={share.user ? share.user.name : "Deleted User"}
                 />
               ))}
             </AvatarGroup>

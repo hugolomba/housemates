@@ -211,7 +211,7 @@ export type AlertGroupByOutputType = {
   createdAt: Date
   expiresAt: Date | null
   isResolved: boolean
-  createdById: string
+  createdById: string | null
   houseId: number
   _count: AlertCountAggregateOutputType | null
   _avg: AlertAvgAggregateOutputType | null
@@ -246,9 +246,9 @@ export type AlertWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Alert"> | Date | string
   expiresAt?: Prisma.DateTimeNullableFilter<"Alert"> | Date | string | null
   isResolved?: Prisma.BoolFilter<"Alert"> | boolean
-  createdById?: Prisma.StringFilter<"Alert"> | string
+  createdById?: Prisma.StringNullableFilter<"Alert"> | string | null
   houseId?: Prisma.IntFilter<"Alert"> | number
-  createdBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   house?: Prisma.XOR<Prisma.HouseScalarRelationFilter, Prisma.HouseWhereInput>
 }
 
@@ -260,7 +260,7 @@ export type AlertOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   expiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
   isResolved?: Prisma.SortOrder
-  createdById?: Prisma.SortOrder
+  createdById?: Prisma.SortOrderInput | Prisma.SortOrder
   houseId?: Prisma.SortOrder
   createdBy?: Prisma.UserOrderByWithRelationInput
   house?: Prisma.HouseOrderByWithRelationInput
@@ -277,9 +277,9 @@ export type AlertWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Alert"> | Date | string
   expiresAt?: Prisma.DateTimeNullableFilter<"Alert"> | Date | string | null
   isResolved?: Prisma.BoolFilter<"Alert"> | boolean
-  createdById?: Prisma.StringFilter<"Alert"> | string
+  createdById?: Prisma.StringNullableFilter<"Alert"> | string | null
   houseId?: Prisma.IntFilter<"Alert"> | number
-  createdBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   house?: Prisma.XOR<Prisma.HouseScalarRelationFilter, Prisma.HouseWhereInput>
 }, "id">
 
@@ -291,7 +291,7 @@ export type AlertOrderByWithAggregationInput = {
   createdAt?: Prisma.SortOrder
   expiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
   isResolved?: Prisma.SortOrder
-  createdById?: Prisma.SortOrder
+  createdById?: Prisma.SortOrderInput | Prisma.SortOrder
   houseId?: Prisma.SortOrder
   _count?: Prisma.AlertCountOrderByAggregateInput
   _avg?: Prisma.AlertAvgOrderByAggregateInput
@@ -311,7 +311,7 @@ export type AlertScalarWhereWithAggregatesInput = {
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Alert"> | Date | string
   expiresAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Alert"> | Date | string | null
   isResolved?: Prisma.BoolWithAggregatesFilter<"Alert"> | boolean
-  createdById?: Prisma.StringWithAggregatesFilter<"Alert"> | string
+  createdById?: Prisma.StringNullableWithAggregatesFilter<"Alert"> | string | null
   houseId?: Prisma.IntWithAggregatesFilter<"Alert"> | number
 }
 
@@ -323,7 +323,7 @@ export type AlertCreateInput = {
   createdAt?: Date | string
   expiresAt?: Date | string | null
   isResolved?: boolean
-  createdBy: Prisma.UserCreateNestedOneWithoutAlertsCreatedInput
+  createdBy?: Prisma.UserCreateNestedOneWithoutAlertsCreatedInput
   house: Prisma.HouseCreateNestedOneWithoutAlertsInput
 }
 
@@ -335,7 +335,7 @@ export type AlertUncheckedCreateInput = {
   createdAt?: Date | string
   expiresAt?: Date | string | null
   isResolved?: boolean
-  createdById: string
+  createdById?: string | null
   houseId: number
 }
 
@@ -347,7 +347,7 @@ export type AlertUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isResolved?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdBy?: Prisma.UserUpdateOneRequiredWithoutAlertsCreatedNestedInput
+  createdBy?: Prisma.UserUpdateOneWithoutAlertsCreatedNestedInput
   house?: Prisma.HouseUpdateOneRequiredWithoutAlertsNestedInput
 }
 
@@ -359,7 +359,7 @@ export type AlertUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isResolved?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   houseId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
@@ -371,7 +371,7 @@ export type AlertCreateManyInput = {
   createdAt?: Date | string
   expiresAt?: Date | string | null
   isResolved?: boolean
-  createdById: string
+  createdById?: string | null
   houseId: number
 }
 
@@ -393,7 +393,7 @@ export type AlertUncheckedUpdateManyInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isResolved?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   houseId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
@@ -598,7 +598,7 @@ export type AlertScalarWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Alert"> | Date | string
   expiresAt?: Prisma.DateTimeNullableFilter<"Alert"> | Date | string | null
   isResolved?: Prisma.BoolFilter<"Alert"> | boolean
-  createdById?: Prisma.StringFilter<"Alert"> | string
+  createdById?: Prisma.StringNullableFilter<"Alert"> | string | null
   houseId?: Prisma.IntFilter<"Alert"> | number
 }
 
@@ -610,7 +610,7 @@ export type AlertCreateWithoutHouseInput = {
   createdAt?: Date | string
   expiresAt?: Date | string | null
   isResolved?: boolean
-  createdBy: Prisma.UserCreateNestedOneWithoutAlertsCreatedInput
+  createdBy?: Prisma.UserCreateNestedOneWithoutAlertsCreatedInput
 }
 
 export type AlertUncheckedCreateWithoutHouseInput = {
@@ -621,7 +621,7 @@ export type AlertUncheckedCreateWithoutHouseInput = {
   createdAt?: Date | string
   expiresAt?: Date | string | null
   isResolved?: boolean
-  createdById: string
+  createdById?: string | null
 }
 
 export type AlertCreateOrConnectWithoutHouseInput = {
@@ -702,7 +702,7 @@ export type AlertCreateManyHouseInput = {
   createdAt?: Date | string
   expiresAt?: Date | string | null
   isResolved?: boolean
-  createdById: string
+  createdById?: string | null
 }
 
 export type AlertUpdateWithoutHouseInput = {
@@ -713,7 +713,7 @@ export type AlertUpdateWithoutHouseInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isResolved?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdBy?: Prisma.UserUpdateOneRequiredWithoutAlertsCreatedNestedInput
+  createdBy?: Prisma.UserUpdateOneWithoutAlertsCreatedNestedInput
 }
 
 export type AlertUncheckedUpdateWithoutHouseInput = {
@@ -724,7 +724,7 @@ export type AlertUncheckedUpdateWithoutHouseInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isResolved?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type AlertUncheckedUpdateManyWithoutHouseInput = {
@@ -735,7 +735,7 @@ export type AlertUncheckedUpdateManyWithoutHouseInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isResolved?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -750,7 +750,7 @@ export type AlertSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   isResolved?: boolean
   createdById?: boolean
   houseId?: boolean
-  createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  createdBy?: boolean | Prisma.Alert$createdByArgs<ExtArgs>
   house?: boolean | Prisma.HouseDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["alert"]>
 
@@ -764,7 +764,7 @@ export type AlertSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   isResolved?: boolean
   createdById?: boolean
   houseId?: boolean
-  createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  createdBy?: boolean | Prisma.Alert$createdByArgs<ExtArgs>
   house?: boolean | Prisma.HouseDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["alert"]>
 
@@ -778,7 +778,7 @@ export type AlertSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   isResolved?: boolean
   createdById?: boolean
   houseId?: boolean
-  createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  createdBy?: boolean | Prisma.Alert$createdByArgs<ExtArgs>
   house?: boolean | Prisma.HouseDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["alert"]>
 
@@ -796,22 +796,22 @@ export type AlertSelectScalar = {
 
 export type AlertOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "message" | "priority" | "createdAt" | "expiresAt" | "isResolved" | "createdById" | "houseId", ExtArgs["result"]["alert"]>
 export type AlertInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  createdBy?: boolean | Prisma.Alert$createdByArgs<ExtArgs>
   house?: boolean | Prisma.HouseDefaultArgs<ExtArgs>
 }
 export type AlertIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  createdBy?: boolean | Prisma.Alert$createdByArgs<ExtArgs>
   house?: boolean | Prisma.HouseDefaultArgs<ExtArgs>
 }
 export type AlertIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  createdBy?: boolean | Prisma.Alert$createdByArgs<ExtArgs>
   house?: boolean | Prisma.HouseDefaultArgs<ExtArgs>
 }
 
 export type $AlertPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Alert"
   objects: {
-    createdBy: Prisma.$UserPayload<ExtArgs>
+    createdBy: Prisma.$UserPayload<ExtArgs> | null
     house: Prisma.$HousePayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -822,7 +822,7 @@ export type $AlertPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     createdAt: Date
     expiresAt: Date | null
     isResolved: boolean
-    createdById: string
+    createdById: string | null
     houseId: number
   }, ExtArgs["result"]["alert"]>
   composites: {}
@@ -1218,7 +1218,7 @@ readonly fields: AlertFieldRefs;
  */
 export interface Prisma__AlertClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  createdBy<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  createdBy<T extends Prisma.Alert$createdByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Alert$createdByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   house<T extends Prisma.HouseDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.HouseDefaultArgs<ExtArgs>>): Prisma.Prisma__HouseClient<runtime.Types.Result.GetResult<Prisma.$HousePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1651,6 +1651,25 @@ export type AlertDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Limit how many Alerts to delete.
    */
   limit?: number
+}
+
+/**
+ * Alert.createdBy
+ */
+export type Alert$createdByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
 }
 
 /**

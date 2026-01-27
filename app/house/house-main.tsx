@@ -9,7 +9,6 @@ import {
   CardBody,
   CardFooter,
   CardHeader,
-  Divider,
   Modal,
   ModalContent,
   ModalHeader,
@@ -42,8 +41,6 @@ import CreateBill from "../house/bills/(bill-components)/create-bill";
 import CreateTask from "./tasks/(task-components)/create-task";
 import AddCredential from "./(main-info-components)/add-credential";
 import Rooms from "./(main-info-components)/rooms";
-import Image from "next/image";
-import { div } from "framer-motion/m";
 import MainButton from "../_components/main-button";
 import Link from "next/link";
 
@@ -119,23 +116,17 @@ export default function HouseMain({ house }: HouseProps) {
     <div className="container flex flex-col gap-4 p-2">
       <Card
         fullWidth
-        className="
-    rounded-4xl
-    bg-gradient-to-br from-blue-500 to-blue-600
-    dark:from-gray-700 dark:to-gray-800
-    text-white
-   
-    shadow-
-    ring-1 ring-white/10
-  "
+        className="rounded-4xl dark:from-gray-700 dark:to-gray-800 text-white shadow-ring-1 ring-white/10 bg-linear-to-tr from-blue-400 to-green-400 "
       >
         <CardHeader className="flex flex-row items-center justify-center p-0 mt-4">
-          <HouseIcon size={52} className="opacity-90" />{" "}
+          <HouseIcon size={52} className="opacity-90 " />{" "}
         </CardHeader>
         <CardBody className="flex flex-col items-center justify-center p-4">
           {/* <HouseIcon size={48} /> */}
-          <h1 className="text-3xl font-bold mt-2">{house.name}</h1>
-          <p className="text-center text-md text-muted-foreground">
+          <h1 className="text-3xl font-bold mt-2 drop-shadow-5xl">
+            {house.name}
+          </h1>
+          <p className="text-center text-md text-muted-foreground drop-shadow-5xl">
             {house.address}
           </p>
           <div className="users-group-div flex flex-col items-center gap-4">
@@ -180,7 +171,7 @@ export default function HouseMain({ house }: HouseProps) {
             href="/settings"
             // variant="ghost"
             startContent={<Settings size={15} />}
-            className="rounded-full bg-white/10 hover:bg-white/15 text-white border border-white/20"
+            className="rounded-full bg-white/10 hover:bg-white/15 text-white border border-white/20 "
           >
             Settings
           </Button>
@@ -195,14 +186,23 @@ export default function HouseMain({ house }: HouseProps) {
         </h2>
 
         <div className="grid grid-cols-3 gap-2">
-          <MainButton onClick={() => setOpenModal("createAlert")}>
+          <MainButton
+            onClick={() => setOpenModal("createAlert")}
+            className="bg-linear-to-tr from-blue-400 to-green-400 dark:from-gray-700 dark:to-gray-800"
+          >
             New Alert
           </MainButton>
 
-          <MainButton onClick={() => setOpenModal("createBill")}>
+          <MainButton
+            onClick={() => setOpenModal("createBill")}
+            className="bg-linear-to-tr from-blue-400 to-green-400 dark:from-gray-700 dark:to-gray-800"
+          >
             New Bill
           </MainButton>
-          <MainButton onClick={() => setOpenModal("createTask")}>
+          <MainButton
+            onClick={() => setOpenModal("createTask")}
+            className="bg-linear-to-tr from-blue-400 to-green-400 dark:from-gray-700 dark:to-gray-800"
+          >
             New Task
           </MainButton>
         </div>
@@ -217,7 +217,7 @@ export default function HouseMain({ house }: HouseProps) {
           fullWidth
           disableIndicatorAnimation
           variant="splitted"
-          className="p-0"
+          className="p-0 "
         >
           <AccordionItem
             key="1"

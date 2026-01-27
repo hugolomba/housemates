@@ -49,6 +49,17 @@ export async function createHouse({
     },
   });
 
+  // create a room
+  await prisma.room.create({
+    data: {
+      name: "Living Room",
+      roomType: "LIVING_ROOM",
+      house: {
+        connect: { id: newHouse.id },
+      },
+    },
+  });
+
   await logActivity({
     houseId: newHouse.id,
     userId: session.user.id,
