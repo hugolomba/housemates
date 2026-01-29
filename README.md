@@ -106,3 +106,77 @@ It provides a protected space where house members can:
 - Role-based permissions (e.g. admin, member)
 - Mobile app version
 - More integrations (e.g. calendar sync, task management tools)
+
+---
+
+## Running the Project Locally
+
+### Requirements
+
+- Node.js (v18 or later recommended)
+- npm or yarn
+- PostgreSQL (local or remote instance)
+- Git
+
+### Installation
+
+Clone the repository and install dependencies:
+
+```bash
+git clone https://github.com/yourusername/housemates.git
+cd housemates
+npm install
+# or
+yarn install
+```
+
+### Environment Variables
+
+Create a `.env` file in the root directory and configure the following variables:
+
+```env
+DATABASE_URL=""
+BETTER_AUTH_SECRET=""
+BETTER_AUTH_URL=""
+BETTER_AUTH_GITHUB_ID=""
+BETTER_AUTH_GITHUB_SECRET=""
+BETTER_AUTH_GOOGLE_ID=""
+BETTER_AUTH_GOOGLE_SECRET=""
+CREDENTIAL_SECRET=""
+```
+
+Make sure to replace placeholders with your actual values.
+
+### Running the Project
+
+Start the development server:
+
+```bash
+npm run dev
+# or
+yarn dev
+```
+
+The app will be available at [http://localhost:3000](http://localhost:3000).
+
+### Running the Database with Prisma
+
+To set up and migrate your database schema, use Prisma commands:
+
+```bash
+npx prisma migrate dev --name init
+```
+
+This will create the necessary tables in your PostgreSQL database based on the Prisma schema.
+
+To generate Prisma client after schema changes:
+
+```bash
+npx prisma generate
+```
+
+You can also open Prisma Studio to browse your database:
+
+```bash
+npx prisma studio
+```
