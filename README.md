@@ -1,4 +1,4 @@
-# Housemates
+# Housemates - Shared House Management Application
 
 ![screenshot](public/images/screenshot.png)
 
